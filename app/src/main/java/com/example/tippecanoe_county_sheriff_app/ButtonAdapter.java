@@ -37,9 +37,12 @@ class ButtonAdapter extends BaseAdapter{
     public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView==null)
             convertView = inf.inflate(layout, null);
-        ImageButton iButton = convertView.findViewById(R.id.imagebutton);                                //item_button.xml
-        //iButton.setImageResource(buttonlist.get(position).getBimage());
-        if(!buttonlist.get(position).getIsConnector()){                                     //link buttons
+        ImageButton iButton = convertView.findViewById(R.id.imagebutton);                           //item_button.xml
+
+        //Cause img is not added
+        iButton.setImageResource(buttonlist.get(position).getBimage());
+
+        if(!buttonlist.get(position).getIsConnector()){                                             //link buttons
             iButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -50,12 +53,12 @@ class ButtonAdapter extends BaseAdapter{
                 }
             });
         }
-        else if(buttonlist.get(position).getIsConnector() && buttonlist.get(position).getChild() != null){
+        else if(buttonlist.get(position).getChild() != null){
             iButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //need 2 change
-                    //change activity
+                    //change activity...
                     //((MainActivity)context).setPageAdapter(buttonlist.get(position).getChild());
                 }
             });
