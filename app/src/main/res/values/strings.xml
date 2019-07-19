@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Tippecanoe-County-Sheriff-App</string>
+    <string name="app_name">ViewPagerSample</string>
+    <string name="desc">Image</string>
 </resources>
