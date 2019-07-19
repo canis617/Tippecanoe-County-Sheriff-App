@@ -10,10 +10,10 @@ import android.widget.ImageButton;
 import java.util.ArrayList;
 
 class ButtonAdapter extends BaseAdapter{
-    Context context;
-    int layout;
-    private  ArrayList<object_item> buttonlist;
-    LayoutInflater inf;
+    private Context context;
+    private int layout;
+    private ArrayList<object_item> buttonlist;
+    private LayoutInflater inf;
 
     ButtonAdapter(Context context, int layout, ArrayList<object_item> list) {
         this.context = context;
@@ -37,10 +37,10 @@ class ButtonAdapter extends BaseAdapter{
     public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView==null)
             convertView = inf.inflate(layout, null);
-        ImageButton ib = convertView.findViewById(R.id.imagebutton);                                //item_button.xml
-        ib.setImageResource(buttonlist.get(position).getBimgage());
-        if(buttonlist.get(position).getisConnector() == false){                                     //link buttons
-            ib.setOnClickListener(new View.OnClickListener() {
+        ImageButton iButton = convertView.findViewById(R.id.imagebutton);                                //item_button.xml
+        //iButton.setImageResource(buttonlist.get(position).getBimage());
+        if(!buttonlist.get(position).getIsConnector()){                                     //link buttons
+            iButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Context context = v.getContext();
@@ -50,8 +50,8 @@ class ButtonAdapter extends BaseAdapter{
                 }
             });
         }
-        else if(buttonlist.get(position).getisConnector() == true && buttonlist.get(position).getChild() != null){
-            ib.setOnClickListener(new View.OnClickListener() {
+        else if(buttonlist.get(position).getIsConnector() && buttonlist.get(position).getChild() != null){
+            iButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //need 2 change

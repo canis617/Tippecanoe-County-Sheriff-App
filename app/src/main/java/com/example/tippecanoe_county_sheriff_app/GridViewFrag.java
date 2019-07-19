@@ -16,16 +16,18 @@ public class GridViewFrag extends Fragment {
     GridViewFrag(ArrayList<object_item> pagedata){
         data = pagedata;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.item_page,container,false);
-        Context context = view.getContext();
-        ButtonAdapter buttonAdapter = new ButtonAdapter (context, R.layout.item_button,data);
-        GridView gv = view.findViewById(R.id.gridview);
+
+        ButtonAdapter buttonAdapter = new ButtonAdapter (view.getContext(), R.layout.item_button, data);       //create button adapter
+        GridView gv = view.findViewById(R.id.gridview);                                             //grid view link
         gv.setAdapter(buttonAdapter);
         return view;
     }

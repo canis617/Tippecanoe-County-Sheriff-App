@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">ViewPagerSample</string>
+    <string name="app_name">TCSA</string>
+    <string name="Tippecanoe">Tippecanoe County Sheriff</string>
     <string name="desc">Image</string>
 </resources>

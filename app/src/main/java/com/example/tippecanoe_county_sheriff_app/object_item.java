@@ -6,26 +6,53 @@ import android.net.Uri;
 import androidx.annotation.Nullable;
 
 public class object_item {
-    int bimgage;                                                                                    //R.@directory.@imagename
-    String url;
-    boolean isConnector;                                                                            //true = High Category
-    object_item[] child;                                                                            //Lower Categories
+    private int bimage;                                                                                    //R.@directory.@imagename
+    private String url;
+    private boolean isConnector;                                                                            //true = High Category
+    private object_item[] child;                                                                            //Lower Categories
 
     object_item(int bimage, @Nullable String url, boolean isConnector, @Nullable object_item[] child){
-        this.bimgage = bimage;
+        this.bimage = bimage;
         this.url = url;
         this.isConnector = isConnector;
         this.child = child;
     }
 
-    public int getBimgage(){return bimgage;}
-    public String getUrl(){return url;}
-    public boolean getisConnector(){return isConnector;}
-    public object_item[] getChild(){return child;}
     public Intent getLinkIntent(){
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         return intent;
     }
 
+    public int getBimage() {
+        return bimage;
+    }
+
+    public void setBimage(int bimage) {
+        this.bimage = bimage;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public boolean getIsConnector() {
+        return isConnector;
+    }
+
+    public void setIsConnector(boolean connector) {
+        isConnector = connector;
+    }
+
+    public object_item[] getChild() {
+        return child;
+    }
+
+    public void setChild(object_item[] child) {
+        this.child = child;
+    }
 }

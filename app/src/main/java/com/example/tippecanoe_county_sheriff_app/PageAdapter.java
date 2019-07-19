@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import static android.util.Log.d;
 
 public class PageAdapter extends FragmentPagerAdapter {
-    int MAX_PAGE;
-    int MAX_BUTTONS;
-    object_item[] allData;
-    ArrayList<object_item> pageData1 = new ArrayList<>();
-    ArrayList<object_item> pageData2 = new ArrayList<>();
-    ArrayList<object_item> pageData3 = new ArrayList<>();
-    Fragment cur_fragment;
+    private int MAX_PAGE;
+    private int MAX_BUTTONS;
+    private object_item[] allData;
+    private ArrayList<object_item> pageData1 = new ArrayList<>();
+    private ArrayList<object_item> pageData2 = new ArrayList<>();
+    private ArrayList<object_item> pageData3 = new ArrayList<>();
+    private Fragment cur_fragment;
 
     public PageAdapter(FragmentManager fm, object_item[] itemData) {
         super(fm);
@@ -23,7 +23,7 @@ public class PageAdapter extends FragmentPagerAdapter {
         setPageData(allData);
     }
     //need 2 fix
-    //mayb won't use
+    //maybe won't use
     public void setPageData(object_item[] itemData){
         pageData1.clear();
         pageData2.clear();
@@ -37,6 +37,7 @@ public class PageAdapter extends FragmentPagerAdapter {
             else { d("tipps","too many data"); }
         }
     }
+
     //Set Each Page's Data At Here
     @Override
     public Fragment getItem(int position) {

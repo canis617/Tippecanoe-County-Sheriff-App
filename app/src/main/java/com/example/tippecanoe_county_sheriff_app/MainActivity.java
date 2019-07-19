@@ -15,9 +15,12 @@ public class MainActivity extends AppCompatActivity {
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);                          //fixed to portrait view
         setContentView(R.layout.activity_main);
+
         data_item itemData = new data_item();                                                       //Data
         object_item[] Data = itemData.getAllData();                                                 //need 2 fix
-        ViewPager viewPager=findViewById(R.id.viewpager);
+
+        ViewPager viewPager = findViewById(R.id.viewpager);                                         //viewPager
+
         pageAdapter = new PageAdapter(getSupportFragmentManager(),Data);
         viewPager.setAdapter(pageAdapter);
     }
