@@ -1,5 +1,9 @@
 package com.example.tippecanoe_county_sheriff_app;
 
+/* File name : GridViewFrag.java
+ * Description : GridView that has Buttons
+ * */
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +14,10 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 
 public class GridViewFrag extends Fragment {
-    ArrayList<object_item> data;
-    OnActivityAction listener;
+    private ArrayList<ButtonItem> data;
+    private OnActivityAction listener;
 
-    GridViewFrag(ArrayList<object_item> pagedata, OnActivityAction listener){
+    GridViewFrag(ArrayList<ButtonItem> pagedata, OnActivityAction listener){
         data = pagedata;
         this.listener = listener;
     }

@@ -1,5 +1,8 @@
 package com.example.tippecanoe_county_sheriff_app;
 
+/* File name : ButtonAdapter.java
+* Description : custom adapter for buttons to put in gridView
+* */
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -12,11 +15,11 @@ import java.util.ArrayList;
 class ButtonAdapter extends BaseAdapter{
     private Context context;
     private int layout;
-    private ArrayList<object_item> buttonlist;
+    private ArrayList<ButtonItem> buttonlist;
     private LayoutInflater inf;
     private OnActivityAction mCallBack;
 
-    ButtonAdapter(Context context, int layout, ArrayList<object_item> list, OnActivityAction listener) {
+    ButtonAdapter(Context context, int layout, ArrayList<ButtonItem> list, OnActivityAction listener) {
         this.context = context;
         this.layout = layout;
         buttonlist = list;
@@ -41,8 +44,7 @@ class ButtonAdapter extends BaseAdapter{
             convertView = inf.inflate(layout, null);
         ImageButton iButton = convertView.findViewById(R.id.imagebutton);                           //item_button.xml
 
-        //Cause img is not added
-        iButton.setImageResource(buttonlist.get(position).getBimage());
+        iButton.setImageResource(buttonlist.get(position).getBimage());                             //button image
 
         if(!buttonlist.get(position).getIsConnector()){                                             //link buttons
             iButton.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +57,7 @@ class ButtonAdapter extends BaseAdapter{
                 }
             });
         }
-        else if(buttonlist.get(position).getChild() == "Admin"){
+        else if(buttonlist.get(position).getChild() == "Admin"){                                    //send method to MainActivity to open submenu
             iButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

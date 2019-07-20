@@ -5,7 +5,7 @@ import android.net.Uri;
 
 import androidx.annotation.Nullable;
 
-public class object_item {
+public class ButtonItem {
     private int bimage;                                                                                    //R.@directory.@imagename
     private String url;
     private boolean isConnector;                                                                            //true = High Category
@@ -19,7 +19,7 @@ public class object_item {
         this.child = child;
     }
 
-    object_item(int bimage, @Nullable String url, boolean isConnector, @Nullable String child){
+    ButtonItem(int bimage, @Nullable String url, boolean isConnector, @Nullable String child){
         this.bimage = bimage;
         this.url = url;
         this.isConnector = isConnector;

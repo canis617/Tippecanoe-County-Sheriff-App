@@ -1,5 +1,9 @@
 package com.example.tippecanoe_county_sheriff_app;
 
+/* File name : MenuFragmentServices.java
+ * Description : Menu Fragment for MainActivity's Fragment
+ * */
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,7 +19,7 @@ public class MenuFragmentServices extends Fragment {
     private MainActivity activity;
     private PageAdapter pageAdapter;
 
-    object_item[] Data;
+    private ButtonItem[] Data;
 
     @Nullable
     @Override

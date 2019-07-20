@@ -7,9 +7,6 @@
     android:background="#4E3B1B"
     tools:context=".MainActivity">
 
-
-
-
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="0dp"
@@ -41,6 +38,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_launcher" />
+
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"

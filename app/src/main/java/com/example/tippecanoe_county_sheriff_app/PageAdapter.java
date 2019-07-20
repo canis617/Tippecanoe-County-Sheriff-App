@@ -1,5 +1,10 @@
 package com.example.tippecanoe_county_sheriff_app;
 
+/* File name : PageAdapter.java
+ * Description : PageAdapter to put into ViewPager
+ *               Each fragment has gridView with buttons
+ * */
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -11,14 +16,14 @@ import static android.util.Log.d;
 public class PageAdapter extends FragmentPagerAdapter {
     private int MAX_PAGE;
     private int MAX_BUTTONS;
-    private object_item[] itemData;
-    private ArrayList<object_item> pageData1 = new ArrayList<>();
-    private ArrayList<object_item> pageData2 = new ArrayList<>();
-    private ArrayList<object_item> pageData3 = new ArrayList<>();
+    private ButtonItem[] itemData;
+    private ArrayList<ButtonItem> pageData1 = new ArrayList<>();
+    private ArrayList<ButtonItem> pageData2 = new ArrayList<>();
+    private ArrayList<ButtonItem> pageData3 = new ArrayList<>();
     private Fragment cur_fragment;
     private OnActivityAction listener;
 
-    public PageAdapter(FragmentManager fm, object_item[] itemData, OnActivityAction listener) {
+    public PageAdapter(FragmentManager fm, ButtonItem[] itemData, OnActivityAction listener) {
         super(fm);
         this.itemData = itemData;
         setPageData(itemData);
@@ -26,7 +31,7 @@ public class PageAdapter extends FragmentPagerAdapter {
     }
     //need 2 fix
     //maybe won't use
-    public void setPageData(object_item[] itemData){
+    public void setPageData(ButtonItem[] itemData){
         pageData1.clear();
         pageData2.clear();
         pageData3.clear();

@@ -1,5 +1,9 @@
 package com.example.tippecanoe_county_sheriff_app;
 
+/* File name : MenuFragmentAdmin.java
+ * Description : Menu Fragment for MainActivity's Fragment
+ * */
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,7 +20,7 @@ public class MenuFragmentAdmin extends Fragment {
     private MainActivity activity;
     private PageAdapter pageAdapter;
 
-    object_item[] Data;
+    private ButtonItem[] Data;
 
     @Nullable
     @Override
@@ -34,7 +38,7 @@ public class MenuFragmentAdmin extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //view pager allocation
+        //data initializing when Fragment is created
         DataItem itemData = new DataItem();
         Data = itemData.getSubMenu_Admin();
         pageAdapter = new PageAdapter(activity.getSupportFragmentManager(),Data, activity);
@@ -44,10 +48,8 @@ public class MenuFragmentAdmin extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.menu_pager_admin,container,false);
-
         ViewPager viewPager = rootView.findViewById(R.id.sub_view_pager_admin);
         viewPager.setAdapter(pageAdapter);
-
         return rootView;
     }
 

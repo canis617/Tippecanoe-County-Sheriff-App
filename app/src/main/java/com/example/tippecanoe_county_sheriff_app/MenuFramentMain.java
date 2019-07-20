@@ -1,5 +1,9 @@
 package com.example.tippecanoe_county_sheriff_app;
 
+/* File name : MenuFragmentMaint.java
+ * Description : Menu Fragment for MainActivity's Fragment
+ * */
+
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +20,7 @@ public class MenuFramentMain extends Fragment{
     private PageAdapter pageAdapter;
     private MainActivity activity;
 
-    object_item[] Data;
+    private ButtonItem[] Data;
 
     @Override
     public void onAttach(Context context) {
@@ -38,8 +42,6 @@ public class MenuFramentMain extends Fragment{
 
         ViewPager viewPager = rootView.findViewById(R.id.main_view_pager);
         viewPager.setAdapter(pageAdapter);
-
-        Log.d(this.getClass().getName(),"frag oncreateview 실행");
 
         return rootView;
     }

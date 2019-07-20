@@ -1,5 +1,9 @@
 package com.example.tippecanoe_county_sheriff_app;
 
+/* File name : MainActivity.java
+ * Description : Main Activity for app module
+ * */
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -7,20 +11,16 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements OnActivityAction {
 
-    TextView logo;
-    ImageView mainImage;
-
-    MenuFramentMain fragmentMain;
-    MenuFragmentAdmin fragmentAdmin;
-    MenuFragmentCorrections fragmentCorrections;
-    MenuFragmentEnforcement fragmentEnforcement;
-    MenuFragmentServices fragmentServices;
-    MenuFragmentSocialMedia fragmentSocialMedia;
+    //Fragments where to use menus
+    private MenuFramentMain fragmentMain;
+    private MenuFragmentAdmin fragmentAdmin;
+    private MenuFragmentCorrections fragmentCorrections;
+    private MenuFragmentEnforcement fragmentEnforcement;
+    private MenuFragmentServices fragmentServices;
+    private MenuFragmentSocialMedia fragmentSocialMedia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements OnActivityAction 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);                          //fixed to portrait view
         setContentView(R.layout.activity_main);
 
+        //initializing menus
         fragmentMain = new MenuFramentMain();
         fragmentAdmin = new MenuFragmentAdmin();
         fragmentCorrections = new MenuFragmentCorrections();
@@ -36,20 +37,17 @@ public class MainActivity extends AppCompatActivity implements OnActivityAction 
         fragmentServices = new MenuFragmentServices();
         fragmentSocialMedia = new MenuFragmentSocialMedia();
 
-        //init page
-        //load all page and hide sub menu
-        //when you click the button, just hide and show it
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.fragmentContainer, fragmentMain);
-        transaction.add(R.id.fragmentContainer, fragmentAdmin);
-        transaction.add(R.id.fragmentContainer, fragmentCorrections);
-        transaction.add(R.id.fragmentContainer, fragmentEnforcement);
-        transaction.add(R.id.fragmentContainer, fragmentServices);
-        transaction.add(R.id.fragmentContainer, fragmentSocialMedia);
-        hideSubMenu();
-        transaction.commit();
+        /*init page
+        * load all page and hide sub menu
+        * when you click the button, just hide and show it
+        */
+        initMenus();
     }
 
+    /* Listener of MainActivity
+    *  MainActivity - Fragment(ViewPager) - PagerAdapter - GridView - ButtonAdapter
+    *  to link between ButtonAdapter's onClick Listener and Activity
+    * */
     @Override
     public void getSubMenu(String menu){
         if(menu == null){
@@ -59,10 +57,10 @@ public class MainActivity extends AppCompatActivity implements OnActivityAction 
         Fragment fr;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        if(menu == "redirection"){
+        if(menu == "redirection"){                                                                  //when need to get back to the main menu
             hideSubMenu();
             transaction.show(fragmentMain);
-        } else {
+        } else {                                                                                    //sub menus
             if(menu == "Admin"){
                 fr = fragmentAdmin;
             } else if(menu == "Corrections"){
@@ -77,24 +75,15 @@ public class MainActivity extends AppCompatActivity implements OnActivityAction 
                 Log.d(this.getClass().getName(), "incorrect parameter error redirect to main");
                 fr = fragmentMain;
             }
-            transaction.hide(fragmentMain);
+
+            transaction.hide(fragmentMain);                                                         //Algorithm - hide Main show Sub in V 1.0 (need to evolve)
             transaction.show(fr);
             transaction.addToBackStack(fr.getClass().getSimpleName());
         }
         transaction.commit();
     }
 
-    @Override
-    public void onBackPressed() {
-        Log.d(this.getClass().getName(),Integer.toString(getSupportFragmentManager().getBackStackEntryCount()));
-        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-            super.onBackPressed();
-        } else {
-            getSupportFragmentManager().popBackStack();
-            getSubMenu("redirection");
-        }
-    }
-
+    //hide all sub menus
     public void hideSubMenu(){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.hide(fragmentAdmin);
@@ -102,6 +91,19 @@ public class MainActivity extends AppCompatActivity implements OnActivityAction 
         transaction.hide(fragmentEnforcement);
         transaction.hide(fragmentServices);
         transaction.hide(fragmentSocialMedia);
+        transaction.commit();
+    }
+
+    //initializing menus (initial version need to evolve)
+    public void initMenus(){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.fragmentContainer, fragmentMain);
+        transaction.add(R.id.fragmentContainer, fragmentAdmin);
+        transaction.add(R.id.fragmentContainer, fragmentCorrections);
+        transaction.add(R.id.fragmentContainer, fragmentEnforcement);
+        transaction.add(R.id.fragmentContainer, fragmentServices);
+        transaction.add(R.id.fragmentContainer, fragmentSocialMedia);
+        hideSubMenu();
         transaction.commit();
     }
 }
