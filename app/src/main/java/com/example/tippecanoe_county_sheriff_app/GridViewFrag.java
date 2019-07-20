@@ -1,6 +1,5 @@
 package com.example.tippecanoe_county_sheriff_app;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +11,9 @@ import java.util.ArrayList;
 
 public class GridViewFrag extends Fragment {
     ArrayList<object_item> data;
-    OnButtonClick listener;
+    OnActivityAction listener;
 
-    GridViewFrag(ArrayList<object_item> pagedata, OnButtonClick listener){
+    GridViewFrag(ArrayList<object_item> pagedata, OnActivityAction listener){
         data = pagedata;
         this.listener = listener;
     }

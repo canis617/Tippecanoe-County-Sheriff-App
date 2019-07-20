@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/sub_menu_layout_01"
+    android:id="@+id/menu_layout_corrections"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
@@ -8,7 +8,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/sub_view_pager_01"
+        android:id="@+id/sub_view_pager_corrections"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="8dp"
@@ -18,7 +18,7 @@
         app:layout_constraintVertical_bias="1.0">
 
         <androidx.viewpager.widget.PagerTabStrip
-            android:id="@+id/pagerTabStrip_sub01"
+            android:id="@+id/pagerTabStrip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

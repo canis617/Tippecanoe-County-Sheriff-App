@@ -16,9 +16,9 @@ public class PageAdapter extends FragmentPagerAdapter {
     private ArrayList<object_item> pageData2 = new ArrayList<>();
     private ArrayList<object_item> pageData3 = new ArrayList<>();
     private Fragment cur_fragment;
-    private OnButtonClick listener;
+    private OnActivityAction listener;
 
-    public PageAdapter(FragmentManager fm, object_item[] itemData, OnButtonClick listener) {
+    public PageAdapter(FragmentManager fm, object_item[] itemData, OnActivityAction listener) {
         super(fm);
         this.itemData = itemData;
         setPageData(itemData);

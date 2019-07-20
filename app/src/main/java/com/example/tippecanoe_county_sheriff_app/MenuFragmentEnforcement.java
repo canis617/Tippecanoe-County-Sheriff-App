@@ -11,8 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-public class SubMenuFragment extends Fragment {
-
+public class MenuFragmentEnforcement extends Fragment {
     private MainActivity activity;
     private PageAdapter pageAdapter;
 
@@ -36,16 +35,16 @@ public class SubMenuFragment extends Fragment {
 
         //view pager allocation
         DataItem itemData = new DataItem();
-        Data = itemData.getSubMenu_01();
+        Data = itemData.getSubMenu_Enforcement();
         pageAdapter = new PageAdapter(activity.getSupportFragmentManager(),Data, activity);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.sub_menu_view_pager_01,container,false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.menu_pager_enforcement,container,false);
 
-        ViewPager viewPager = rootView.findViewById(R.id.sub_view_pager_01);
+        ViewPager viewPager = rootView.findViewById(R.id.sub_view_pager_enforcement);
         viewPager.setAdapter(pageAdapter);
 
         return rootView;

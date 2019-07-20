@@ -2,23 +2,25 @@ package com.example.tippecanoe_county_sheriff_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.pm.ActivityInfo;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements OnButtonClick{
+public class MainActivity extends AppCompatActivity implements OnActivityAction {
 
     TextView logo;
     ImageView mainImage;
 
-    MainMenuFragment fragment1;
-    SubMenuFragment fragment2;
+    MenuFramentMain fragmentMain;
+    MenuFragmentAdmin fragmentAdmin;
+    MenuFragmentCorrections fragmentCorrections;
+    MenuFragmentEnforcement fragmentEnforcement;
+    MenuFragmentServices fragmentServices;
+    MenuFragmentSocialMedia fragmentSocialMedia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,47 +29,59 @@ public class MainActivity extends AppCompatActivity implements OnButtonClick{
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);                          //fixed to portrait view
         setContentView(R.layout.activity_main);
 
-        logo = (TextView)findViewById(R.id.textView);
-        logo.setText(R.string.Tippecanoe);
+        fragmentMain = new MenuFramentMain();
+        fragmentAdmin = new MenuFragmentAdmin();
+        fragmentCorrections = new MenuFragmentCorrections();
+        fragmentEnforcement = new MenuFragmentEnforcement();
+        fragmentServices = new MenuFragmentServices();
+        fragmentSocialMedia = new MenuFragmentSocialMedia();
 
-        mainImage=(ImageView)findViewById(R.id.imageView);                                          //set main image
-        Drawable myDrawable = getResources().getDrawable(R.drawable.board);
-        mainImage.setImageDrawable(myDrawable);
-
-        fragment1 = new MainMenuFragment();
-        fragment2 = new SubMenuFragment();
-
-        this.onClick(0);
+        //init page
+        //load all page and hide sub menu
+        //when you click the button, just hide and show it
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.fragmentContainer, fragmentMain);
+        transaction.add(R.id.fragmentContainer, fragmentAdmin);
+        transaction.add(R.id.fragmentContainer, fragmentCorrections);
+        transaction.add(R.id.fragmentContainer, fragmentEnforcement);
+        transaction.add(R.id.fragmentContainer, fragmentServices);
+        transaction.add(R.id.fragmentContainer, fragmentSocialMedia);
+        hideSubMenu();
+        transaction.commit();
     }
 
     @Override
-    public void onClick(int index){
-        //for debug
-        Log.d(this.getClass().getName(),"onClick실행");
+    public void getSubMenu(String menu){
+        if(menu == null){
+            Log.d(this.getClass().getName(), "sub menu parameter error");
+        }
 
         Fragment fr;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        if(index == -1){
-            transaction.remove(fragment2);
-            transaction.show(fragment1).commit();
-        }
-        else if(index == 0 ){
-            fr = fragment1;
-            transaction.replace(R.id.fragmentContainer, fr);
-            transaction.commit();
-        } else if(index == 1){
-            fr = fragment2;
-            transaction.hide(fragment1);
-            transaction.add(R.id.fragmentContainer, fr);
+        if(menu == "redirection"){
+            hideSubMenu();
+            transaction.show(fragmentMain);
+        } else {
+            if(menu == "Admin"){
+                fr = fragmentAdmin;
+            } else if(menu == "Corrections"){
+                fr = fragmentCorrections;
+            } else if(menu == "SocialMedia"){
+                fr = fragmentSocialMedia;
+            } else if(menu == "Services"){
+                fr = fragmentServices;
+            } else if(menu == "Enforcement"){
+                fr = fragmentEnforcement;
+            } else {
+                Log.d(this.getClass().getName(), "incorrect parameter error redirect to main");
+                fr = fragmentMain;
+            }
+            transaction.hide(fragmentMain);
+            transaction.show(fr);
             transaction.addToBackStack(fr.getClass().getSimpleName());
-            transaction.commit();
-        } else{
-            fr = fragment1;
-            transaction.replace(R.id.fragmentContainer, fr);
-            transaction.commit();
         }
-
+        transaction.commit();
     }
 
     @Override
@@ -77,7 +91,17 @@ public class MainActivity extends AppCompatActivity implements OnButtonClick{
             super.onBackPressed();
         } else {
             getSupportFragmentManager().popBackStack();
-            onClick(-1);
+            getSubMenu("redirection");
         }
+    }
+
+    public void hideSubMenu(){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.hide(fragmentAdmin);
+        transaction.hide(fragmentCorrections);
+        transaction.hide(fragmentEnforcement);
+        transaction.hide(fragmentServices);
+        transaction.hide(fragmentSocialMedia);
+        transaction.commit();
     }
 }

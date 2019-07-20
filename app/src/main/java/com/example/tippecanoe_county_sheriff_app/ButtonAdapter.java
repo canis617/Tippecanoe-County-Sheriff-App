@@ -14,9 +14,9 @@ class ButtonAdapter extends BaseAdapter{
     private int layout;
     private ArrayList<object_item> buttonlist;
     private LayoutInflater inf;
-    private OnButtonClick mCallBack;
+    private OnActivityAction mCallBack;
 
-    ButtonAdapter(Context context, int layout, ArrayList<object_item> list, OnButtonClick listener) {
+    ButtonAdapter(Context context, int layout, ArrayList<object_item> list, OnActivityAction listener) {
         this.context = context;
         this.layout = layout;
         buttonlist = list;
@@ -55,11 +55,43 @@ class ButtonAdapter extends BaseAdapter{
                 }
             });
         }
-        else if(buttonlist.get(position).getChild() == "Jail"){
+        else if(buttonlist.get(position).getChild() == "Admin"){
             iButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mCallBack.onClick(1);
+                    mCallBack.getSubMenu("Admin");
+                }
+            });
+        }
+        else if(buttonlist.get(position).getChild() == "Corrections"){
+            iButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mCallBack.getSubMenu("Corrections");
+                }
+            });
+        }
+        else if(buttonlist.get(position).getChild() == "Enforcement"){
+            iButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mCallBack.getSubMenu("Enforcement");
+                }
+            });
+        }
+        else if(buttonlist.get(position).getChild() == "Services"){
+            iButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mCallBack.getSubMenu("Services");
+                }
+            });
+        }
+        else if(buttonlist.get(position).getChild() == "SocialMedia"){
+            iButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mCallBack.getSubMenu("SocialMedia");
                 }
             });
         }

@@ -3,7 +3,7 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.example.tippecanoe_county_sheriff_app">
 
-    <dist:module dist:instant="true" />
+    dist:module dist:instant="true"
 
     <application
         android:allowBackup="true"
