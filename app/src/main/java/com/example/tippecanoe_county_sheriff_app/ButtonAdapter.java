@@ -14,12 +14,14 @@ class ButtonAdapter extends BaseAdapter{
     private int layout;
     private ArrayList<object_item> buttonlist;
     private LayoutInflater inf;
+    private OnButtonClick mCallBack;
 
-    ButtonAdapter(Context context, int layout, ArrayList<object_item> list) {
+    ButtonAdapter(Context context, int layout, ArrayList<object_item> list, OnButtonClick listener) {
         this.context = context;
         this.layout = layout;
         buttonlist = list;
         inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mCallBack = listener;
     }
     @Override
     public int getCount() {
@@ -53,13 +55,11 @@ class ButtonAdapter extends BaseAdapter{
                 }
             });
         }
-        else if(buttonlist.get(position).getChild() != null){
+        else if(buttonlist.get(position).getChild() == "Jail"){
             iButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //need 2 change
-                    //change activity...
-                    //((MainActivity)context).setPageAdapter(buttonlist.get(position).getChild());
+                    mCallBack.onClick(1);
                 }
             });
         }

@@ -11,16 +11,18 @@ import static android.util.Log.d;
 public class PageAdapter extends FragmentPagerAdapter {
     private int MAX_PAGE;
     private int MAX_BUTTONS;
-    private object_item[] allData;
+    private object_item[] itemData;
     private ArrayList<object_item> pageData1 = new ArrayList<>();
     private ArrayList<object_item> pageData2 = new ArrayList<>();
     private ArrayList<object_item> pageData3 = new ArrayList<>();
     private Fragment cur_fragment;
+    private OnButtonClick listener;
 
-    public PageAdapter(FragmentManager fm, object_item[] itemData) {
+    public PageAdapter(FragmentManager fm, object_item[] itemData, OnButtonClick listener) {
         super(fm);
-        allData = itemData;
-        setPageData(allData);
+        this.itemData = itemData;
+        setPageData(itemData);
+        this.listener = listener;
     }
     //need 2 fix
     //maybe won't use
@@ -45,13 +47,13 @@ public class PageAdapter extends FragmentPagerAdapter {
             return null;
         switch (position){
             case 0:
-                cur_fragment = new GridViewFrag(pageData1);
+                cur_fragment = new GridViewFrag(pageData1,listener);
                 break;
             case 1:
-                cur_fragment = new GridViewFrag(pageData2);
+                cur_fragment = new GridViewFrag(pageData2,listener);
                 break;
             case 2:
-                cur_fragment = new GridViewFrag(pageData3);
+                cur_fragment = new GridViewFrag(pageData3,listener);
                 break;
         }
         return cur_fragment;

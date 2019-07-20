@@ -9,9 +9,17 @@ public class object_item {
     private int bimage;                                                                                    //R.@directory.@imagename
     private String url;
     private boolean isConnector;                                                                            //true = High Category
-    private object_item[] child;                                                                            //Lower Categories
+    private String child;                                                                            //Lower Categories
 
-    object_item(int bimage, @Nullable String url, boolean isConnector, @Nullable object_item[] child){
+    public String getChild() {
+        return child;
+    }
+
+    public void setChild(String child) {
+        this.child = child;
+    }
+
+    object_item(int bimage, @Nullable String url, boolean isConnector, @Nullable String child){
         this.bimage = bimage;
         this.url = url;
         this.isConnector = isConnector;
@@ -48,11 +56,4 @@ public class object_item {
         isConnector = connector;
     }
 
-    public object_item[] getChild() {
-        return child;
-    }
-
-    public void setChild(object_item[] child) {
-        this.child = child;
-    }
 }

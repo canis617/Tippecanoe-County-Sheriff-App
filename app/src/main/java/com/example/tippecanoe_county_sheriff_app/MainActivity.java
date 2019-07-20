@@ -1,13 +1,24 @@
 package com.example.tippecanoe_county_sheriff_app;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.content.pm.ActivityInfo;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnButtonClick{
 
-    PageAdapter pageAdapter;
+    TextView logo;
+    ImageView mainImage;
+
+    MainMenuFragment fragment1;
+    SubMenuFragment fragment2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,22 +27,57 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);                          //fixed to portrait view
         setContentView(R.layout.activity_main);
 
-        data_item itemData = new data_item();                                                       //Data
-        object_item[] Data = itemData.getAllData();                                                 //need 2 fix
+        logo = (TextView)findViewById(R.id.textView);
+        logo.setText(R.string.Tippecanoe);
 
-        ViewPager viewPager = findViewById(R.id.viewpager);                                         //viewPager
+        mainImage=(ImageView)findViewById(R.id.imageView);                                          //set main image
+        Drawable myDrawable = getResources().getDrawable(R.drawable.board);
+        mainImage.setImageDrawable(myDrawable);
 
-        pageAdapter = new PageAdapter(getSupportFragmentManager(),Data);
-        viewPager.setAdapter(pageAdapter);
+        fragment1 = new MainMenuFragment();
+        fragment2 = new SubMenuFragment();
+
+        this.onClick(0);
     }
 
-    //2 set a new data to pageAdapter
-    //not good
-    //mayb we won't use
-    /*
-    public void setPageAdapter(object_item[] newData){
-        pageAdapter.setPageData(newData);
-        pageAdapter.notifyDataSetChanged();
+    @Override
+    public void onClick(int index){
+        //for debug
+        Log.d(this.getClass().getName(),"onClick실행");
+
+        Fragment fr;
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        if(index == -1){
+            transaction.remove(fragment2);
+            transaction.show(fragment1).commit();
+        }
+        else if(index == 0 ){
+            fr = fragment1;
+            transaction.replace(R.id.fragmentContainer, fr);
+            transaction.commit();
+        } else if(index == 1){
+            fr = fragment2;
+            transaction.hide(fragment1);
+            transaction.add(R.id.fragmentContainer, fr);
+            transaction.addToBackStack(fr.getClass().getSimpleName());
+            transaction.commit();
+        } else{
+            fr = fragment1;
+            transaction.replace(R.id.fragmentContainer, fr);
+            transaction.commit();
+        }
+
     }
-    */
+
+    @Override
+    public void onBackPressed() {
+        Log.d(this.getClass().getName(),Integer.toString(getSupportFragmentManager().getBackStackEntryCount()));
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            super.onBackPressed();
+        } else {
+            getSupportFragmentManager().popBackStack();
+            onClick(-1);
+        }
+    }
 }

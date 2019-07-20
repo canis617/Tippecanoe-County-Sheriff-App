@@ -12,9 +12,11 @@ import java.util.ArrayList;
 
 public class GridViewFrag extends Fragment {
     ArrayList<object_item> data;
+    OnButtonClick listener;
 
-    GridViewFrag(ArrayList<object_item> pagedata){
+    GridViewFrag(ArrayList<object_item> pagedata, OnButtonClick listener){
         data = pagedata;
+        this.listener = listener;
     }
 
     @Override
@@ -26,7 +28,7 @@ public class GridViewFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.item_page,container,false);
 
-        ButtonAdapter buttonAdapter = new ButtonAdapter (view.getContext(), R.layout.item_button, data);       //create button adapter
+        ButtonAdapter buttonAdapter = new ButtonAdapter (view.getContext(), R.layout.item_button, data,listener);       //create button adapter
         GridView gv = view.findViewById(R.id.gridview);                                             //grid view link
         gv.setAdapter(buttonAdapter);
         return view;
