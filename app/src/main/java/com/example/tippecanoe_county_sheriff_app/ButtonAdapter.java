@@ -97,6 +97,22 @@ class ButtonAdapter extends BaseAdapter{
                 }
             });
         }
+        else if(buttonlist.get(position).getChild() == "Others"){
+            iButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mCallBack.getSubMenu("Others");
+                }
+            });
+        }
+        else if(buttonlist.get(position).getChild() == "Sample"){
+            iButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mCallBack.getSubMenu("Sample");
+                }
+            });
+        }
         return convertView;
     }
 }

@@ -17,12 +17,8 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity implements OnActivityAction {
 
     //Fragments where to use menus
-    private MenuFramentMain fragmentMain;
-    private MenuFragmentAdmin fragmentAdmin;
-    private MenuFragmentCorrections fragmentCorrections;
-    private MenuFragmentEnforcement fragmentEnforcement;
-    private MenuFragmentServices fragmentServices;
-    private MenuFragmentSocialMedia fragmentSocialMedia;
+    private MenuFramentMain fragmentMain,fragmentAdmin,fragmentCorrections,
+            fragmentEnforcement,fragmentServices,fragmentSocialMedia, fragmentOthers, fragmentSample;
 
     //weather views
     TextView cityField, currentTemperatureField, weatherIcon;
@@ -41,19 +37,21 @@ public class MainActivity extends AppCompatActivity implements OnActivityAction 
         weatherView = new WeatherAPI(this);
 
         //initializing menus
-        fragmentMain = new MenuFramentMain();
-        fragmentAdmin = new MenuFragmentAdmin();
-        fragmentCorrections = new MenuFragmentCorrections();
-        fragmentEnforcement = new MenuFragmentEnforcement();
-        fragmentServices = new MenuFragmentServices();
-        fragmentSocialMedia = new MenuFragmentSocialMedia();
-
+        fragmentMain = new MenuFramentMain("Main");
+        fragmentAdmin = new MenuFramentMain("Admin");
+        fragmentCorrections = new MenuFramentMain("Corrections");
+        fragmentEnforcement = new MenuFramentMain("Enforcement");
+        fragmentServices = new MenuFramentMain("Services");
+        fragmentSocialMedia = new MenuFramentMain("SocialMedia");
+        fragmentOthers = new MenuFramentMain("Others");
+        fragmentSample = new MenuFramentMain("Sample");
 
         /*init page
         * load all page and hide sub menu
         * when you click the button, just hide and show it
         */
-        initMenus();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,fragmentMain).commit();
+        //initMenus();
     }
 
     /* Listener of MainActivity
@@ -69,9 +67,8 @@ public class MainActivity extends AppCompatActivity implements OnActivityAction 
         Fragment fr;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        if(menu == "redirection"){                                                                  //when need to get back to the main menu
-            hideSubMenu();
-            transaction.show(fragmentMain);
+        if(menu == "redirection"){
+            transaction.replace(R.id.fragmentContainer,fragmentMain);
         } else {                                                                                    //sub menus
             if(menu == "Admin"){
                 fr = fragmentAdmin;
@@ -83,39 +80,18 @@ public class MainActivity extends AppCompatActivity implements OnActivityAction 
                 fr = fragmentServices;
             } else if(menu == "Enforcement"){
                 fr = fragmentEnforcement;
+            } else if(menu == "Others"){
+                fr = fragmentOthers;
+            } else if(menu == "Sample"){
+                fr = fragmentSample;
             } else {
                 Log.d(this.getClass().getName(), "incorrect parameter error redirect to main");
                 fr = fragmentMain;
             }
-
-            transaction.hide(fragmentMain);                                                         //Algorithm - hide Main show Sub in V 1.0 (need to evolve)
-            transaction.show(fr);
+                                                      //Algorithm - hide Main show Sub in V 1.0 (need to evolve)
+            transaction.replace(R.id.fragmentContainer,fr);
             transaction.addToBackStack(fr.getClass().getSimpleName());
         }
-        transaction.commit();
-    }
-
-    //hide all sub menus
-    public void hideSubMenu(){
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.hide(fragmentAdmin);
-        transaction.hide(fragmentCorrections);
-        transaction.hide(fragmentEnforcement);
-        transaction.hide(fragmentServices);
-        transaction.hide(fragmentSocialMedia);
-        transaction.commit();
-    }
-
-    //initializing menus (initial version need to evolve)
-    public void initMenus(){
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.fragmentContainer, fragmentMain);
-        transaction.add(R.id.fragmentContainer, fragmentAdmin);
-        transaction.add(R.id.fragmentContainer, fragmentCorrections);
-        transaction.add(R.id.fragmentContainer, fragmentEnforcement);
-        transaction.add(R.id.fragmentContainer, fragmentServices);
-        transaction.add(R.id.fragmentContainer, fragmentSocialMedia);
-        hideSubMenu();
         transaction.commit();
     }
 

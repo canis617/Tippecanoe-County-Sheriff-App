@@ -3,7 +3,6 @@ package com.example.tippecanoe_county_sheriff_app;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.text.Html;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONException;

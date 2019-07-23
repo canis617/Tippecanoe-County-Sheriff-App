@@ -6,6 +6,9 @@ package com.example.tippecanoe_county_sheriff_app;
  * Maybe need to add a module to manage data (evolving later)
  * */
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class DataItem {
     private ButtonItem[] data;
 
@@ -13,31 +16,55 @@ public class DataItem {
         data = null;
     }
 
-    public ButtonItem[] getData() {
-        return data;
-    }
-
     public void setData(ButtonItem[] data) {
         this.data = data;
     }
 
+    public ArrayList<ButtonItem> getData(String key){
+        if(key == null){
+            return null;
+        }
+        switch(key){
+            case "Main":
+                return getMainData();
+            case "Admin":
+                return getSubMenu_Admin();
+            case "Corrections":
+                return getSubMenu_Corrections();
+            case "Services":
+                return getSubMenu_Services();
+            case "SocialMedia":
+                return getSubMenu_SocialMedia();
+            case "Enforcement":
+                return getSubMenu_Enforcement();
+            case "Others":
+                return getSubMenu_Others();
+            case "Sample":
+                return getSubMenu_Sample();
+            default:
+                return null;
+        }
+
+    }
+
     //main menu data
-    public ButtonItem[] getMainData(){
+    public ArrayList<ButtonItem> getMainData(){
         data = new ButtonItem[]{
                 new ButtonItem(R.drawable.admin,null, true, "Admin"),
-                new ButtonItem(R.drawable.sex_offender,"http://www.icrimewatch.net/index.php?AgencyID=54758", false, null),
-                new ButtonItem(R.drawable.corrections,"https://www.tippecanoe.in.gov/359/Sheriffs-Department", true, "Corrections"),
-                new ButtonItem(R.drawable.submit_a_tip,"", false, null),
-                new ButtonItem(R.drawable.contact,"", false, null),
-                new ButtonItem(R.drawable.services,"https://www.tippecanoe.in.gov/359/Sheriffs-Department", true, "Services"),
-                new ButtonItem(R.drawable.social_media,"https://www.tippecanoe.in.gov/359/Sheriffs-Department", true, "SocialMedia"),
-                new ButtonItem(R.drawable.enforcement,"https://www.tippecanoe.in.gov/359/Sheriffs-Department", true, "Enforcement"),
+                new ButtonItem(R.drawable.sex_offender,"https://www.tippecanoe.in.gov/359/Sheriffs-Department", false, null),
+                new ButtonItem(R.drawable.corrections,"", true, "Corrections"),
+                new ButtonItem(R.drawable.submit_a_tip,"https://www.tippecanoe.in.gov/359/Sheriffs-Department", false, null),
+                new ButtonItem(R.drawable.contact,"https://www.tippecanoe.in.gov/359/Sheriffs-Department", false, null),
+                new ButtonItem(R.drawable.services,"", true, "Services"),
+                new ButtonItem(R.drawable.social_media,"", true, "SocialMedia"),
+                new ButtonItem(R.drawable.enforcement,"", true, "Enforcement"),
+                new ButtonItem(R.drawable.others,"", true, "Others"),
         };
-        return data;
+        return arrayToList(data);
     }
 
     //Admin sub menu data
-    public ButtonItem[] getSubMenu_Admin(){
+    public ArrayList<ButtonItem> getSubMenu_Admin(){
         data = new ButtonItem[]{
                 new ButtonItem(R.drawable.admin,"https://www.tippecanoe.in.gov/Directory.aspx?did=43", false, null),                      //Phone Directory Link
                 //Jun:
@@ -47,11 +74,11 @@ public class DataItem {
                 //There is no webpage
                 new ButtonItem(R.drawable.admin,"https://www.tippecanoe.in.gov/470/Employment",false,null)                                //Employment Link
         };
-        return data;
+        return arrayToList(data);
     }
 
     //Corrections sub menu data
-    public ButtonItem[] getSubMenu_Corrections(){
+    public ArrayList<ButtonItem> getSubMenu_Corrections(){
         data = new ButtonItem[]{
                 new ButtonItem(R.drawable.corrections,"http://www3.tippecanoe.in.gov/InmateListing/InmateSearch.aspx", false, null),      //Inmate Lookup Link
                 //new ButtonItem(R.drawable.jail,"@Web_Based_Vendor_Link", false, null),                                                                          //I don't get it
@@ -61,11 +88,11 @@ public class DataItem {
                 new ButtonItem(R.drawable.corrections,"https://tippecanoein.gtlvisitme.com/app",false, null),                             //Video Visitation Link
                 //new ButtonItem(R.drawable.jail,"@Bond_Statements_&_Posting_Link",false, null),                                                                  //I don't get it
         };
-        return data;
+        return arrayToList(data);
     }
 
     //Services sub menu data
-    public ButtonItem[] getSubMenu_Services(){
+    public ArrayList<ButtonItem> getSubMenu_Services(){
         data = new ButtonItem[]{
                 new ButtonItem(R.drawable.services,"https://www.tippecanoe.in.gov/479/Sheriff-Sales", false, null),                       //Sheriff-Sales Link
                 new ButtonItem(R.drawable.services,"http://www.tippecanoe.in.gov/477/Firearm-Permits", false, null),                      //Firearm-Permits Link
@@ -75,29 +102,45 @@ public class DataItem {
                 //new ButtonItem(R.drawable.services,"@Security_Request_Link", false, null),
                 new ButtonItem(R.drawable.services,"http://www.tippecanoe.in.gov/480/Tax-Warrants", false, null),                         //Tax-Warrants Link
         };
-        return data;
+        return arrayToList(data);
     }
 
     //Social Media sub menu data
-    public ButtonItem[] getSubMenu_SocialMedia(){
+    public ArrayList<ButtonItem> getSubMenu_SocialMedia(){
         data = new ButtonItem[]{
                 new ButtonItem(R.drawable.social_media,"https://twitter.com/tippecanoecosh1", false, null),                               //Twitter Link
                 new ButtonItem(R.drawable.social_media,"https://www.facebook.com/TCSOIndiana/", false, null),                             //Facebook Link
                 new ButtonItem(R.drawable.social_media,"https://www.instagram.com/tcso79/", false, null),                                 //Instagram Link
         };
-        return data;
+        return arrayToList(data);
     }
 
     //Enforcement sub menu data
-    public ButtonItem[] getSubMenu_Enforcement(){
+    public ArrayList<ButtonItem> getSubMenu_Enforcement(){
         data = new ButtonItem[]{
-                new ButtonItem(R.drawable.enforcement,"https://wetip.com/", false, null),                                                 //We-Tip Link
-                //Jun:
-                //I think we need more:
-                //Description(Maybe extra Page)
-                //new ButtonItem(R.drawable.services,"@Traffic_Complaints_Link", false, null),
+                new ButtonItem(R.drawable.enforcement,"https://wetip.com/", false, null),
         };
-        return data;
+        return arrayToList(data);
+    }
+
+    public ArrayList<ButtonItem> getSubMenu_Others(){
+        data = new ButtonItem[]{
+                new ButtonItem(R.drawable.others,"https://wetip.com/", false, null),
+                new ButtonItem(R.drawable.others,"https://wetip.com/", false, null),
+                new ButtonItem(R.drawable.others,"", true, "Sample"),
+        };
+        return arrayToList(data);
+    }
+
+    public ArrayList<ButtonItem> getSubMenu_Sample(){
+        data = new ButtonItem[]{
+                new ButtonItem(R.drawable.enforcement,"https://wetip.com/", false, null),
+                new ButtonItem(R.drawable.enforcement,"https://wetip.com/", false, null),
+                new ButtonItem(R.drawable.enforcement,"https://wetip.com/", false, null),
+                new ButtonItem(R.drawable.enforcement,"https://wetip.com/", false, null),
+                new ButtonItem(R.drawable.enforcement,"https://wetip.com/", false, null),
+        };
+        return arrayToList(data);
     }
 
     public ButtonItem getDataAt(int position){
@@ -107,4 +150,14 @@ public class DataItem {
         return data;
     }
     public int getLength(){ return data.length; }
+    public ArrayList<ButtonItem> arrayToList(ButtonItem[] data){
+        ArrayList<ButtonItem> listData = new ArrayList<ButtonItem>();
+        int index;
+        for(ButtonItem tempButton : data){
+            if(tempButton != null){
+                listData.add(tempButton);
+            }
+        }
+        return listData;
+    }
 }

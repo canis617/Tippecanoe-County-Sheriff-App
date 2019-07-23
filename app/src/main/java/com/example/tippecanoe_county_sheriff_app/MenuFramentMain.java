@@ -10,17 +10,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import java.util.ArrayList;
+
 public class MenuFramentMain extends Fragment{
-    private PageAdapter pageAdapter;
     private MainActivity activity;
 
-    private ButtonItem[] Data;
+    private ArrayList<ButtonItem> buttonData;
+
+    public MenuFramentMain(String index){
+        DataItem item = new DataItem();
+        buttonData = item.getData(index);
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -32,16 +39,11 @@ public class MenuFramentMain extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.menu_pager_main, container, false);
 
-        //view pager allocation
-        DataItem itemData = new DataItem();
-        Data = itemData.getMainData();
-        pageAdapter = new PageAdapter(activity.getSupportFragmentManager(),Data, activity);
-
-        ViewPager viewPager = rootView.findViewById(R.id.main_view_pager);
-        viewPager.setAdapter(pageAdapter);
+        ButtonAdapter buttonAdapter = new ButtonAdapter (rootView.getContext(), R.layout.item_button, buttonData, activity);       //create button adapter
+        GridView gridView = rootView.findViewById(R.id.grid_view);                                             //grid view link
+        gridView.setAdapter(buttonAdapter);
 
         return rootView;
     }
