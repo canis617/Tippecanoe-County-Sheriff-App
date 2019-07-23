@@ -7,8 +7,8 @@
     android:layout_height="wrap_content">
     <ImageButton
         android:id="@+id/imagebutton"
-        android:layout_width="330dp"
-        android:layout_height="300dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:adjustViewBounds="true"
         android:contentDescription="@null"
         android:padding="0dp"
