@@ -51,7 +51,7 @@ class ButtonAdapter extends BaseAdapter{
                 @Override
                 public void onClick(View v) {
                     Context context = v.getContext();
-                    Intent intent = buttonlist.get(position).getLinkIntent();
+                    Intent intent = buttonlist.get(position).getfunc();
                     try { context.startActivity(intent); }
                     catch (Exception e) { e.printStackTrace(); }
                 }

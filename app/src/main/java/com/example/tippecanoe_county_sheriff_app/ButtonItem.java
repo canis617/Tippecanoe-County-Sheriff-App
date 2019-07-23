@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 
 public class ButtonItem {
     private int bimage;                                                                                    //R.@directory.@imagename
-    private String url;
+    private Intent func;
     private boolean isConnector;                                                                            //true = High Category
     private String child;                                                                            //Lower Categories
 
@@ -19,18 +19,18 @@ public class ButtonItem {
         this.child = child;
     }
 
-    ButtonItem(int bimage, @Nullable String url, boolean isConnector, @Nullable String child){
+    ButtonItem(int bimage, Intent func, boolean isConnector, @Nullable String child){
         this.bimage = bimage;
-        this.url = url;
+        this.func = func;
         this.isConnector = isConnector;
         this.child = child;
     }
 
-    public Intent getLinkIntent(){
+    /*public Intent getLinkIntent(){
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         return intent;
-    }
+    }*/
 
     public int getBimage() {
         return bimage;
@@ -40,12 +40,12 @@ public class ButtonItem {
         this.bimage = bimage;
     }
 
-    public String getUrl() {
-        return url;
+    public Intent getfunc() {
+        return func;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setFunc(Intent func) {
+        this.func = func;
     }
 
     public boolean getIsConnector() {
