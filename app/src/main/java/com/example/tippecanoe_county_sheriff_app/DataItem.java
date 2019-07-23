@@ -9,7 +9,6 @@ package com.example.tippecanoe_county_sheriff_app;
 import android.content.Intent;
 import android.net.Uri;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DataItem {
@@ -69,13 +68,13 @@ public class DataItem {
     //Admin sub menu data
     public ArrayList<ButtonItem> getSubMenu_Admin(){
         data = new ButtonItem[]{
-                new ButtonItem(R.drawable.admin,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/Directory.aspx?did=43")), false, null),                      //Phone Directory Link
+                new ButtonItem(R.drawable.phone_directory,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/Directory.aspx?did=43")), false, null),                      //Phone Directory Link
                 //Jun:
                 //Maybe we can make a new Page
-                new ButtonItem(R.drawable.admin,null, true, null),                                                                               //I don't get it
-                new ButtonItem(R.drawable.admin,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/482/News-Releases")), false, null),                          //Press Releases Link
+                new ButtonItem(R.drawable.adminline,null, true, null),                                                                               //I don't get it
+                new ButtonItem(R.drawable.press_releases,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/482/News-Releases")), false, null),                          //Press Releases Link
                 //There is no webpage
-                new ButtonItem(R.drawable.admin,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/470/Employment")),false,null)                                //Employment Link
+                new ButtonItem(R.drawable.employment,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/470/Employment")),false,null)                                //Employment Link
         };
         return arrayToList(data);
     }
@@ -83,7 +82,7 @@ public class DataItem {
     //Corrections sub menu data
     public ArrayList<ButtonItem> getSubMenu_Corrections(){
         data = new ButtonItem[]{
-                new ButtonItem(R.drawable.corrections,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www3.tippecanoe.in.gov/InmateListing/InmateSearch.aspx")), false, null),      //Inmate Lookup Link
+                new ButtonItem(R.drawable.inmate_lookup,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www3.tippecanoe.in.gov/InmateListing/InmateSearch.aspx")), false, null),      //Inmate Lookup Link
                 new ButtonItem(R.drawable.web_based_vendor,null, true, null),                                                                          //I don't get it
                 new ButtonItem(R.drawable.commissary,new Intent(Intent.ACTION_VIEW, Uri.parse("https://deposits.jailatm.com/webdeposits/default.aspx")),false, null),               //Jun:
                 //this is more familiar
