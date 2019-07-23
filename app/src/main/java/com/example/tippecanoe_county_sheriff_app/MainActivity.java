@@ -26,9 +26,7 @@ public class MainActivity extends AppCompatActivity implements OnActivityAction 
 
     //weather views
     TextView cityField, currentTemperatureField, weatherIcon;
-    Typeface weatherFont;
-    String city;  //city method (city name, country)
-    String OPEN_WEATHER_MAP_API;  //API key
+
 
     private WeatherAPI weatherView;
 
@@ -39,8 +37,8 @@ public class MainActivity extends AppCompatActivity implements OnActivityAction 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);                          //fixed to portrait view
         setContentView(R.layout.activity_main);
 
-        city = "Lafayette, usa"; //default city
-        OPEN_WEATHER_MAP_API = getString(R.string.weatherAPIKey);
+        //weather initializing
+        weatherView = new WeatherAPI(this);
 
         //initializing menus
         fragmentMain = new MenuFramentMain();
@@ -50,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements OnActivityAction 
         fragmentServices = new MenuFragmentServices();
         fragmentSocialMedia = new MenuFragmentSocialMedia();
 
-        weatherView = new WeatherAPI(this);
+
         /*init page
         * load all page and hide sub menu
         * when you click the button, just hide and show it
@@ -119,38 +117,6 @@ public class MainActivity extends AppCompatActivity implements OnActivityAction 
         transaction.add(R.id.fragmentContainer, fragmentSocialMedia);
         hideSubMenu();
         transaction.commit();
-    }
-
-    public void setCityField(TextView cityField) {
-        this.cityField = cityField;
-    }
-
-    public String getOPEN_WEATHER_MAP_API() {
-        return OPEN_WEATHER_MAP_API;
-    }
-
-    public void setCurrentTemperatureField(TextView currentTemperatureField) {
-        this.currentTemperatureField = currentTemperatureField;
-    }
-
-    public void setWeatherIcon(TextView weatherIcon) {
-        this.weatherIcon = weatherIcon;
-    }
-
-    public void setWeatherFont(Typeface weatherFont) {
-        this.weatherFont = weatherFont;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public void setTypeface(){
-        weatherIcon.setTypeface(weatherFont);
-    }
-
-    public void setOPEN_WEATHER_MAP_API(String OPEN_WEATHER_MAP_API) {
-        this.OPEN_WEATHER_MAP_API = OPEN_WEATHER_MAP_API;
     }
 
 }

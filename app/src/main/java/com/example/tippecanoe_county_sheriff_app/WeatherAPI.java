@@ -14,17 +14,21 @@ import java.util.Locale;
 public class WeatherAPI{
     MainActivity activity;
 
+    private Typeface weatherFont;
+    private String city;  //city method (city name, country)
+    private String OPEN_WEATHER_MAP_API;  //API key
+
     public WeatherAPI(MainActivity activity) {
         this.activity = activity;
-        activity.city = "Lafayette, usa";
-        activity.OPEN_WEATHER_MAP_API = activity.getString(R.string.weatherAPIKey);
+        city = "Lafayette, usa";
+        OPEN_WEATHER_MAP_API = activity.getString(R.string.weatherAPIKey);
 
         activity.cityField = (TextView) activity.findViewById(R.id.city_field);
         activity.currentTemperatureField = (TextView) activity.findViewById(R.id.current_temperature_field); //temporature
         activity.weatherIcon = (TextView) activity.findViewById(R.id.weather_icon); //Weather Icon
-        activity.weatherFont = Typeface.createFromAsset(activity.getAssets(), "fonts/weathericons-regular-webfont.ttf");
-        activity.weatherIcon.setTypeface(activity.weatherFont);
-        taskLoadUp(activity.city);
+        weatherFont = Typeface.createFromAsset(activity.getAssets(), "fonts/weathericons-regular-webfont.ttf");
+        activity.weatherIcon.setTypeface(weatherFont);
+        taskLoadUp(city);
 
         /* comment cause not used
         *  This is Views can used by api
@@ -54,7 +58,7 @@ public class WeatherAPI{
 
         protected String doInBackground(String...args) {
             String xml = WeatherFunction.excuteGet("http://api.openweathermap.org/data/2.5/weather?q=" + args[0] +
-                    "&units=metric&appid=" + activity.OPEN_WEATHER_MAP_API);
+                    "&units=metric&appid=" + OPEN_WEATHER_MAP_API);
             return xml;
         }
 
