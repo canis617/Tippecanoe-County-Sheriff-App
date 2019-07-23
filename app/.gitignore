@@ -12,6 +12,8 @@
 /captures
 .externalNativeBuild
 
+/app/src/main/java/res/values/keys.xml
+
 .gradle
 /build/
 
