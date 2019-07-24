@@ -91,8 +91,8 @@ public class MainActivity extends AppCompatActivity implements OnActivityAction 
                                                       //Algorithm - hide Main show Sub in V 1.0 (need to evolve)
             transaction.replace(R.id.fragmentContainer,fr);
             transaction.addToBackStack(fr.getClass().getSimpleName());
+
         }
         transaction.commit();
     }
-
 }
