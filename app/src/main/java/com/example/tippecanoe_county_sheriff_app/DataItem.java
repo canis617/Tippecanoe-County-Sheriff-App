@@ -53,7 +53,7 @@ public class DataItem {
     public ArrayList<ButtonItem> getMainData(){
         data = new ButtonItem[]{
                 new ButtonItem(R.drawable.admin,null, true, "Admin"),
-                new ButtonItem(R.drawable.sex_offender,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/359/Sheriffs-Department")), false, null),
+                new ButtonItem(R.drawable.sex_offender,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.icrimewatch.net/index.php?AgencyID=54758")), false, null),
                 new ButtonItem(R.drawable.corrections,null, true, "Corrections"),
                 new ButtonItem(R.drawable.submit_a_tip,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/359/Sheriffs-Department")), false, null),
                 new ButtonItem(R.drawable.contact,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/359/Sheriffs-Department")), false, null),
