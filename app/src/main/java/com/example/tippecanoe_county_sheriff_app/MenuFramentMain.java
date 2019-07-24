@@ -27,6 +27,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 
+import static android.util.Log.d;
+
 public class MenuFramentMain extends Fragment{
     private MainActivity activity;
     private String FragName;
@@ -58,7 +60,7 @@ public class MenuFramentMain extends Fragment{
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.menu_pager_main, container, false);
 
         ButtonAdapter buttonAdapter = new ButtonAdapter (rootView.getContext(), R.layout.item_button, buttonData, activity);       //create button adapter
-                                                     //grid view link
+        //grid view link
 
         /*
             Exception: Social media(Popup)
@@ -100,9 +102,26 @@ public class MenuFramentMain extends Fragment{
                 View layout = infla.inflate(R.layout.activity_pop_up_window, (ViewGroup) activity.findViewById(R.id.popup_element));
 
                 pwindo = new PopupWindow(layout, mWidthPixels - 100, mHeightPixels - 300, true);
+                //View pwview = pwindo.getContentView();
+                layout.setFocusableInTouchMode(true);
+                layout.requestFocus();
+                layout.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (!hasFocus)
+                            //d("jun", "nofocus");
+                            //pwindo.dismiss();
+                            activity.getSubMenu("Main");
+                    }
+                });
                 pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
                 btnClosePopup = (Button) layout.findViewById(R.id.btn_close_popup);
                 btnClosePopup.setOnClickListener(cancel_button_click_listener);
+
+                /*
+
+                 */
+
 
                 GridView popgridview = layout.findViewById(R.id.popupgridview);
                 popgridview.setAdapter(buttonAdapter);
@@ -136,7 +155,11 @@ public class MenuFramentMain extends Fragment{
             new View.OnClickListener() {
                 public void onClick(View v) {
                     pwindo.dismiss();
-                    activity.onBackPressed();
+
+                    //activity.getSubMenu("Main");
+
+                    //activity.onBackPressed();
+
                 }
             };
 
