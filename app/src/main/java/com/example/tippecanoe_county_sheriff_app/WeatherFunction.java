@@ -2,6 +2,8 @@ package com.example.tippecanoe_county_sheriff_app;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -28,14 +30,15 @@ public class WeatherFunction {
             //Create connection
             url = new URL(targetURL);
             connection = (HttpURLConnection)url.openConnection();
+            connection.setRequestMethod("GET");
             connection.setRequestProperty("content-type", "application/json;  charset=utf-8");
             connection.setRequestProperty("Content-Language", "en-US");
             connection.setUseCaches (false);
             connection.setDoInput(true);
-            connection.setDoOutput(false);
-
             InputStream is;
             int status = connection.getResponseCode();
+            String msg = connection.getResponseMessage();
+
             if (status != HttpURLConnection.HTTP_OK)
                 is = connection.getErrorStream();
             else
@@ -50,6 +53,7 @@ public class WeatherFunction {
             rd.close();
             return response.toString();
         } catch (Exception e) {
+            Log.d("Error Message : ", e.toString());
             return null;
         } finally {
             if(connection != null) {

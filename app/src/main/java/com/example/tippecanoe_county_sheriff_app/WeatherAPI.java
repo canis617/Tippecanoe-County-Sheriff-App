@@ -3,6 +3,7 @@ package com.example.tippecanoe_county_sheriff_app;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.text.Html;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONException;
@@ -19,7 +20,7 @@ public class WeatherAPI{
 
     public WeatherAPI(MainActivity activity) {
         this.activity = activity;
-        city = "Lafayette, usa";
+        city = "47906,us";
         OPEN_WEATHER_MAP_API = activity.getString(R.string.weatherAPIKey);
 
         activity.cityField = (TextView) activity.findViewById(R.id.city_field);
@@ -56,8 +57,8 @@ public class WeatherAPI{
         }
 
         protected String doInBackground(String...args) {
-            String xml = WeatherFunction.excuteGet("http://api.openweathermap.org/data/2.5/weather?q=" + args[0] +
-                    "&units=metric&appid=" + OPEN_WEATHER_MAP_API);
+            String xml = WeatherFunction.excuteGet("http://api.openweathermap.org/data/2.5/weather?zip=" + args[0] +
+                    "&appid=" + OPEN_WEATHER_MAP_API);
             return xml;
         }
 
@@ -72,7 +73,7 @@ public class WeatherAPI{
 
                     activity.cityField.setText(json.getString("name").toUpperCase(Locale.US) + ", " + json.getJSONObject("sys").getString("country"));
                     //detailsField.setText(details.getString("description").toUpperCase(Locale.US));
-                    activity.currentTemperatureField.setText(String.format("%.1f", main.getDouble("temp")*1.8+32) + "°F");
+                    activity.currentTemperatureField.setText(String.format("%.1f", main.getDouble("temp")*0.1*1.8+32) + "°F");
                     //humidity_field.setText("Humidity: " + main.getString("humidity") + "%");
                     //pressure_field.setText("Pressure: " + main.getString("pressure") + " hPa");
                     //updatedField.setText(df.format(new Date(json.getLong("dt") * 1000)));
@@ -84,6 +85,7 @@ public class WeatherAPI{
 
                 }
             } catch (JSONException e) {
+                Log.d("Error Message", e.toString());
                 Toast.makeText(activity.getApplicationContext(), "Error, Check City", Toast.LENGTH_SHORT).show();
             }
 
