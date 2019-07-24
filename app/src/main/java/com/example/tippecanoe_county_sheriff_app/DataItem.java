@@ -110,9 +110,9 @@ public class DataItem {
     //Social Media sub menu data
     public ArrayList<ButtonItem> getSubMenu_SocialMedia(){
         data = new ButtonItem[]{
-                new ButtonItem(R.drawable.social_media,new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/tippecanoecosh1")), false, null),                               //Twitter Link
-                new ButtonItem(R.drawable.social_media,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/TCSOIndiana/")), false, null),                             //Facebook Link
-                new ButtonItem(R.drawable.social_media,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/tcso79/")), false, null),                                 //Instagram Link
+                new ButtonItem(R.drawable.icotwitter,new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/tippecanoecosh1")), false, null),                               //Twitter Link
+                new ButtonItem(R.drawable.icofacebook,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/TCSOIndiana/")), false, null),                             //Facebook Link
+                new ButtonItem(R.drawable.icoinstagram,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/tcso79/")), false, null),                                 //Instagram Link
         };
         return arrayToList(data);
     }
