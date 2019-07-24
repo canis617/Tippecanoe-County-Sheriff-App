@@ -6,6 +6,7 @@ package com.example.tippecanoe_county_sheriff_app;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -83,8 +84,7 @@ public class MenuFramentMain extends Fragment{
                 try {
                     mWidthPixels = (Integer) Display.class.getMethod("getRawWidth").invoke(d);
                     mHeightPixels = (Integer) Display.class.getMethod("getRawHeight").invoke(d);
-                } catch (Exception ignored) {
-                }
+                } catch (Exception ignored) { }
             }
             // 상태바와 메뉴바의 크기를 포함
             if (Build.VERSION.SDK_INT >= 17) {
@@ -93,35 +93,39 @@ public class MenuFramentMain extends Fragment{
                     Display.class.getMethod("getRealSize", Point.class).invoke(d, realSize);
                     mWidthPixels = realSize.x;
                     mHeightPixels = realSize.y;
-                } catch (Exception ignored) {
-                }
+                } catch (Exception ignored) { }
             }
             try {
                 LayoutInflater infla = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
                 View layout = infla.inflate(R.layout.activity_pop_up_window, (ViewGroup) activity.findViewById(R.id.popup_element));
 
+
                 pwindo = new PopupWindow(layout, mWidthPixels - 100, mHeightPixels - 300, true);
+                //pwindo.setOutsideTouchable(false);
                 //View pwview = pwindo.getContentView();
+                //layout.setFocusable(true);
+                pwindo.setOutsideTouchable(true);
+                pwindo.setBackgroundDrawable(new BitmapDrawable());
                 layout.setFocusableInTouchMode(true);
-                layout.requestFocus();
                 layout.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     @Override
                     public void onFocusChange(View v, boolean hasFocus) {
-                        if (!hasFocus)
-                            //d("jun", "nofocus");
-                            //pwindo.dismiss();
-                            activity.getSubMenu("Main");
+                        if (hasFocus)
+                            d("jun", "focus");
+
+                        if(!hasFocus){
+                            d("jun","nofocus");
+                            activity.onBackPressed();
+                        }
+                        //pwindo.dismiss();
+
                     }
                 });
+                layout.requestFocus();
                 pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
                 btnClosePopup = (Button) layout.findViewById(R.id.btn_close_popup);
                 btnClosePopup.setOnClickListener(cancel_button_click_listener);
-
-                /*
-
-                 */
-
 
                 GridView popgridview = layout.findViewById(R.id.popupgridview);
                 popgridview.setAdapter(buttonAdapter);
@@ -129,7 +133,6 @@ public class MenuFramentMain extends Fragment{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
         else{
             GridView gridView = rootView.findViewById(R.id.grid_view);
