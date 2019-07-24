@@ -136,6 +136,7 @@ public class MenuFramentMain extends Fragment{
             new View.OnClickListener() {
                 public void onClick(View v) {
                     pwindo.dismiss();
+                    activity.getSubMenu("Main");
                 }
             };
 
