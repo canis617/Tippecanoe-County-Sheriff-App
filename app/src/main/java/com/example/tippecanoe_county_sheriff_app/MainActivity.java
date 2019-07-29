@@ -67,27 +67,46 @@ public class MainActivity extends AppCompatActivity implements OnActivityAction 
         Fragment fr;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        if(menu == "redirection"){
+        if(menu.equals("redirection")){
             transaction.replace(R.id.fragmentContainer,fragmentMain);
-        } else {                                                                                    //sub menus
-            if(menu == "Admin"){
-                fr = fragmentAdmin;
-            } else if(menu == "Corrections"){
-                fr = fragmentCorrections;
-            } else if(menu == "SocialMedia"){
-                fr = fragmentSocialMedia;
-            } else if(menu == "Services"){
-                fr = fragmentServices;
-            } else if(menu == "Enforcement"){
-                fr = fragmentEnforcement;
-            } else if(menu == "Others"){
-                fr = fragmentOthers;
-            } else if(menu == "Sample"){
-                fr = fragmentSample;
-            } else {
-                Log.d(this.getClass().getName(), "incorrect parameter error redirect to main");
-                fr = fragmentMain;
+        } else {//sub menus
+            switch(menu){
+                case "Admin":
+                    fr = fragmentAdmin; break;
+                case "Corrections":
+                    fr = fragmentCorrections; break;
+                case "SocialMedia":
+                    fr = fragmentSocialMedia; break;
+                case "Services":
+                    fr = fragmentServices; break;
+                case "Enforcement":
+                    fr = fragmentEnforcement; break;
+                case "Others":
+                    fr = fragmentOthers; break;
+                case "Sample":
+                    fr = fragmentSample; break;
+                    default:
+                        Log.d(this.getClass().getName(), "incorrect parameter error redirect to main");
+                        fr = fragmentMain;
             }
+            /*
+            if(menu.equals("Admin")){
+
+            } else if(menu.equals("Corrections")){
+
+            } else if(menu.equals("SocialMedia")){
+
+            } else if(menu.equals("Services")){
+
+            } else if(menu.equals("Enforcement")){
+
+            } else if(menu.equals("Others")){
+
+            } else if(menu.equals("Sample")){
+
+            } else {
+
+            }*/
                                                       //Algorithm - hide Main show Sub in V 1.0 (need to evolve)
             transaction.replace(R.id.fragmentContainer,fr);
             transaction.addToBackStack(fr.getClass().getSimpleName());
@@ -95,4 +114,5 @@ public class MainActivity extends AppCompatActivity implements OnActivityAction 
         }
         transaction.commit();
     }
+
 }

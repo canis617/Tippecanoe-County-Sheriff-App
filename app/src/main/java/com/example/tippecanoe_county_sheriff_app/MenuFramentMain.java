@@ -24,7 +24,6 @@ import android.widget.PopupWindow;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 
@@ -32,18 +31,17 @@ import static android.util.Log.d;
 
 public class MenuFramentMain extends Fragment{
     private MainActivity activity;
-    private String FragName;
+    //private String FragName;
     private ArrayList<ButtonItem> buttonData;
 
     ///
     private Button btnClosePopup;
-    private Button btnCreatePopup;
     private PopupWindow pwindo;
     private int mWidthPixels, mHeightPixels;
 
 
     public MenuFramentMain(String index){
-        FragName = index;
+        //FragName = index;
         DataItem item = new DataItem();
         buttonData = item.getData(index);
     }
@@ -66,31 +64,32 @@ public class MenuFramentMain extends Fragment{
         /*
             Exception: Social media(Popup)
          */
+        /*
         if(FragName.equals("SocialMedia")){
             //popupset
             //gridviewset
             //setAdapater on gridview
 
             WindowManager w = activity.getWindowManager();
-            Display d = w.getDefaultDisplay();
+            Display display = w.getDefaultDisplay();
             DisplayMetrics metrics = new DisplayMetrics();
-            d.getMetrics(metrics);
+            display.getMetrics(metrics);
             // since SDK_INT = 1;
             mWidthPixels = metrics.widthPixels;
             mHeightPixels = metrics.heightPixels;
 
             // 상태바와 메뉴바의 크기를 포함해서 재계산
-            if (Build.VERSION.SDK_INT >= 14 && Build.VERSION.SDK_INT < 17) {
+            if (Build.VERSION.SDK_INT >= 15 && Build.VERSION.SDK_INT < 17) {
                 try {
-                    mWidthPixels = (Integer) Display.class.getMethod("getRawWidth").invoke(d);
-                    mHeightPixels = (Integer) Display.class.getMethod("getRawHeight").invoke(d);
+                    mWidthPixels = (Integer) Display.class.getMethod("getRawWidth").invoke(display);
+                    mHeightPixels = (Integer) Display.class.getMethod("getRawHeight").invoke(display);
                 } catch (Exception ignored) { }
             }
             // 상태바와 메뉴바의 크기를 포함
             if (Build.VERSION.SDK_INT >= 17) {
                 try {
                     Point realSize = new Point();
-                    Display.class.getMethod("getRealSize", Point.class).invoke(d, realSize);
+                    Display.class.getMethod("getRealSize", Point.class).invoke(display, realSize);
                     mWidthPixels = realSize.x;
                     mHeightPixels = realSize.y;
                 } catch (Exception ignored) { }
@@ -111,33 +110,32 @@ public class MenuFramentMain extends Fragment{
                 layout.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     @Override
                     public void onFocusChange(View v, boolean hasFocus) {
-                        if (hasFocus)
-                            d("jun", "focus");
-
-                        if(!hasFocus){
-                            d("jun","nofocus");
-                            activity.onBackPressed();
-                        }
-                        //pwindo.dismiss();
-
+                        if(!hasFocus){ activity.onBackPressed(); }
+                        //d("jun","nofocus");
                     }
                 });
                 layout.requestFocus();
                 pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
-                btnClosePopup = (Button) layout.findViewById(R.id.btn_close_popup);
-                btnClosePopup.setOnClickListener(cancel_button_click_listener);
+                btnClosePopup = layout.findViewById(R.id.btn_close_popup);
+                btnClosePopup.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view) { pwindo.dismiss();}
+                        //activity.getSubMenu("Main");
+                        //activity.onBackPressed();
+
+                });
 
                 GridView popgridview = layout.findViewById(R.id.popupgridview);
                 popgridview.setAdapter(buttonAdapter);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            } catch (Exception e) { e.printStackTrace(); }
         }
         else{
-            GridView gridView = rootView.findViewById(R.id.grid_view);
-            gridView.setAdapter(buttonAdapter);
-        }
+
+        }*/
+
+        GridView gridView = rootView.findViewById(R.id.grid_view);
+        gridView.setAdapter(buttonAdapter);
         return rootView;
     }
 
@@ -147,23 +145,4 @@ public class MenuFramentMain extends Fragment{
         //now cannot access to activity
         activity = null;
     }
-
-
-    //extra
-    private void initiatePopupWindow() {
-
-    }
-
-    private View.OnClickListener cancel_button_click_listener =
-            new View.OnClickListener() {
-                public void onClick(View v) {
-                    pwindo.dismiss();
-
-                    //activity.getSubMenu("Main");
-
-                    //activity.onBackPressed();
-
-                }
-            };
-
 }

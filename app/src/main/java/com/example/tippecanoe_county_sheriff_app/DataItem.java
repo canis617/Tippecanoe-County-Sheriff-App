@@ -52,15 +52,15 @@ public class DataItem {
     //main menu data
     public ArrayList<ButtonItem> getMainData(){
         data = new ButtonItem[]{
-                new ButtonItem(R.drawable.admin,null, true, "Admin"),
-                new ButtonItem(R.drawable.sex_offender,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.icrimewatch.net/index.php?AgencyID=54758")), false, null),
-                new ButtonItem(R.drawable.corrections,null, true, "Corrections"),
-                new ButtonItem(R.drawable.submit_a_tip,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/359/Sheriffs-Department")), false, null),
-                new ButtonItem(R.drawable.contact,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/359/Sheriffs-Department")), false, null),
-                new ButtonItem(R.drawable.services,null, true, "Services"),
-                new ButtonItem(R.drawable.social_media,null, true, "SocialMedia"),
-                new ButtonItem(R.drawable.enforcement,null, true, "Enforcement"),
-                new ButtonItem(R.drawable.others,null, true, "Others"),
+                new ButtonItem(null,R.drawable.admin,null, true, "Admin"),
+                new ButtonItem(null,R.drawable.sex_offender,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.icrimewatch.net/index.php?AgencyID=54758")), false, null),
+                new ButtonItem(null,R.drawable.corrections,null, true, "Corrections"),
+                new ButtonItem(null,R.drawable.we_tip,new Intent(Intent.ACTION_VIEW, Uri.parse("https://wetip.com/")), false, null),
+                new ButtonItem(null,R.drawable.contact,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/359/Sheriffs-Department")), false, null),
+                new ButtonItem(null,R.drawable.services,null, true, "Services"),
+                new ButtonItem(null,R.drawable.social_media,null, true, "SocialMedia"),
+                new ButtonItem(null,R.drawable.alphazero,null, true, "Enforcement"),
+                new ButtonItem(null,R.drawable.others,null, true, "Others"),
         };
         return arrayToList(data);
     }
@@ -68,13 +68,13 @@ public class DataItem {
     //Admin sub menu data
     public ArrayList<ButtonItem> getSubMenu_Admin(){
         data = new ButtonItem[]{
-                new ButtonItem(R.drawable.phone_directory,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/Directory.aspx?did=43")), false, null),                      //Phone Directory Link
+                new ButtonItem(null,R.drawable.phone_directory,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/Directory.aspx?did=43")), false, null),                      //Phone Directory Link
                 //Jun:
                 //Maybe we can make a new Page
-                new ButtonItem(R.drawable.adminline,null, true, null),                                                                               //I don't get it
-                new ButtonItem(R.drawable.press_releases,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/482/News-Releases")), false, null),                          //Press Releases Link
+                new ButtonItem(null,R.drawable.adminline,null, true, null),                                                                               //I don't get it
+                //new ButtonItem(R.drawable.press_releases,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/482/News-Releases")), false, null),                          //Press Releases Link
                 //There is no webpage
-                new ButtonItem(R.drawable.employment,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/470/Employment")),false,null)                                //Employment Link
+                new ButtonItem(null,R.drawable.employment,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/470/Employment")),false,null)                                //Employment Link
         };
         return arrayToList(data);
     }
@@ -82,13 +82,13 @@ public class DataItem {
     //Corrections sub menu data
     public ArrayList<ButtonItem> getSubMenu_Corrections(){
         data = new ButtonItem[]{
-                new ButtonItem(R.drawable.inmate_lookup,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www3.tippecanoe.in.gov/InmateListing/InmateSearch.aspx")), false, null),      //Inmate Lookup Link
-                new ButtonItem(R.drawable.web_based_vendor,null, true, null),                                                                          //I don't get it
-                new ButtonItem(R.drawable.commissary,new Intent(Intent.ACTION_VIEW, Uri.parse("https://deposits.jailatm.com/webdeposits/default.aspx")),false, null),               //Jun:
+                new ButtonItem(null,R.drawable.inmate_lookup,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www3.tippecanoe.in.gov/InmateListing/InmateSearch.aspx")), false, null),      //Inmate Lookup Link
+                new ButtonItem(null,R.drawable.web_based_vendor,null, true, null),                                                                          //I don't get it
+                new ButtonItem(null,R.drawable.commissary,new Intent(Intent.ACTION_VIEW, Uri.parse("https://deposits.jailatm.com/webdeposits/default.aspx")),false, null),               //Jun:
                 //this is more familiar
                 //then a Web Based Vendor
-                new ButtonItem(R.drawable.video_visitation,new Intent(Intent.ACTION_VIEW, Uri.parse("https://tippecanoein.gtlvisitme.com/app")),false, null),                             //Video Visitation Link
-                new ButtonItem(R.drawable.bond_statements,null,true, null),                                                                  //I don't get it
+                new ButtonItem(null,R.drawable.video_visitation,new Intent(Intent.ACTION_VIEW, Uri.parse("https://tippecanoein.gtlvisitme.com/app")),false, null),                             //Video Visitation Link
+                new ButtonItem(null,R.drawable.bond_statements,null,true, null),                                                                  //I don't get it
         };
         return arrayToList(data);
     }
@@ -96,13 +96,13 @@ public class DataItem {
     //Services sub menu data
     public ArrayList<ButtonItem> getSubMenu_Services(){
         data = new ButtonItem[]{
-                new ButtonItem(R.drawable.sheriffs_sale,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/479/Sheriff-Sales")), false, null),                       //Sheriff-Sales Link
-                new ButtonItem(R.drawable.gun_permits,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/477/Firearm-Permits")), false, null),                      //Firearm-Permits Link
-                new ButtonItem(R.drawable.crash_reports,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/486/Crash-Reports")), false, null),                        //Crash-Reports Link
-                new ButtonItem(R.drawable.records_request,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/524/Public-Record-Requests")), false, null),               //Public-Record-Requests Link
-                new ButtonItem(R.drawable.animal_control,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/473/Animal-Control")), false, null),                       //Animal-Control Link
-                new ButtonItem(R.drawable.security_requests,null, true, null),
-                new ButtonItem(R.drawable.tax_warrants,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/480/Tax-Warrants")), false, null),                         //Tax-Warrants Link
+                new ButtonItem(null,R.drawable.sheriffs_sale,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/479/Sheriff-Sales")), false, null),                       //Sheriff-Sales Link
+                new ButtonItem(null,R.drawable.gun_permits,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/477/Firearm-Permits")), false, null),                      //Firearm-Permits Link
+                new ButtonItem(null,R.drawable.crash_reports,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/486/Crash-Reports")), false, null),                        //Crash-Reports Link
+                new ButtonItem(null,R.drawable.records_request,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/524/Public-Record-Requests")), false, null),               //Public-Record-Requests Link
+                new ButtonItem(null,R.drawable.animal_control,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/473/Animal-Control")), false, null),                       //Animal-Control Link
+                new ButtonItem(null,R.drawable.security_requests,null, true, null),
+                new ButtonItem(null,R.drawable.tax_warrants,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/480/Tax-Warrants")), false, null),                         //Tax-Warrants Link
         };
         return arrayToList(data);
     }
@@ -110,9 +110,9 @@ public class DataItem {
     //Social Media sub menu data
     public ArrayList<ButtonItem> getSubMenu_SocialMedia(){
         data = new ButtonItem[]{
-                new ButtonItem(R.drawable.icotwitter,new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/tippecanoecosh1")), false, null),                               //Twitter Link
-                new ButtonItem(R.drawable.icofacebook,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/TCSOIndiana/")), false, null),                             //Facebook Link
-                new ButtonItem(R.drawable.icoinstagram,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/tcso79/")), false, null),                                 //Instagram Link
+                new ButtonItem(null,R.drawable.icofacebook,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/TCSOIndiana/")), false, null),                             //Facebook Link
+                new ButtonItem(null,R.drawable.icotwitter,new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/tippecanoecosh1")), false, null),                               //Twitter Link
+                new ButtonItem(null,R.drawable.icoinstagram,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/tcso79/")), false, null),                                 //Instagram Link
         };
         return arrayToList(data);
     }
@@ -120,28 +120,28 @@ public class DataItem {
     //Enforcement sub menu data
     public ArrayList<ButtonItem> getSubMenu_Enforcement(){
         data = new ButtonItem[]{
-                new ButtonItem(R.drawable.we_tip,new Intent(Intent.ACTION_VIEW, Uri.parse("https://wetip.com/")), false, null),
-                new ButtonItem(R.drawable.traffic_complaints,null, true, null),
+                //new ButtonItem(R.drawable.we_tip,new Intent(Intent.ACTION_VIEW, Uri.parse("https://wetip.com/")), false, null),
+                new ButtonItem(null,R.drawable.traffic_complaints,null, true, null),
         };
         return arrayToList(data);
     }
 
     public ArrayList<ButtonItem> getSubMenu_Others(){
         data = new ButtonItem[]{
-                new ButtonItem(R.drawable.others,new Intent(Intent.ACTION_VIEW, Uri.parse("https://wetip.com/")), false, null),
-                new ButtonItem(R.drawable.others,new Intent(Intent.ACTION_VIEW, Uri.parse("https://wetip.com/")), false, null),
-                new ButtonItem(R.drawable.others,null, true, "Sample"),
+                new ButtonItem(null,R.drawable.others,new Intent(Intent.ACTION_VIEW, Uri.parse("https://wetip.com/")), false, null),
+                new ButtonItem(null,R.drawable.others,new Intent(Intent.ACTION_VIEW, Uri.parse("https://wetip.com/")), false, null),
+                new ButtonItem(null,R.drawable.others,null, true, "Sample"),
         };
         return arrayToList(data);
     }
 
     public ArrayList<ButtonItem> getSubMenu_Sample(){
         data = new ButtonItem[]{
-                new ButtonItem(R.drawable.enforcement,new Intent(Intent.ACTION_VIEW, Uri.parse("https://wetip.com/")), false, null),
-                new ButtonItem(R.drawable.enforcement,new Intent(Intent.ACTION_VIEW, Uri.parse("https://wetip.com/")), false, null),
-                new ButtonItem(R.drawable.enforcement,new Intent(Intent.ACTION_VIEW, Uri.parse("https://wetip.com/")), false, null),
-                new ButtonItem(R.drawable.enforcement,new Intent(Intent.ACTION_VIEW, Uri.parse("https://wetip.com/")), false, null),
-                new ButtonItem(R.drawable.enforcement,new Intent(Intent.ACTION_VIEW, Uri.parse("https://wetip.com/")), false, null),
+                new ButtonItem(null,R.drawable.enforcement,new Intent(Intent.ACTION_VIEW, Uri.parse("https://wetip.com/")), false, null),
+                new ButtonItem(null,R.drawable.enforcement,new Intent(Intent.ACTION_VIEW, Uri.parse("https://wetip.com/")), false, null),
+                new ButtonItem(null,R.drawable.enforcement,new Intent(Intent.ACTION_VIEW, Uri.parse("https://wetip.com/")), false, null),
+                new ButtonItem(null,R.drawable.enforcement,new Intent(Intent.ACTION_VIEW, Uri.parse("https://wetip.com/")), false, null),
+                new ButtonItem(null,R.drawable.enforcement,new Intent(Intent.ACTION_VIEW, Uri.parse("https://wetip.com/")), false, null),
         };
         return arrayToList(data);
     }

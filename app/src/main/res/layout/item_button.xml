@@ -12,6 +12,7 @@
         android:layout_height="179dp"
         android:adjustViewBounds="true"
         android:contentDescription="@null"
+        android:background="#998668"
         android:padding="0dp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"

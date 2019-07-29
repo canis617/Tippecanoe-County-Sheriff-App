@@ -1,12 +1,12 @@
 package com.example.tippecanoe_county_sheriff_app;
 
 import android.content.Intent;
-import android.net.Uri;
 
 import androidx.annotation.Nullable;
 
 public class ButtonItem {
-    private int bimage;                                                                                    //R.@directory.@imagename
+    private String ButtonName;
+    private int ButtonImage;                                                                                    //R.@directory.@imagename
     private Intent func;
     private boolean isConnector;                                                                            //true = High Category
     private String child;                                                                            //Lower Categories
@@ -19,8 +19,9 @@ public class ButtonItem {
         this.child = child;
     }
 
-    ButtonItem(int bimage, Intent func, boolean isConnector, @Nullable String child){
-        this.bimage = bimage;
+    ButtonItem(String ButtonName, int ButtonImage, Intent func, boolean isConnector, @Nullable String child){
+        this.ButtonName = ButtonName;
+        this.ButtonImage = ButtonImage;
         this.func = func;
         this.isConnector = isConnector;
         this.child = child;
@@ -32,12 +33,16 @@ public class ButtonItem {
         return intent;
     }*/
 
-    public int getBimage() {
-        return bimage;
+    public String getButtonName() { return ButtonName; }
+
+    public void setButtonName(String buttonName) { ButtonName = buttonName; }
+
+    public int getButtonImage() {
+        return ButtonImage;
     }
 
-    public void setBimage(int bimage) {
-        this.bimage = bimage;
+    public void setButtonImage(int buttonImage) {
+        this.ButtonImage = buttonImage;
     }
 
     public Intent getfunc() {
@@ -55,5 +60,6 @@ public class ButtonItem {
     public void setIsConnector(boolean connector) {
         isConnector = connector;
     }
+
 
 }

@@ -13,14 +13,14 @@ import android.widget.ImageButton;
 import java.util.ArrayList;
 
 class ButtonAdapter extends BaseAdapter{
-    private Context context;
+    //private Context context;
     private int layout;
     private ArrayList<ButtonItem> buttonlist;
     private LayoutInflater inf;
     private OnActivityAction mCallBack;
 
     ButtonAdapter(Context context, int layout, ArrayList<ButtonItem> list, OnActivityAction listener) {
-        this.context = context;
+        //Context thiscontext = context;
         this.layout = layout;
         buttonlist = list;
         inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -44,7 +44,7 @@ class ButtonAdapter extends BaseAdapter{
             convertView = inf.inflate(layout, null);
         ImageButton iButton = convertView.findViewById(R.id.imagebutton);                           //item_button.xml
 
-        iButton.setImageResource(buttonlist.get(position).getBimage());                             //button image
+        iButton.setImageResource(buttonlist.get(position).getButtonImage());                             //button image
 
         if(!buttonlist.get(position).getIsConnector()){                                             //link buttons
             iButton.setOnClickListener(new View.OnClickListener() {
@@ -57,59 +57,53 @@ class ButtonAdapter extends BaseAdapter{
                 }
             });
         }
+        //extra intent onclicklistrner
+        //pop up onclicklistner
+        //another form(activity change) onclicklistner
         else if(buttonlist.get(position).getChild() == "Admin"){                                    //send method to MainActivity to open submenu
             iButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    mCallBack.getSubMenu("Admin");
-                }
+                public void onClick(View v) { mCallBack.getSubMenu("Admin"); }
             });
         }
         else if(buttonlist.get(position).getChild() == "Corrections"){
             iButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    mCallBack.getSubMenu("Corrections");
-                }
+                public void onClick(View v) { mCallBack.getSubMenu("Corrections"); }
             });
         }
         else if(buttonlist.get(position).getChild() == "Enforcement"){
             iButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    mCallBack.getSubMenu("Enforcement");
+                public void onClick(View v) { mCallBack.getSubMenu("Enforcement");
                 }
             });
         }
         else if(buttonlist.get(position).getChild() == "Services"){
             iButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    mCallBack.getSubMenu("Services");
+                public void onClick(View v) { mCallBack.getSubMenu("Services");
                 }
             });
         }
         else if(buttonlist.get(position).getChild() == "SocialMedia"){
             iButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    mCallBack.getSubMenu("SocialMedia");
+                public void onClick(View v) { mCallBack.getSubMenu("SocialMedia");
                 }
             });
         }
         else if(buttonlist.get(position).getChild() == "Others"){
             iButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    mCallBack.getSubMenu("Others");
+                public void onClick(View v) { mCallBack.getSubMenu("Others");
                 }
             });
         }
         else if(buttonlist.get(position).getChild() == "Sample"){
             iButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    mCallBack.getSubMenu("Sample");
+                public void onClick(View v) { mCallBack.getSubMenu("Sample");
                 }
             });
         }
