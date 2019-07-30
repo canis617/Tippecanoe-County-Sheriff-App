@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 
 
 enum ButtonType{
-    CONTAINER,SINGLEFUNC,DOUBLEFUNC,POPUPCONTAINER
+    CONTAINER,SINGLEFUNC,DOUBLEFUNC,POPUPCONTAINER,NEWPAGE
 }
 public class ButtonItem {
     private String ButtonName;

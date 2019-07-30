@@ -8,15 +8,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import static android.util.Log.d;
+
 public class Email extends AppCompatActivity {
     private EditText mEditTextTo;
     private EditText mEditTextSubject;
     private EditText mEditTextMessage;
+    private String UpCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.email_layout);
+
+        UpCategory = getIntent().getStringExtra("ButtonName");
+        d("jun",UpCategory);
+        getSupportActionBar().setTitle(UpCategory);
 
         mEditTextTo = findViewById(R.id.edit_text_to);
         mEditTextSubject = findViewById(R.id.edit_text_subject);

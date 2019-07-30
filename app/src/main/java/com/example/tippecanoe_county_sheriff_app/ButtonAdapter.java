@@ -59,8 +59,20 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder
                     }
                 });
                 break;
-                default:
-                    break;
+
+            case NEWPAGE:
+                holder.textbutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Context context = v.getContext();
+                        Intent intent = buttonItems.get(position).getFunc();
+                        intent.putExtra("ButtonName",buttonItems.get(position).getButtonName());
+                        context.startActivity(intent);
+                    }
+                });
+                break;
+            default:
+                break;
         }
     }
 

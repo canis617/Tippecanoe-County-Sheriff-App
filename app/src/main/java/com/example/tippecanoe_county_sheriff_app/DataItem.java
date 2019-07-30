@@ -25,7 +25,7 @@ public class DataItem{
         data = new ButtonItem[]{
                 new ButtonItem("Admin",R.drawable.admin, null,null , ButtonType.CONTAINER, new ButtonItem[]{
                         new ButtonItem("Phone Directory",R.drawable.phone_directory,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/Directory.aspx?did=43")),null ,ButtonType.SINGLEFUNC, null),                      //Phone Directory Link
-                        new ButtonItem("Admin Line",R.drawable.adminline,new Intent("android.intent.action.CALL", Uri.parse("01040877140")),null , ButtonType.SINGLEFUNC, null),
+                        new ButtonItem("Admin Line",R.drawable.adminline,new Intent(Intent.ACTION_DIAL, Uri.parse("tel:01040877140")),null , ButtonType.SINGLEFUNC, null),
                         new ButtonItem("Job Apply",R.drawable.employment,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/470/Employment")),null ,ButtonType.SINGLEFUNC,null)                                //Employment Link
                 }),
                 new ButtonItem("Sex Offender",R.drawable.sex_offender,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.icrimewatch.net/index.php?AgencyID=54758")),null , ButtonType.SINGLEFUNC, null),                       //Sex Offender Registry Link
@@ -38,9 +38,9 @@ public class DataItem{
                 }),
                 new ButtonItem("We-Tip",R.drawable.we_tip,new Intent(Intent.ACTION_VIEW, Uri.parse("https://wetip.com/")), null ,ButtonType.SINGLEFUNC, null),                                                                           //Another Page
                 new ButtonItem("Contact",R.drawable.contact,null, null ,ButtonType.POPUPCONTAINER, new ButtonItem[]{
-                        new ButtonItem("Administration",0,new Intent("android.intent.action.CALL", Uri.parse("7654239388")),null , ButtonType.SINGLEFUNC, null),
-                        new ButtonItem("Dispatch",0,new Intent("android.intent.action.CALL", Uri.parse("7654239321")),null , ButtonType.SINGLEFUNC, null),
-                        new ButtonItem("Jail",0,new Intent("android.intent.action.CALL", Uri.parse("7654231655")),null ,ButtonType.SINGLEFUNC, null),
+                        new ButtonItem("Administration",0,new Intent(Intent.ACTION_DIAL, Uri.parse("tel:7654239388")),null , ButtonType.SINGLEFUNC, null),
+                        new ButtonItem("Dispatch",0,new Intent(Intent.ACTION_DIAL, Uri.parse("tel:7654239321")),null , ButtonType.SINGLEFUNC, null),
+                        new ButtonItem("Jail",0,new Intent(Intent.ACTION_DIAL, Uri.parse("tel:7654231655")),null ,ButtonType.SINGLEFUNC, null),
                 }),
                 new ButtonItem("Services",R.drawable.services,null, null ,ButtonType.CONTAINER, new ButtonItem[]{
                         new ButtonItem("Sheriff's Sale",R.drawable.sheriffs_sale,null, null ,ButtonType.POPUPCONTAINER, new ButtonItem[]{
@@ -52,23 +52,23 @@ public class DataItem{
                         new ButtonItem("Records Request",R.drawable.records_request,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/524/Public-Record-Requests")), null ,ButtonType.SINGLEFUNC, null),               //Public-Record-Requests Link
                         new ButtonItem("Animal Control",R.drawable.animal_control,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/473/Animal-Control")), null ,ButtonType.SINGLEFUNC, null),                       //Animal-Control Link
                         new ButtonItem("Security and Extra Patrol Request",R.drawable.security_requests,null, null ,ButtonType.POPUPCONTAINER, new ButtonItem[]{
-                                new ButtonItem("Security Request",0,new Intent(),null,ButtonType.SINGLEFUNC,null),
-                                new ButtonItem("Extra Patrol Request",0,new Intent(),null,ButtonType.SINGLEFUNC,null),
+                                new ButtonItem("Security Request",0, new Intent(context,Email.class),null,ButtonType.NEWPAGE,null),
+                                new ButtonItem("Extra Patrol Request",0, new Intent(context,Email.class),null,ButtonType.NEWPAGE,null),
                         }),
                         new ButtonItem("Tax Warrants",R.drawable.tax_warrants,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/480/Tax-Warrants")), null ,ButtonType.SINGLEFUNC, null),                          //Tax-Warrants Link
                 }),
                 new ButtonItem("Social Media",R.drawable.social_media,null, null ,ButtonType.CONTAINER, new ButtonItem[]{
                         new ButtonItem("Facebook",R.drawable.icofacebook,new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/660280407355488")), new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/TCSOIndiana/")) ,ButtonType.DOUBLEFUNC, null),                             //Facebook Link
                         new ButtonItem("Twitter",R.drawable.icotwitter,new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name=tippecanoecoin")), new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/tippecanoecosh1")),ButtonType.DOUBLEFUNC, null),                               //Twitter Link
-                        new ButtonItem("Instagram",R.drawable.icoinstagram,new Intent(Intent.ACTION_VIEW,Uri.parse("http://instagram.com/_u/tcso79")), new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/tcso79/")),ButtonType.DOUBLEFUNC, null),                                   //Instagram Link
+                        new ButtonItem("Instagram",R.drawable.icoinstagram,new Intent(Intent.ACTION_VIEW,Uri.parse("http://instagram.com/_u/tcso79")), new Intent(Intent.ACTION_VIEW, Uri.parse("https://instagram.com/tcso79/")),ButtonType.DOUBLEFUNC, null),                                   //Instagram Link
                         // need app link or other ways 2 open app
                 }),
                 new ButtonItem("Enforcement",R.drawable.enforcement,null, null ,ButtonType.CONTAINER, new ButtonItem[]{
-                        new ButtonItem("Traffic Complaints",R.drawable.traffic_complaints,null,null , ButtonType.SINGLEFUNC, null),
+                        new ButtonItem("Traffic Complaints",R.drawable.traffic_complaints,new Intent(context,Email.class),null , ButtonType.NEWPAGE, null),
                 }),
                 new ButtonItem(null,R.drawable.others,null,null ,ButtonType.CONTAINER, new ButtonItem[]{
                         new ButtonItem(null,0,null,null ,ButtonType.CONTAINER, new ButtonItem[]{
-                                new ButtonItem(null,R.drawable.others,new Intent(context,Email.class),null ,ButtonType.SINGLEFUNC,null),
+                                new ButtonItem(null,R.drawable.others,null,null ,ButtonType.SINGLEFUNC,null),
                                 new ButtonItem(null,0,null,null ,ButtonType.CONTAINER, new ButtonItem[]{
                                         new ButtonItem(null,0,null,null ,ButtonType.SINGLEFUNC,null),
                                         new ButtonItem(null,0,null,null ,ButtonType.SINGLEFUNC,null),

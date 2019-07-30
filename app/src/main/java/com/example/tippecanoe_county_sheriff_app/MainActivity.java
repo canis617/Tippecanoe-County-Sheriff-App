@@ -38,14 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         DataItem dataItem = new DataItem(this);                                                       //Data
         ButtonData = dataItem.getData();
-        //Prev_Data.push(Data);
-        /*if(Data==null){
 
-        }
-        if(Previ_Data.isEmpty()){
-            //Pre_Data.add(Data);
-
-        }*/
         gridView=findViewById(R.id.maingridview);
         imageButtonAdapter = new ImageButtonAdapter(this,R.layout.item_imagebutton,ArraytoList(ButtonData));
         gridView.setAdapter(imageButtonAdapter);
@@ -70,9 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<ButtonItem> ArraytoList(ButtonItem[] buttonItems){
         ArrayList<ButtonItem> arrayList = new ArrayList<>();
         for(ButtonItem tempButton : buttonItems){
-            if(tempButton != null){
-                arrayList.add(tempButton);
-            }
+            if(tempButton != null){ arrayList.add(tempButton); }
         }
         return arrayList;
     }

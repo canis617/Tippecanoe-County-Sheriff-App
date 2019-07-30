@@ -35,6 +35,8 @@ class ImageButtonAdapter extends BaseAdapter{
     private LayoutInflater inf;
     private PopupWindow pwindo;
 
+    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
+
     ImageButtonAdapter(Context context, int layout, ArrayList<ButtonItem> list) {
         this.context = context;
         this.layout = layout;
@@ -111,6 +113,17 @@ class ImageButtonAdapter extends BaseAdapter{
                     }
                 });
                 break;
+            case NEWPAGE:
+                ib.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Context context = v.getContext();
+                        Intent intent = buttonlist.get(position).getFunc();
+                        intent.putExtra("ButtonName",buttonlist.get(position).getButtonName());
+                        context.startActivity(intent);
+                    }
+                });
+                break;
             case POPUPCONTAINER:
                 ib.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -151,7 +164,7 @@ class ImageButtonAdapter extends BaseAdapter{
                             View layout = infla.inflate(R.layout.activity_pop_up_window, (ViewGroup) ((MainActivity) context).findViewById(R.id.popup_element));
 
 
-                            pwindo = new PopupWindow(layout, mWidthPixels - 100, 500, true);
+                            pwindo = new PopupWindow(layout, mWidthPixels - 100, ViewGroup.LayoutParams.WRAP_CONTENT, true);
                             //pwindo = new PopupWindow(layout,);
                             //pwindo.setOutsideTouchable(false);
                             //View pwview = pwindo.getContentView();
