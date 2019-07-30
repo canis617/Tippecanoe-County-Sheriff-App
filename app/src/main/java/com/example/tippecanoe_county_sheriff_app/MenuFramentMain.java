@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import static android.util.Log.d;
 
 public class MenuFramentMain extends Fragment{
+    /*
     private MainActivity activity;
     //private String FragName;
     private ArrayList<ButtonItem> buttonData;
@@ -132,7 +133,7 @@ public class MenuFramentMain extends Fragment{
         }
         else{
 
-        }*/
+        }
 
         GridView gridView = rootView.findViewById(R.id.grid_view);
         gridView.setAdapter(buttonAdapter);
@@ -144,5 +145,5 @@ public class MenuFramentMain extends Fragment{
         super.onDetach();
         //now cannot access to activity
         activity = null;
-    }
+    }*/
 }

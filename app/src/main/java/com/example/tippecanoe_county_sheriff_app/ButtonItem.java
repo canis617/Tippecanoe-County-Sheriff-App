@@ -7,31 +7,27 @@ import androidx.annotation.Nullable;
 public class ButtonItem {
     private String ButtonName;
     private int ButtonImage;                                                                                    //R.@directory.@imagename
-    private Intent func;
+    private Intent Func;
+    private Intent ExtraFunc;
     private boolean isConnector;                                                                            //true = High Category
-    private String child;                                                                            //Lower Categories
+    private ButtonItem[] child;                                                                            //Lower Categories
 
-    public String getChild() {
+    public ButtonItem[] getChild() {
         return child;
     }
 
-    public void setChild(String child) {
+    public void setChild(ButtonItem[] child) {
         this.child = child;
     }
 
-    ButtonItem(String ButtonName, int ButtonImage, Intent func, boolean isConnector, @Nullable String child){
+    ButtonItem(String ButtonName, int ButtonImage, Intent Func,Intent ExtraFunc, boolean isConnector, @Nullable ButtonItem[] child){
         this.ButtonName = ButtonName;
         this.ButtonImage = ButtonImage;
-        this.func = func;
+        this.Func = Func;
+        this.ExtraFunc = ExtraFunc;
         this.isConnector = isConnector;
         this.child = child;
     }
-
-    /*public Intent getLinkIntent(){
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(url));
-        return intent;
-    }*/
 
     public String getButtonName() { return ButtonName; }
 
@@ -45,21 +41,27 @@ public class ButtonItem {
         this.ButtonImage = buttonImage;
     }
 
-    public Intent getfunc() {
-        return func;
+    public Intent getFunc() {
+        return Func;
     }
 
     public void setFunc(Intent func) {
-        this.func = func;
+        this.Func = func;
     }
 
-    public boolean getIsConnector() {
+    public boolean getisConnector() {
         return isConnector;
     }
 
-    public void setIsConnector(boolean connector) {
+    public void setisConnector(boolean connector) {
         isConnector = connector;
     }
 
+    public Intent getExtraFunc() {
+        return ExtraFunc;
+    }
 
+    public void setExtraFunc(Intent extraFunc) {
+        ExtraFunc = extraFunc;
+    }
 }

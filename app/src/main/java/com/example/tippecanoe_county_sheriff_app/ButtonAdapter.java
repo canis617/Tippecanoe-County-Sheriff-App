@@ -10,21 +10,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+
 import java.util.ArrayList;
 
 class ButtonAdapter extends BaseAdapter{
-    //private Context context;
+    private Context context;
     private int layout;
-    private ArrayList<ButtonItem> buttonlist;
+    private  ArrayList<ButtonItem> buttonlist;
     private LayoutInflater inf;
-    private OnActivityAction mCallBack;
 
-    ButtonAdapter(Context context, int layout, ArrayList<ButtonItem> list, OnActivityAction listener) {
-        //Context thiscontext = context;
+    ButtonAdapter(Context context, int layout, ArrayList<ButtonItem> list) {
+        this.context = context;
         this.layout = layout;
-        buttonlist = list;
+        setData(list);
         inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mCallBack = listener;
+    }
+    public void setData(ArrayList<ButtonItem> list){
+        buttonlist = list;
     }
     @Override
     public int getCount() {
@@ -42,68 +44,36 @@ class ButtonAdapter extends BaseAdapter{
     public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView==null)
             convertView = inf.inflate(layout, null);
-        ImageButton iButton = convertView.findViewById(R.id.imagebutton);                           //item_button.xml
 
-        iButton.setImageResource(buttonlist.get(position).getButtonImage());                             //button image
+        ImageButton ib = convertView.findViewById(R.id.imagebutton);                                //item_button.xml
+        if(position%2==0){ ib.setBackgroundColor(context.getResources().getColor(R.color.ButtonColor1)); }
+        else{ ib.setBackgroundColor(context.getResources().getColor(R.color.ButtonColor2)); }
+        //ib.setImageResource(buttonlist.get(position).getButtonImage());
 
-        if(!buttonlist.get(position).getIsConnector()){                                             //link buttons
-            iButton.setOnClickListener(new View.OnClickListener() {
+        if(!buttonlist.get(position).getisConnector()){                                     //link buttons
+            ib.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Context context = v.getContext();
-                    Intent intent = buttonlist.get(position).getfunc();
+                    Intent intent = buttonlist.get(position).getFunc();
                     try { context.startActivity(intent); }
                     catch (Exception e) { e.printStackTrace(); }
                 }
             });
         }
-        //extra intent onclicklistrner
-        //pop up onclicklistner
-        //another form(activity change) onclicklistner
-        else if(buttonlist.get(position).getChild() == "Admin"){                                    //send method to MainActivity to open submenu
-            iButton.setOnClickListener(new View.OnClickListener() {
+        else if(buttonlist.get(position).getisConnector() && buttonlist.get(position).getChild() != null){
+            ib.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) { mCallBack.getSubMenu("Admin"); }
-            });
-        }
-        else if(buttonlist.get(position).getChild() == "Corrections"){
-            iButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) { mCallBack.getSubMenu("Corrections"); }
-            });
-        }
-        else if(buttonlist.get(position).getChild() == "Enforcement"){
-            iButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) { mCallBack.getSubMenu("Enforcement");
-                }
-            });
-        }
-        else if(buttonlist.get(position).getChild() == "Services"){
-            iButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) { mCallBack.getSubMenu("Services");
-                }
-            });
-        }
-        else if(buttonlist.get(position).getChild() == "SocialMedia"){
-            iButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) { mCallBack.getSubMenu("SocialMedia");
-                }
-            });
-        }
-        else if(buttonlist.get(position).getChild() == "Others"){
-            iButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) { mCallBack.getSubMenu("Others");
-                }
-            });
-        }
-        else if(buttonlist.get(position).getChild() == "Sample"){
-            iButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) { mCallBack.getSubMenu("Sample");
+                public void onClick(View v) {
+                    ((MainActivity)context).setPrev_Data(buttonlist.toArray(new ButtonItem[0]));
+                    ((MainActivity)context).setPageAdapter(buttonlist.get(position).getChild());
+                    /*Context context = v.getContext();
+                    Intent intent = buttonlist.get(position).getFunc();
+                    intent.putExtra("ChildData",buttonlist.get(position).getChild());
+                    intent.putExtra("UpperCategory","UpperCategory!");
+                    try { context.startActivity(intent); }
+                    catch (Exception e) { e.printStackTrace(); }
+                */
                 }
             });
         }
