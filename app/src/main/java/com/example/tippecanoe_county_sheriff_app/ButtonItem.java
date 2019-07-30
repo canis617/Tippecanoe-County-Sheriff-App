@@ -9,7 +9,8 @@ public class ButtonItem {
     private int ButtonImage;                                                                                    //R.@directory.@imagename
     private Intent Func;
     private Intent ExtraFunc;
-    private boolean isConnector;                                                                            //true = High Category
+    //private boolean isConnector;                                                                            //true = High Category
+    private String ButtonType;
     private ButtonItem[] child;                                                                            //Lower Categories
 
     public ButtonItem[] getChild() {
@@ -20,12 +21,13 @@ public class ButtonItem {
         this.child = child;
     }
 
-    ButtonItem(String ButtonName, int ButtonImage, Intent Func,Intent ExtraFunc, boolean isConnector, @Nullable ButtonItem[] child){
+    ButtonItem(String ButtonName, int ButtonImage, Intent Func,Intent ExtraFunc, String ButtonType, @Nullable ButtonItem[] child){
         this.ButtonName = ButtonName;
         this.ButtonImage = ButtonImage;
         this.Func = Func;
         this.ExtraFunc = ExtraFunc;
-        this.isConnector = isConnector;
+        //this.isConnector = isConnector;
+        this.ButtonType = ButtonType;
         this.child = child;
     }
 
@@ -49,19 +51,17 @@ public class ButtonItem {
         this.Func = func;
     }
 
-    public boolean getisConnector() {
-        return isConnector;
-    }
+    //public boolean getisConnector() {return isConnector;}
 
-    public void setisConnector(boolean connector) {
-        isConnector = connector;
-    }
+    //public void setisConnector(boolean connector) { isConnector = connector; }
 
-    public Intent getExtraFunc() {
-        return ExtraFunc;
-    }
+    public Intent getExtraFunc() { return ExtraFunc; }
 
-    public void setExtraFunc(Intent extraFunc) {
-        ExtraFunc = extraFunc;
+    public void setExtraFunc(Intent extraFunc) { ExtraFunc = extraFunc; }
+
+    public String getButtonType() { return ButtonType; }
+
+    public void setButtonType(String buttonType) {
+        ButtonType = buttonType;
     }
 }

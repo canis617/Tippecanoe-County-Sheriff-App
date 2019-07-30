@@ -13,6 +13,8 @@ import android.widget.ImageButton;
 
 import java.util.ArrayList;
 
+import static android.util.Log.d;
+
 class ButtonAdapter extends BaseAdapter{
     private Context context;
     private int layout;
@@ -50,23 +52,13 @@ class ButtonAdapter extends BaseAdapter{
         else{ ib.setBackgroundColor(context.getResources().getColor(R.color.ButtonColor2)); }
         //ib.setImageResource(buttonlist.get(position).getButtonImage());
 
-        if(!buttonlist.get(position).getisConnector()){                                     //link buttons
-            ib.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Context context = v.getContext();
-                    Intent intent = buttonlist.get(position).getFunc();
-                    try { context.startActivity(intent); }
-                    catch (Exception e) { e.printStackTrace(); }
-                }
-            });
-        }
-        else if(buttonlist.get(position).getisConnector() && buttonlist.get(position).getChild() != null){
-            ib.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ((MainActivity)context).setPrev_Data(buttonlist.toArray(new ButtonItem[0]));
-                    ((MainActivity)context).setPageAdapter(buttonlist.get(position).getChild());
+        switch (buttonlist.get(position).getButtonType()){
+            case "container":
+                ib.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ((MainActivity)context).setPrev_Data(buttonlist.toArray(new ButtonItem[0]));
+                        ((MainActivity)context).setPageAdapter(buttonlist.get(position).getChild());
                     /*Context context = v.getContext();
                     Intent intent = buttonlist.get(position).getFunc();
                     intent.putExtra("ChildData",buttonlist.get(position).getChild());
@@ -74,9 +66,59 @@ class ButtonAdapter extends BaseAdapter{
                     try { context.startActivity(intent); }
                     catch (Exception e) { e.printStackTrace(); }
                 */
-                }
-            });
+                    }
+                });
+                break;
+            case "single-func":
+                ib.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Context context = v.getContext();
+                        Intent intent = buttonlist.get(position).getFunc();
+                        try { context.startActivity(intent); }
+                        catch (Exception e) { e.printStackTrace(); }
+                    }
+                });
+                break;
+            case "double-func":
+                ib.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Context context = v.getContext();
+                        Intent intent = buttonlist.get(position).getFunc();
+                        //intent.setPackage()
+                        Intent Extraintent = buttonlist.get(position).getExtraFunc();
+                        try {
+                            context.startActivity(intent);
+                        } catch (android.content.ActivityNotFoundException anfe) {
+                            context.startActivity(Extraintent);
+                            //new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName))
+                        }
+                    }
+                });
+                break;
+            case"popup_container":
+                ib.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //popup창 객체생성
+                        //recyclerview 가져오기
+                        //adapter buttonlist.get(position).getchild로 가져온 자식 버튼 넣어주기
+                        //adapter 설정
+                    }
+                });
+                break;
+            default:
+                d("jun","default");
+                break;
+
         }
+        /*if(buttonlist.get(position).getButtonType().equals("link")){                                     //link buttons
+
+        }
+        else if(buttonlist.get(position).getButtonType().equals("container")){
+
+        }*/
         return convertView;
     }
 }
