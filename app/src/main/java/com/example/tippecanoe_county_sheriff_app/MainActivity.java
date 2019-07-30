@@ -17,7 +17,8 @@ public class MainActivity extends AppCompatActivity {
     private ButtonItem[] ButtonData;
     private Stack<ButtonItem[]> Prev_Data = new Stack<>();
     private GridView gridView;
-    private ButtonAdapter buttonAdapter;
+    ImageButtonAdapter imageButtonAdapter;
+
 
     //weather views
     public TextView cityField, currentTemperatureField, weatherIcon;
@@ -46,13 +47,13 @@ public class MainActivity extends AppCompatActivity {
 
         }*/
         gridView=findViewById(R.id.maingridview);
-        buttonAdapter = new ButtonAdapter(this,R.layout.item_button,ArraytoList(ButtonData));
-        gridView.setAdapter(buttonAdapter);
+        imageButtonAdapter = new ImageButtonAdapter(this,R.layout.item_imagebutton,ArraytoList(ButtonData));
+        gridView.setAdapter(imageButtonAdapter);
     }
 
     public void setPageAdapter(ButtonItem[] newData){
-        buttonAdapter.setData(ArraytoList(newData));
-        buttonAdapter.notifyDataSetChanged();
+        imageButtonAdapter.setData(ArraytoList(newData));
+        imageButtonAdapter.notifyDataSetChanged();
     }
     public void setPrev_Data(ButtonItem[] object_items){
         Prev_Data.push(object_items);

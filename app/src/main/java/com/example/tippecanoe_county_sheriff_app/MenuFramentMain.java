@@ -35,12 +35,12 @@ public class MenuFramentMain extends Fragment{
     //private String FragName;
     private ArrayList<ButtonItem> buttonData;
 
-    ///
+    */
     private Button btnClosePopup;
     private PopupWindow pwindo;
     private int mWidthPixels, mHeightPixels;
 
-
+    /*
     public MenuFramentMain(String index){
         //FragName = index;
         DataItem item = new DataItem();
@@ -59,7 +59,7 @@ public class MenuFramentMain extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.menu_pager_main, container, false);
 
-        ButtonAdapter buttonAdapter = new ButtonAdapter (rootView.getContext(), R.layout.item_button, buttonData, activity);       //create button adapter
+        ButtonAdapter buttonAdapter = new ButtonAdapter (rootView.getContext(), R.layout.item_imagebutton, buttonData, activity);       //create button adapter
         //grid view link
 
         /*
@@ -71,63 +71,7 @@ public class MenuFramentMain extends Fragment{
             //gridviewset
             //setAdapater on gridview
 
-            WindowManager w = activity.getWindowManager();
-            Display display = w.getDefaultDisplay();
-            DisplayMetrics metrics = new DisplayMetrics();
-            display.getMetrics(metrics);
-            // since SDK_INT = 1;
-            mWidthPixels = metrics.widthPixels;
-            mHeightPixels = metrics.heightPixels;
 
-            // 상태바와 메뉴바의 크기를 포함해서 재계산
-            if (Build.VERSION.SDK_INT >= 15 && Build.VERSION.SDK_INT < 17) {
-                try {
-                    mWidthPixels = (Integer) Display.class.getMethod("getRawWidth").invoke(display);
-                    mHeightPixels = (Integer) Display.class.getMethod("getRawHeight").invoke(display);
-                } catch (Exception ignored) { }
-            }
-            // 상태바와 메뉴바의 크기를 포함
-            if (Build.VERSION.SDK_INT >= 17) {
-                try {
-                    Point realSize = new Point();
-                    Display.class.getMethod("getRealSize", Point.class).invoke(display, realSize);
-                    mWidthPixels = realSize.x;
-                    mHeightPixels = realSize.y;
-                } catch (Exception ignored) { }
-            }
-            try {
-                LayoutInflater infla = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-                View layout = infla.inflate(R.layout.activity_pop_up_window, (ViewGroup) activity.findViewById(R.id.popup_element));
-
-
-                pwindo = new PopupWindow(layout, mWidthPixels - 100, mHeightPixels - 300, true);
-                //pwindo.setOutsideTouchable(false);
-                //View pwview = pwindo.getContentView();
-                //layout.setFocusable(true);
-                pwindo.setOutsideTouchable(true);
-                pwindo.setBackgroundDrawable(new BitmapDrawable());
-                layout.setFocusableInTouchMode(true);
-                layout.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                    @Override
-                    public void onFocusChange(View v, boolean hasFocus) {
-                        if(!hasFocus){ activity.onBackPressed(); }
-                        //d("jun","nofocus");
-                    }
-                });
-                layout.requestFocus();
-                pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
-                btnClosePopup = layout.findViewById(R.id.btn_close_popup);
-                btnClosePopup.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View view) { pwindo.dismiss();}
-                        //activity.getSubMenu("Main");
-                        //activity.onBackPressed();
-
-                });
-
-                GridView popgridview = layout.findViewById(R.id.popupgridview);
-                popgridview.setAdapter(buttonAdapter);
 
             } catch (Exception e) { e.printStackTrace(); }
         }
