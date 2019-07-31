@@ -9,12 +9,15 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Stack;
 
+import static android.util.Log.d;
+
 public class MainActivity extends AppCompatActivity {
-    private ButtonItem[] ButtonData;
+    private ButtonItem[] ButtonData = null;
     private Stack<ButtonItem[]> Prev_Data = new Stack<>();
     private GridView gridView;
     ImageButtonAdapter imageButtonAdapter;
@@ -36,8 +39,12 @@ public class MainActivity extends AppCompatActivity {
         weatherView = new WeatherAPI(this);
 
 
-        DataItem dataItem = new DataItem(this);                                                       //Data
-        ButtonData = dataItem.getData();
+        if(ButtonData == null){
+            d("jun","null!");
+            DataItem dataItem = new DataItem(this);                                                       //Data
+            ButtonData = dataItem.getData();
+        }
+
 
         gridView=findViewById(R.id.maingridview);
         imageButtonAdapter = new ImageButtonAdapter(this,R.layout.item_imagebutton,ArraytoList(ButtonData));
@@ -58,7 +65,10 @@ public class MainActivity extends AppCompatActivity {
             setPageAdapter(ButtonData);
             Prev_Data.pop();
         }
-        else{ super.onBackPressed(); }
+        else{
+            Toast.makeText(getApplicationContext(),"App is Closing", Toast.LENGTH_SHORT).show();
+            super.onBackPressed();
+        }
     }
     private ArrayList<ButtonItem> ArraytoList(ButtonItem[] buttonItems){
         ArrayList<ButtonItem> arrayList = new ArrayList<>();

@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.*;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -21,6 +23,8 @@ public class Email extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.email_layout);
 
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
         UpCategory = getIntent().getStringExtra("ButtonName");
         d("jun",UpCategory);
         getSupportActionBar().setTitle(UpCategory);
@@ -28,6 +32,7 @@ public class Email extends AppCompatActivity {
         mEditTextTo = findViewById(R.id.edit_text_to);
         mEditTextSubject = findViewById(R.id.edit_text_subject);
         mEditTextMessage = findViewById(R.id.edit_text_message);
+
 
         Button buttonSend = findViewById(R.id.button_send);
         buttonSend.setOnClickListener(new View.OnClickListener() {
@@ -38,10 +43,10 @@ public class Email extends AppCompatActivity {
         });
     }
     private void sendMail(){
-        String recipientList = mEditTextSubject.getText().toString();
+        String recipientList = mEditTextTo.getText().toString();
         String[] recipients = recipientList.split(",");
         // example1@gmail.com, exam2@gmail.com
-        String subject = mEditTextTo.getText().toString();
+        String subject = mEditTextSubject.getText().toString();
         String message = mEditTextMessage.getText().toString();
 
         Intent intent = new Intent(Intent.ACTION_SEND);
@@ -52,4 +57,15 @@ public class Email extends AppCompatActivity {
         intent.setType("message/rfc822");
         startActivity(Intent.createChooser(intent, "Choose an email client"));
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                //
+                onBackPressed();
+                break;
+        }
+        return true;
+    }
+
 }

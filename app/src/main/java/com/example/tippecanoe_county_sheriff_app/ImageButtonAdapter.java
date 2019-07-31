@@ -3,6 +3,7 @@ package com.example.tippecanoe_county_sheriff_app;
 /* File name : ImageButtonAdapter.java
 * Description : custom adapter for buttons to put in gridView
 * */
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
@@ -103,12 +104,17 @@ class ImageButtonAdapter extends BaseAdapter{
                         Context context = v.getContext();
                         Intent intent = buttonlist.get(position).getFunc();
                         if(buttonlist.get(position).getButtonName().equals("Instagram")){ intent.setPackage("com.instagram.android"); }
+                        else if(buttonlist.get(position).getButtonName().equals("Video Visitation")){
+                            ComponentName componentName =  new ComponentName("air.com.renovo.vismobile","air.com.renovo.vismobile.AppEntry");
+                            intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                            intent.setComponent(componentName);
+                        }
                         Intent Extraintent = buttonlist.get(position).getExtraFunc();
                         try {
                             context.startActivity(intent);
                         } catch (android.content.ActivityNotFoundException anfe) {
                             context.startActivity(Extraintent);
-                            //new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName))
+                            //
                         }
                     }
                 });
