@@ -35,6 +35,7 @@ public class DataItem{
                         //new ButtonItem(null,R.drawable.web_based_vendor,null,null , true, null),                                                                          //I don't get it
                         new ButtonItem("Commissary",R.drawable.commissary,new Intent(Intent.ACTION_VIEW, Uri.parse("https://deposits.jailatm.com/webdeposits/default.aspx")),null ,ButtonType.SINGLEFUNC, null),               //Jun:
                         new ButtonItem("Video Visitation",R.drawable.video_visitation, new Intent(Intent.ACTION_MAIN), new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=air.com.renovo.vismobile")) ,ButtonType.DOUBLEFUNC, null),                             //Video Visitation Link
+                        new ButtonItem("Visitation Policy",R.drawable.corrections,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/468/Inmate-Visitation-Policy")),null ,ButtonType.SINGLEFUNC, null),
                         //new ButtonItem(null,R.drawable.bond_statements,null,null ,true, null),
                 }),
                 new ButtonItem("We-Tip",R.drawable.we_tip,new Intent(Intent.ACTION_VIEW, Uri.parse("https://wetip.com/")), null ,ButtonType.SINGLEFUNC, null),                                                                           //Another Page

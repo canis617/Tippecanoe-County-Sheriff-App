@@ -46,7 +46,7 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ButtonAdapter.ViewHolder holder, final int position) {
         holder.textbutton.setText(String.valueOf(buttonItems.get(position).getButtonName()));
-        holder.textbutton.setTextSize(buttonItems.get(position).getButtonImage());
+        holder.textbutton.setTextSize(buttonItems.get(position).getButtonContent());
         holder.textbutton.setPaintFlags(holder.textbutton.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         switch (buttonItems.get(position).getButtonType()){
             case SINGLEFUNC:

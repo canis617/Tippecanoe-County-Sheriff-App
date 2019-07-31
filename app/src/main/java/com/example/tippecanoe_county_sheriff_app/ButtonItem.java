@@ -10,7 +10,7 @@ enum ButtonType{
 }
 public class ButtonItem {
     private String ButtonName;
-    private int ButtonImage;                                                                                    //R.@directory.@imagename
+    private int ButtonContent;                                                                                    //R.@directory.@imagename
     private Intent Func;
     private Intent ExtraFunc;
     //private boolean isConnector;                                                                            //true = High Category
@@ -25,9 +25,9 @@ public class ButtonItem {
         this.child = child;
     }
 
-    ButtonItem(String ButtonName, int ButtonImage, Intent Func,Intent ExtraFunc, ButtonType ButtonType, @Nullable ButtonItem[] child){
+    ButtonItem(String ButtonName, int ButtonContent, Intent Func, Intent ExtraFunc, ButtonType ButtonType, @Nullable ButtonItem[] child){
         this.ButtonName = ButtonName;
-        this.ButtonImage = ButtonImage;
+        this.ButtonContent = ButtonContent;
         this.Func = Func;
         this.ExtraFunc = ExtraFunc;
         //this.isConnector = isConnector;
@@ -39,12 +39,12 @@ public class ButtonItem {
 
     public void setButtonName(String buttonName) { ButtonName = buttonName; }
 
-    public int getButtonImage() {
-        return ButtonImage;
+    public int getButtonContent() {
+        return ButtonContent;
     }
 
-    public void setButtonImage(int buttonImage) {
-        this.ButtonImage = buttonImage;
+    public void setButtonContent(int buttonContent) {
+        this.ButtonContent = buttonContent;
     }
 
     public Intent getFunc() {

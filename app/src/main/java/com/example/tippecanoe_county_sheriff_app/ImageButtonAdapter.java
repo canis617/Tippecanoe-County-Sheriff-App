@@ -67,7 +67,7 @@ class ImageButtonAdapter extends BaseAdapter{
         ImageButton ib = convertView.findViewById(R.id.imagebutton);                                //item_imagebutton.xmln.xml
         if(position%2==0){ ib.setBackgroundColor(context.getResources().getColor(R.color.ButtonColor1)); }
         else{ ib.setBackgroundColor(context.getResources().getColor(R.color.ButtonColor2)); }
-        ib.setImageResource(buttonlist.get(position).getButtonImage());
+        ib.setImageResource(buttonlist.get(position).getButtonContent());
 
         switch (buttonlist.get(position).getButtonType()){
             case CONTAINER:
