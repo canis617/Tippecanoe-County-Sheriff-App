@@ -10,6 +10,7 @@ import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,14 +37,19 @@ class ImageButtonAdapter extends BaseAdapter{
     private  ArrayList<ButtonItem> buttonlist;
     private LayoutInflater inf;
     private PopupWindow pwindo;
+    private float buttonWidth, gridHMargin;
+    private int mWidthPixels;
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
 
-    ImageButtonAdapter(Context context, int layout, ArrayList<ButtonItem> list) {
+    ImageButtonAdapter(Context context, int layout, ArrayList<ButtonItem> list, float buttonWidth, int mWidthPixels, float gridHMargin) {
         this.context = context;
         this.layout = layout;
         setData(list);
         inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.buttonWidth = buttonWidth;
+        this.mWidthPixels = mWidthPixels;
+        this.gridHMargin = gridHMargin;
     }
     public void setData(ArrayList<ButtonItem> list){
         buttonlist = list;
@@ -65,6 +72,28 @@ class ImageButtonAdapter extends BaseAdapter{
             convertView = inf.inflate(layout, null);
 
         ImageButton ib = convertView.findViewById(R.id.imagebutton);                                //item_imagebutton.xmln.xml
+        //ib.setMaxHeight((int));
+        //ib.setMaxWidth((int));
+
+        //ib.setLayoutParams(new ConstraintLayout.LayoutParams((int)(mWidthPixels/3),(int)(mWidthPixels/3)));
+
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) ib.getLayoutParams();
+
+
+        // Set the height of this ImageButton
+        params.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (buttonWidth*(1-(gridHMargin*2)))/3, ib.getResources().getDisplayMetrics());
+
+        // Set the width of that ImageButton
+        params.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (buttonWidth*(1-(gridHMargin*2)))/3, ib.getResources().getDisplayMetrics());
+
+        //params.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 180, ((MainActivity)context).getResources().getDisplayMetrics());
+        //params.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 180, ((MainActivity)context).getResources().getDisplayMetrics());
+
+        // Apply the updated layout parameters to last ImageButton
+        ib.setLayoutParams(params);
+
+        d("jun","Button's:"+ ib.getLayoutParams().width);
+
         if(position%2==0){ ib.setBackgroundColor(context.getResources().getColor(R.color.ButtonColor1)); }
         else{ ib.setBackgroundColor(context.getResources().getColor(R.color.ButtonColor2)); }
         ib.setImageResource(buttonlist.get(position).getButtonContent());
@@ -136,7 +165,8 @@ class ImageButtonAdapter extends BaseAdapter{
                     public void onClick(View v) {
                         Button btnClosePopup;
 
-                        int mWidthPixels, mHeightPixels;
+                        /*
+
 
                         WindowManager w = ((MainActivity) context).getWindowManager();
                         Display display = w.getDefaultDisplay();
@@ -164,13 +194,14 @@ class ImageButtonAdapter extends BaseAdapter{
                             } catch (Exception ignored) {
                             }
                         }
+                        */
                         try {
                             LayoutInflater infla = (LayoutInflater) ((MainActivity) context).getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
                             View layout = infla.inflate(R.layout.activity_pop_up_window, (ViewGroup) ((MainActivity) context).findViewById(R.id.popup_element));
 
 
-                            pwindo = new PopupWindow(layout, mWidthPixels - 100, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+                            pwindo = new PopupWindow(layout, (int)(mWidthPixels*0.9), ViewGroup.LayoutParams.WRAP_CONTENT, true);
                             //pwindo = new PopupWindow(layout,);
                             //pwindo.setOutsideTouchable(false);
                             //View pwview = pwindo.getContentView();

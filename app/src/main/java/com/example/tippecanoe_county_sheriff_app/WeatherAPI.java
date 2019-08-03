@@ -3,13 +3,17 @@ package com.example.tippecanoe_county_sheriff_app;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.text.Html;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.text.DateFormat;
 import java.util.Locale;
+
+import static android.util.Log.d;
 
 public class WeatherAPI{
     MainActivity activity;
@@ -28,6 +32,13 @@ public class WeatherAPI{
         activity.weatherIcon = (TextView) activity.findViewById(R.id.weather_icon); //Weather Icon
         weatherFont = Typeface.createFromAsset(activity.getAssets(), "fonts/weathericons-regular-webfont.ttf");
         activity.weatherIcon.setTypeface(weatherFont);
+
+
+        DisplayMetrics displayMetrics = activity.getResources().getDisplayMetrics();
+        float textsize = activity.currentTemperatureField.getTextSize() / displayMetrics.density;
+        activity.cityField.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textsize);
+        d("jun","tempsize:"+ textsize);
+        d("jun","citysize:"+activity.cityField.getTextSize());
         taskLoadUp(city);
 
         /* comment cause not used
@@ -56,6 +67,8 @@ public class WeatherAPI{
             //loader.setVisibility(View.VISIBLE);
         }
 
+        //need to check networking
+        // if dont, then no internet ... stop :(
         protected String doInBackground(String...args) {
             String xml = WeatherFunction.excuteGet("http://api.openweathermap.org/data/2.5/weather?zip=" + args[0] +
                     "&appid=" + OPEN_WEATHER_MAP_API);
@@ -85,7 +98,7 @@ public class WeatherAPI{
 
                 }
             } catch (JSONException e) {
-                Log.d("Error Message", e.toString());
+                d("Error Message", e.toString());
                 Toast.makeText(activity.getApplicationContext(), "Error, Check City", Toast.LENGTH_SHORT).show();
             }
 
