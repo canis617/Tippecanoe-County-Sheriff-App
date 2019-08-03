@@ -119,10 +119,10 @@ public class MainActivity extends AppCompatActivity {
         hguideline.setGuidelinePercent(0.0f + gridHMargin);
         hguideline2.setGuidelinePercent(1.0f - gridHMargin);
 
-        d("alz","horimargin:"+gridHMargin);
-        d("alz","vertmargin"+gridVMargin);
-        d("jun","Height:"+ (mHeightPixels *0.6 * (1- (gridVMargin*2))));
-        d("jun","Width:"+ mWidthPixels *(1-(gridHMargin*2)));
+        //d("alz","horimargin:"+gridHMargin);
+        //d("alz","vertmargin"+gridVMargin);
+        //d("jun","Height:"+ (mHeightPixels *0.6 * (1- (gridVMargin*2))));
+        //d("jun","Width:"+ mWidthPixels *(1-(gridHMargin*2)));
 
         if(ButtonData == null){
             //d("jun","null!");

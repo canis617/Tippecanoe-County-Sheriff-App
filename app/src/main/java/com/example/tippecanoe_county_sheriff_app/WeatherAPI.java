@@ -8,6 +8,9 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.core.widget.TextViewCompat;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.text.DateFormat;
@@ -33,12 +36,6 @@ public class WeatherAPI{
         weatherFont = Typeface.createFromAsset(activity.getAssets(), "fonts/weathericons-regular-webfont.ttf");
         activity.weatherIcon.setTypeface(weatherFont);
 
-
-        DisplayMetrics displayMetrics = activity.getResources().getDisplayMetrics();
-        float textsize = activity.currentTemperatureField.getTextSize() / displayMetrics.density;
-        activity.cityField.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textsize);
-        d("jun","tempsize:"+ textsize);
-        d("jun","citysize:"+activity.cityField.getTextSize());
         taskLoadUp(city);
 
         /* comment cause not used

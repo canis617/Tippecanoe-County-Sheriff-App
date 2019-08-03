@@ -92,7 +92,7 @@ class ImageButtonAdapter extends BaseAdapter{
         // Apply the updated layout parameters to last ImageButton
         ib.setLayoutParams(params);
 
-        d("jun","Button's:"+ ib.getLayoutParams().width);
+        //d("jun","Button's:"+ ib.getLayoutParams().width);
 
         if(position%2==0){ ib.setBackgroundColor(context.getResources().getColor(R.color.ButtonColor1)); }
         else{ ib.setBackgroundColor(context.getResources().getColor(R.color.ButtonColor2)); }
