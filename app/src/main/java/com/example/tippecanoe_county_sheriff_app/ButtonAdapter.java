@@ -1,5 +1,6 @@
 package com.example.tippecanoe_county_sheriff_app;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -10,6 +11,8 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.tippecanoe_county_sheriff_app.Data.*;
 
 import java.util.ArrayList;
 
@@ -49,7 +52,7 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder
         //holder.textbutton.setTextSize(buttonItems.get(position).getButtonContent());
         holder.textbutton.setPaintFlags(holder.textbutton.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         switch (buttonItems.get(position).getButtonType()){
-            case SINGLEFUNC:
+            case AUTODIAL:
                 holder.textbutton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -60,7 +63,58 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder
                     }
                 });
                 break;
+            case LINKTOAPP:
+                holder.textbutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Context context = v.getContext();
+                        Intent intent = buttonItems.get(position).getFunc();
+                        if(buttonItems.get(position).getButtonName().equals("Instagram")){ intent.setPackage("com.instagram.android"); }
+                        //desc
 
+                        Intent Extraintent = buttonItems.get(position).getExtraFunc();
+                        try {
+                            context.startActivity(intent);
+                        } catch (android.content.ActivityNotFoundException anfe) {
+                            context.startActivity(Extraintent);
+                            //
+                        }
+                    }
+                });
+                break;
+            case LINKTOSNS:
+                holder.textbutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Context context = v.getContext();
+                        Intent intent = buttonItems.get(position).getFunc();
+                        if(buttonItems.get(position).getButtonName().equals("Video Visitation")){
+                            ComponentName componentName =  new ComponentName("air.com.renovo.vismobile","air.com.renovo.vismobile.AppEntry");
+                            intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                            intent.setComponent(componentName);
+                        }
+                        //desc
+
+                        Intent Extraintent = buttonItems.get(position).getExtraFunc();
+                        try {
+                            context.startActivity(intent);
+                        } catch (android.content.ActivityNotFoundException anfe) {
+                            context.startActivity(Extraintent);
+                        }
+                    }
+                });
+                break;
+            case LINKTOWEB:
+                holder.textbutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Context context = v.getContext();
+                        Intent intent = buttonItems.get(position).getFunc();
+                        try { context.startActivity(intent); }
+                        catch (Exception e) { e.printStackTrace(); }
+                    }
+                });
+                break;
             case NEWPAGE:
                 holder.textbutton.setOnClickListener(new View.OnClickListener() {
                     @Override

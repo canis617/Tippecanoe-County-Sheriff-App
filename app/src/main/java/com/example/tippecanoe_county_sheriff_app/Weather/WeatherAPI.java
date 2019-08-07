@@ -1,15 +1,13 @@
-package com.example.tippecanoe_county_sheriff_app;
+package com.example.tippecanoe_county_sheriff_app.Weather;
 
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.text.Html;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.util.TypedValue;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.core.widget.TextViewCompat;
+import com.example.tippecanoe_county_sheriff_app.MainActivity;
+import com.example.tippecanoe_county_sheriff_app.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,6 +16,8 @@ import java.util.Locale;
 
 import static android.util.Log.d;
 
+
+//need to fix
 public class WeatherAPI{
     MainActivity activity;
 

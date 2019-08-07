@@ -18,6 +18,9 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tippecanoe_county_sheriff_app.Data.*;
+import com.example.tippecanoe_county_sheriff_app.Weather.WeatherAPI;
+
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -33,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     //weather views
     public TextView cityField, currentTemperatureField, weatherIcon;
 
-
+    //
     private WeatherAPI weatherView;
 
     @Override
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);                          //fixed to portrait view
         getSupportActionBar().hide();
+
         weatherView = new WeatherAPI(this);
 
         Guideline vguideline = findViewById(R.id.dguideline20);
@@ -133,12 +137,12 @@ public class MainActivity extends AppCompatActivity {
 
         gridView=findViewById(R.id.maingridview);
         //imageButtonAdapter = new ImageButtonAdapter(this,R.layout.item_imagebutton,ArraytoList(ButtonData),mWidthPixels*(1-(gridHMargin*2)), mWidthPixels);
-        imageButtonAdapter = new ImageButtonAdapter(this,R.layout.item_imagebutton,ArraytoList(ButtonData),dpWidth, mWidthPixels,gridHMargin);
+        imageButtonAdapter = new ImageButtonAdapter(this,R.layout.item_imagebutton,arrayToList(ButtonData),dpWidth, mWidthPixels,gridHMargin);
         gridView.setAdapter(imageButtonAdapter);
     }
 
     public void setPageAdapter(ButtonItem[] newData){
-        imageButtonAdapter.setData(ArraytoList(newData));
+        imageButtonAdapter.setData(arrayToList(newData));
         imageButtonAdapter.notifyDataSetChanged();
     }
     public void setPrev_Data(ButtonItem[] object_items){
@@ -156,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
-    private ArrayList<ButtonItem> ArraytoList(ButtonItem[] buttonItems){
+    private ArrayList<ButtonItem> arrayToList(ButtonItem[] buttonItems){
         ArrayList<ButtonItem> arrayList = new ArrayList<>();
         for(ButtonItem tempButton : buttonItems){
             if(tempButton != null){ arrayList.add(tempButton); }

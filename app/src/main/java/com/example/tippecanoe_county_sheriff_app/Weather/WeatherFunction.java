@@ -1,4 +1,4 @@
-package com.example.tippecanoe_county_sheriff_app;
+package com.example.tippecanoe_county_sheriff_app.Weather;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
