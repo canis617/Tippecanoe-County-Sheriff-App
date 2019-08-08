@@ -1,5 +1,4 @@
-package com.example.tippecanoe_county_sheriff_app.Email;
-
+package com.example.tippecanoe_county_sheriff_app.email;
 
 import android.Manifest;
 import android.accounts.Account;
@@ -22,11 +21,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-
-//import com.stackoverflow.ranjith.androidprojdel.backend.Constant;
-
-//import com.example..Constant;
-
 import com.example.tippecanoe_county_sheriff_app.R;
 
 import static android.util.Log.d;
@@ -40,8 +34,6 @@ public class Email extends AppCompatActivity {
     private AccountManager accountManager;
 
     private final String SCOPE = Constant.GMAIL_COMPOSE + " " + Constant.GMAIL_MODIFY + " " + Constant.MAIL_GOOGLE_COM;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -215,6 +207,7 @@ public class Email extends AppCompatActivity {
 
 }
 
+//To Alonzo
 /*
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -1,4 +1,4 @@
-package com.example.tippecanoe_county_sheriff_app.Weather;
+package com.example.tippecanoe_county_sheriff_app.weather;
 
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -6,7 +6,7 @@ import android.text.Html;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tippecanoe_county_sheriff_app.MainActivity;
+import com.example.tippecanoe_county_sheriff_app.main.MainActivity;
 import com.example.tippecanoe_county_sheriff_app.R;
 
 import org.json.JSONException;

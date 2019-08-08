@@ -1,4 +1,4 @@
-package com.example.tippecanoe_county_sheriff_app;
+package com.example.tippecanoe_county_sheriff_app.main;
 
 /* File name : ImageButtonAdapter.java
 * Description : custom adapter for buttons to put in gridView
@@ -22,11 +22,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tippecanoe_county_sheriff_app.Data.ButtonItem;
+import com.example.tippecanoe_county_sheriff_app.R;
+import com.example.tippecanoe_county_sheriff_app.data.ButtonItem;
 
 import java.util.ArrayList;
-
-import static android.util.Log.d;
 
 //should we divide a calc-screen size
 class ImageButtonAdapter extends BaseAdapter{
@@ -38,7 +37,8 @@ class ImageButtonAdapter extends BaseAdapter{
     private float buttonWidth, gridHMargin;
     private int mWidthPixels;
 
-    ImageButtonAdapter(Context context, int layout, ArrayList<ButtonItem> list, float buttonWidth, int mWidthPixels, float gridHMargin) {
+    //Constructor
+    public ImageButtonAdapter(Context context, int layout, ArrayList<ButtonItem> list, float buttonWidth, int mWidthPixels, float gridHMargin) {
         this.context = context;
         this.layout = layout;
         setData(list);
@@ -123,12 +123,8 @@ class ImageButtonAdapter extends BaseAdapter{
                         //desc
 
                         Intent Extraintent = buttonlist.get(position).getExtraFunc();
-                        try {
-                            context.startActivity(intent);
-                        } catch (android.content.ActivityNotFoundException anfe) {
-                            context.startActivity(Extraintent);
-                            //
-                        }
+                        try { context.startActivity(intent); }
+                        catch (android.content.ActivityNotFoundException anfe) { context.startActivity(Extraintent); }
                     }
                 });
                 break;
@@ -146,11 +142,8 @@ class ImageButtonAdapter extends BaseAdapter{
                         //desc
 
                         Intent Extraintent = buttonlist.get(position).getExtraFunc();
-                        try {
-                            context.startActivity(intent);
-                        } catch (android.content.ActivityNotFoundException anfe) {
-                            context.startActivity(Extraintent);
-                        }
+                        try { context.startActivity(intent); }
+                        catch (android.content.ActivityNotFoundException anfe) { context.startActivity(Extraintent); }
                     }
                 });
                 break;
@@ -196,16 +189,11 @@ class ImageButtonAdapter extends BaseAdapter{
                             ButtonAdapter buttonAdapter = new ButtonAdapter(buttonlist.get(position).getChild());
                             poprecview.setLayoutManager(layoutManager);
                             poprecview.setAdapter(buttonAdapter);
-                            //recyclerview 가져오기
-                            //adapter buttonlist.get(position).getchild로 가져온 자식 버튼 넣어주기
-                            //adapter 설정
-                        } catch (Exception e) {
-                        }
+                        } catch (Exception e) { }
                     }
                     });
                 break;
             default:
-                d("jun","default");
                 break;
 
         }

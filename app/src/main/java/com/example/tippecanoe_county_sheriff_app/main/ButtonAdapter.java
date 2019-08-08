@@ -1,4 +1,4 @@
-package com.example.tippecanoe_county_sheriff_app;
+package com.example.tippecanoe_county_sheriff_app.main;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -12,7 +12,8 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tippecanoe_county_sheriff_app.Data.*;
+import com.example.tippecanoe_county_sheriff_app.R;
+import com.example.tippecanoe_county_sheriff_app.data.*;
 
 import java.util.ArrayList;
 
@@ -30,7 +31,8 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder
         }
     }
 
-    ButtonAdapter(ButtonItem[] buttonItems){
+    //Constructor
+    public ButtonAdapter(ButtonItem[] buttonItems){
         for(ButtonItem tempButton : buttonItems){
             if(tempButton != null){
                 this.buttonItems.add(tempButton);
@@ -49,7 +51,6 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ButtonAdapter.ViewHolder holder, final int position) {
         holder.textbutton.setText(String.valueOf(buttonItems.get(position).getButtonName()));
-        //holder.textbutton.setTextSize(buttonItems.get(position).getButtonContent());
         holder.textbutton.setPaintFlags(holder.textbutton.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         switch (buttonItems.get(position).getButtonType()){
             case AUTODIAL:
@@ -73,12 +74,8 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder
                         //desc
 
                         Intent Extraintent = buttonItems.get(position).getExtraFunc();
-                        try {
-                            context.startActivity(intent);
-                        } catch (android.content.ActivityNotFoundException anfe) {
-                            context.startActivity(Extraintent);
-                            //
-                        }
+                        try { context.startActivity(intent); }
+                        catch (android.content.ActivityNotFoundException anfe) { context.startActivity(Extraintent); }
                     }
                 });
                 break;
@@ -96,11 +93,8 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder
                         //desc
 
                         Intent Extraintent = buttonItems.get(position).getExtraFunc();
-                        try {
-                            context.startActivity(intent);
-                        } catch (android.content.ActivityNotFoundException anfe) {
-                            context.startActivity(Extraintent);
-                        }
+                        try { context.startActivity(intent); }
+                        catch (android.content.ActivityNotFoundException anfe) { context.startActivity(Extraintent); }
                     }
                 });
                 break;

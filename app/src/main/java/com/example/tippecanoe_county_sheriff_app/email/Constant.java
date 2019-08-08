@@ -1,4 +1,4 @@
-package com.example.tippecanoe_county_sheriff_app.Email;
+package com.example.tippecanoe_county_sheriff_app.email;
 
 public class Constant {
     public static final String MAIL_GOOGLE_COM = "https://mail.google.com";

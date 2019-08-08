@@ -1,6 +1,4 @@
-package com.example.tippecanoe_county_sheriff_app.Email;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.tippecanoe_county_sheriff_app.email;
 
 import com.sun.mail.smtp.SMTPTransport;
 import com.sun.mail.util.BASE64EncoderStream;
@@ -14,8 +12,6 @@ import javax.mail.URLName;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.util.ByteArrayDataSource;
-
-import static android.util.Log.d;
 
 public class GMailSender {
     private Session session;

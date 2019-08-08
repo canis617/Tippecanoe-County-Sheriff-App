@@ -1,10 +1,9 @@
-package com.example.tippecanoe_county_sheriff_app.Email;
+package com.example.tippecanoe_county_sheriff_app.email;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-import static android.util.Log.d;
 
 public class AuthPreferences {
 
@@ -13,6 +12,7 @@ public class AuthPreferences {
 
     private SharedPreferences preferences;
 
+    //Constructor
     public AuthPreferences(Context context) {
         preferences = context.getSharedPreferences("authoris", Context.MODE_PRIVATE);
     }

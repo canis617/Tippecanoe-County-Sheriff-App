@@ -1,4 +1,4 @@
-package com.example.tippecanoe_county_sheriff_app.Data;
+package com.example.tippecanoe_county_sheriff_app.data;
 
 import android.content.Intent;
 
@@ -13,7 +13,7 @@ public class ButtonItem {
     private ButtonItem[] child;
 
     //Constructor
-    ButtonItem(String ButtonName, int ButtonContent, Intent Func, @Nullable Intent ExtraFunc, ButtonType ButtonType, @Nullable ButtonItem[] child){
+    public ButtonItem(String ButtonName, int ButtonContent, Intent Func, @Nullable Intent ExtraFunc, ButtonType ButtonType, @Nullable ButtonItem[] child){
         this.ButtonName = ButtonName;
         this.ButtonContent = ButtonContent;
         this.Func = Func;

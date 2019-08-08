@@ -1,4 +1,4 @@
-package com.example.tippecanoe_county_sheriff_app;
+package com.example.tippecanoe_county_sheriff_app.main;
 
 /* File name : MainActivity.java
  * Description : Main Activity for app module
@@ -18,13 +18,12 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tippecanoe_county_sheriff_app.Data.*;
-import com.example.tippecanoe_county_sheriff_app.Weather.WeatherAPI;
+import com.example.tippecanoe_county_sheriff_app.R;
+import com.example.tippecanoe_county_sheriff_app.data.*;
+import com.example.tippecanoe_county_sheriff_app.weather.WeatherAPI;
 
 import java.util.ArrayList;
 import java.util.Stack;
-
-import static android.util.Log.d;
 
 public class MainActivity extends AppCompatActivity {
     private ButtonItem[] ButtonData = null;
@@ -34,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     //weather views
+    //need to move: Weather...
     public TextView cityField, currentTemperatureField, weatherIcon;
 
     //
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         Guideline hguideline2 = findViewById(R.id.ddguideline14);
 
         //get screen size
-
+        //need to make as a new class
         int mWidthPixels, mHeightPixels;
 
 
@@ -72,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
             try {
                 mWidthPixels = (Integer) Display.class.getMethod("getRawWidth").invoke(display);
                 mHeightPixels = (Integer) Display.class.getMethod("getRawHeight").invoke(display);
-            } catch (Exception ignored) {
             }
+            catch (Exception ignored) { }
         }
         // 상태바와 메뉴바의 크기를 포함
         if (Build.VERSION.SDK_INT >= 17) {
@@ -90,10 +90,10 @@ public class MainActivity extends AppCompatActivity {
         float dpHeight = displayMetrics.heightPixels / displayMetrics.density;
         float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
 
-        //((height * 0.6 - length * 0.9)/2)/height
         float gridWidth = (float)mWidthPixels;
         float gridHeight = (float)mHeightPixels;
 
+        //need: as static number
         float gridHMargin = 0.05f, gridVMargin;
         float count = 1;
 
@@ -112,21 +112,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-
-
-        //gridMargin = (float)String.format("%.2f", ;
-        //gridMargin = (dpHeight * 0.65f - dpWidth * 0.9f)/2/dpHeight;
-        //d("jun","gmargin:"+gridMargin);
-
         vguideline.setGuidelinePercent(0.4f + gridVMargin);
         vguideline2.setGuidelinePercent(1.0f - gridVMargin);
         hguideline.setGuidelinePercent(0.0f + gridHMargin);
         hguideline2.setGuidelinePercent(1.0f - gridHMargin);
-
-        //d("alz","horimargin:"+gridHMargin);
-        //d("alz","vertmargin"+gridVMargin);
-        //d("jun","Height:"+ (mHeightPixels *0.6 * (1- (gridVMargin*2))));
-        //d("jun","Width:"+ mWidthPixels *(1-(gridHMargin*2)));
 
         if(ButtonData == null){
             //d("jun","null!");
@@ -136,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         gridView=findViewById(R.id.maingridview);
-        //imageButtonAdapter = new ImageButtonAdapter(this,R.layout.item_imagebutton,ArraytoList(ButtonData),mWidthPixels*(1-(gridHMargin*2)), mWidthPixels);
         imageButtonAdapter = new ImageButtonAdapter(this,R.layout.item_imagebutton,arrayToList(ButtonData),dpWidth, mWidthPixels,gridHMargin);
         gridView.setAdapter(imageButtonAdapter);
     }
