@@ -109,7 +109,7 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder
                     }
                 });
                 break;
-            case NEWPAGE:
+            case LINKTONEWPAGE:
                 holder.textbutton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

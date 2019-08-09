@@ -15,14 +15,14 @@ public class WeatherFunction {
 
 
 
-    public static boolean isNetworkAvailable(Context context)
+    protected static boolean isNetworkAvailable(Context context)
     {
         return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
     }
 
 
 
-    public static String excuteGet(String targetURL)
+    protected static String excuteGet(String targetURL)
     {
         URL url;
         HttpURLConnection connection = null;
@@ -63,7 +63,7 @@ public class WeatherFunction {
     }
 
 
-    public static String setWeatherIcon(int actualId, long sunrise, long sunset){
+    protected static String setWeatherIcon(int actualId, long sunrise, long sunset){
         int id = actualId / 100;
         String icon = "";
         if(actualId == 800){

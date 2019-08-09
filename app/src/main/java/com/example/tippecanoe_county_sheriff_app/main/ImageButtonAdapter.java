@@ -32,8 +32,8 @@ class ImageButtonAdapter extends BaseAdapter{
     private Context context;
     private int layout;
     private  ArrayList<ButtonItem> buttonlist;
-    private LayoutInflater inf;
     private PopupWindow pwindo;
+    private LayoutInflater inf;
     private float buttonWidth, gridHMargin;
     private int mWidthPixels;
 
@@ -91,7 +91,7 @@ class ImageButtonAdapter extends BaseAdapter{
                     }
                 });
                 break;
-            case NEWPAGE:
+            case LINKTONEWPAGE:
                 ib.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

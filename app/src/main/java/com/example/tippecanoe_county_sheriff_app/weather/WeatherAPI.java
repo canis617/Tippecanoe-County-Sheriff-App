@@ -1,5 +1,6 @@
 package com.example.tippecanoe_county_sheriff_app.weather;
 
+import android.content.Context;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.text.Html;
@@ -19,22 +20,25 @@ import static android.util.Log.d;
 
 //need to fix
 public class WeatherAPI{
-    MainActivity activity;
-
+    MainActivity activity;      //danger
     private Typeface weatherFont;
     private String city;  //city method (city name, country)
     private String OPEN_WEATHER_MAP_API;  //API key
 
+    private TextView cityField, currentTemperatureField, weatherIcon;
+
+    //Constructor
     public WeatherAPI(MainActivity activity) {
         this.activity = activity;
         city = "47906,us";
-        OPEN_WEATHER_MAP_API = activity.getString(R.string.weatherAPIKey);
+        OPEN_WEATHER_MAP_API = activity.getResources().getString(R.string.weatherAPIKey);
 
-        activity.cityField = (TextView) activity.findViewById(R.id.city_field);
-        activity.currentTemperatureField = (TextView) activity.findViewById(R.id.current_temperature_field); //temporature
-        activity.weatherIcon = (TextView) activity.findViewById(R.id.weather_icon); //Weather Icon
+
+        cityField = activity.findViewById(R.id.city_field); //city
+        currentTemperatureField =  activity.findViewById(R.id.current_temperature_field); //temporature
+        weatherIcon = activity.findViewById(R.id.weather_icon); //Weather Icon
         weatherFont = Typeface.createFromAsset(activity.getAssets(), "fonts/weathericons-regular-webfont.ttf");
-        activity.weatherIcon.setTypeface(weatherFont);
+        weatherIcon.setTypeface(weatherFont);
 
         taskLoadUp(city);
 
@@ -48,7 +52,7 @@ public class WeatherAPI{
         //detailsField = (TextView) findViewById(R.id.details_field);
     }
 
-    public void taskLoadUp(String query) {
+    private void taskLoadUp(String query) {
         if (WeatherFunction.isNetworkAvailable(activity.getApplicationContext())) {
             DownloadWeather task = new DownloadWeather();
             task.execute(query);
@@ -57,15 +61,15 @@ public class WeatherAPI{
         }
     }
 
-    class DownloadWeather extends AsyncTask < String, Void, String > {
+    private class DownloadWeather extends AsyncTask < String, Void, String > {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //loader.setVisibility(View.VISIBLE);
         }
 
         //need to check networking
-        // if dont, then no internet ... stop :(
+        //if dont, then no internet ... stop :(
+        //checked in android version 5.1
         protected String doInBackground(String...args) {
             String xml = WeatherFunction.excuteGet("http://api.openweathermap.org/data/2.5/weather?zip=" + args[0] +
                     "&appid=" + OPEN_WEATHER_MAP_API);
@@ -81,13 +85,13 @@ public class WeatherAPI{
                     JSONObject main = json.getJSONObject("main");
                     DateFormat df = DateFormat.getDateTimeInstance();
 
-                    activity.cityField.setText(json.getString("name").toUpperCase(Locale.US) + ", " + json.getJSONObject("sys").getString("country"));
+                    cityField.setText(json.getString("name").toUpperCase(Locale.US) + ", " + json.getJSONObject("sys").getString("country"));
                     //detailsField.setText(details.getString("description").toUpperCase(Locale.US));
-                    activity.currentTemperatureField.setText(String.format("%.1f", main.getDouble("temp")*0.1*1.8+32) + "°F");
+                    currentTemperatureField.setText(String.format("%.1f", main.getDouble("temp")*0.1*1.8+32) + "°F");
                     //humidity_field.setText("Humidity: " + main.getString("humidity") + "%");
                     //pressure_field.setText("Pressure: " + main.getString("pressure") + " hPa");
                     //updatedField.setText(df.format(new Date(json.getLong("dt") * 1000)));
-                    activity.weatherIcon.setText(Html.fromHtml(WeatherFunction.setWeatherIcon(details.getInt("id"),
+                    weatherIcon.setText(Html.fromHtml(WeatherFunction.setWeatherIcon(details.getInt("id"),
                             json.getJSONObject("sys").getLong("sunrise") * 1000,
                             json.getJSONObject("sys").getLong("sunset") * 1000)));
 

@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 
 public class ButtonItem {
     private String ButtonName;
-    private int ButtonContent;                                                                      //usually button's image
+    private int ButtonContent;
     private Intent Func;
     private Intent ExtraFunc;
     private ButtonType ButtonType;
@@ -23,7 +23,6 @@ public class ButtonItem {
     }
 
     //Getter and Setter
-    //-----------------------------------------------------------------------//
     public String getButtonName() { return ButtonName; }
 
     public void setButtonName(String buttonName) { ButtonName = buttonName; }

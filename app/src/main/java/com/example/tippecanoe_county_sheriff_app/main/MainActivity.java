@@ -5,17 +5,11 @@ package com.example.tippecanoe_county_sheriff_app.main;
  * */
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.Guideline;
+
 
 import android.content.pm.ActivityInfo;
-import android.graphics.Point;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.Display;
-import android.view.WindowManager;
 import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tippecanoe_county_sheriff_app.R;
@@ -25,16 +19,25 @@ import com.example.tippecanoe_county_sheriff_app.weather.WeatherAPI;
 import java.util.ArrayList;
 import java.util.Stack;
 
+import static android.util.Log.d;
+
 public class MainActivity extends AppCompatActivity {
     private ButtonItem[] ButtonData = null;
-    private Stack<ButtonItem[]> Prev_Data = new Stack<>();
+    private Stack<ButtonItem[]> Prev_Data = new Stack<>();  //need to seperate
     private GridView gridView;
-    ImageButtonAdapter imageButtonAdapter;
+    private GridViewGuideLines gridLines;
+    private ImageButtonAdapter imageButtonAdapter;
+    private ScreensizeCalc screensizeCalc;
+    private MarginCalc marginCalc;
 
-
+    private int mWidthPixels, mHeightPixels;
+    private float dpHeight, dpWidth;
+    private float gHoriMargin, gVertMargin;
+    private static final float MAX_GRID_PERC = 0.56f;
+    private static final float MIN_MARGIN_PERC = 0.02f;
     //weather views
     //need to move: Weather...
-    public TextView cityField, currentTemperatureField, weatherIcon;
+
 
     //
     private WeatherAPI weatherView;
@@ -49,83 +52,26 @@ public class MainActivity extends AppCompatActivity {
 
         weatherView = new WeatherAPI(this);
 
-        Guideline vguideline = findViewById(R.id.dguideline20);
-        Guideline vguideline2 = findViewById(R.id.dguideline4);
-        Guideline hguideline = findViewById(R.id.ddguideline12);
-        Guideline hguideline2 = findViewById(R.id.ddguideline14);
-
-        //get screen size
-        //need to make as a new class
-        int mWidthPixels, mHeightPixels;
+        gridLines = new GridViewGuideLines(findViewById(android.R.id.content));
 
 
-        WindowManager w = getWindowManager();
-        Display display = w.getDefaultDisplay();
-        DisplayMetrics metrics = new DisplayMetrics();
-        display.getMetrics(metrics);
-        // since SDK_INT = 1;
-        mWidthPixels = metrics.widthPixels;
-        mHeightPixels = metrics.heightPixels;
+        screensizeCalc = new ScreensizeCalc(this);
+        marginCalc = new MarginCalc(screensizeCalc.getmWidthPixels(),screensizeCalc.getmHeightPixels());
+        gHoriMargin = marginCalc.getgHoriMargin();
+        gVertMargin = marginCalc.getgVertMargin();
+        gridLines.setGuidlinesPercent(gVertMargin,gHoriMargin);
 
-        // 상태바와 메뉴바의 크기를 포함해서 재계산
-        if (Build.VERSION.SDK_INT >= 15 && Build.VERSION.SDK_INT < 17) {
-            try {
-                mWidthPixels = (Integer) Display.class.getMethod("getRawWidth").invoke(display);
-                mHeightPixels = (Integer) Display.class.getMethod("getRawHeight").invoke(display);
-            }
-            catch (Exception ignored) { }
-        }
-        // 상태바와 메뉴바의 크기를 포함
-        if (Build.VERSION.SDK_INT >= 17) {
-            try {
-                Point realSize = new Point();
-                Display.class.getMethod("getRealSize", Point.class).invoke(display, realSize);
-                mWidthPixels = realSize.x;
-                mHeightPixels = realSize.y;
-            } catch (Exception ignored) {
-            }
-        }
+//        if(ButtonData == null){
+//
+//        }
+        DataItem dataItem = new DataItem(this);                                                       //Data
+        ButtonData = dataItem.getData();
 
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        float dpHeight = displayMetrics.heightPixels / displayMetrics.density;
-        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
-
-        float gridWidth = (float)mWidthPixels;
-        float gridHeight = (float)mHeightPixels;
-
-        //need: as static number
-        float gridHMargin = 0.05f, gridVMargin;
-        float count = 1;
-
-        while(true){
-            gridVMargin = (gridHeight* 0.56f - gridWidth)/2f/gridHeight;
-            if(gridVMargin<0.02){
-                gridWidth -= gridWidth*0.01;
-            }
-            else{
-                if(gridWidth != mWidthPixels){
-                    gridHMargin = (1 - gridWidth/mWidthPixels)/2.0f;
-                }
-                //gridVMargin = (gridHeight* 0.56f - gridWidth)/2f/gridHeight;
-                gridVMargin = (float)Math.floor((gridHeight* 0.56f - gridWidth)/2f/gridHeight*100f)/100f;
-                break;
-            }
-        }
-
-        vguideline.setGuidelinePercent(0.4f + gridVMargin);
-        vguideline2.setGuidelinePercent(1.0f - gridVMargin);
-        hguideline.setGuidelinePercent(0.0f + gridHMargin);
-        hguideline2.setGuidelinePercent(1.0f - gridHMargin);
-
-        if(ButtonData == null){
-            //d("jun","null!");
-            DataItem dataItem = new DataItem(this);                                                       //Data
-            ButtonData = dataItem.getData();
-        }
-
+        mWidthPixels = screensizeCalc.getmWidthPixels();
+        dpWidth = screensizeCalc.getDpWidth();
 
         gridView=findViewById(R.id.maingridview);
-        imageButtonAdapter = new ImageButtonAdapter(this,R.layout.item_imagebutton,arrayToList(ButtonData),dpWidth, mWidthPixels,gridHMargin);
+        imageButtonAdapter = new ImageButtonAdapter(this,R.layout.item_imagebutton,arrayToList(ButtonData),dpWidth, mWidthPixels,gHoriMargin);
         gridView.setAdapter(imageButtonAdapter);
     }
 
@@ -136,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
     public void setPrev_Data(ButtonItem[] object_items){
         Prev_Data.push(object_items);
     }
+
+
     @Override
     public void onBackPressed() {
         if(!Prev_Data.isEmpty()){

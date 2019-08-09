@@ -50,11 +50,11 @@ public class DataItem{
                         new ButtonItem("Records Request",R.drawable.records_request,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/524/Public-Record-Requests")), null ,ButtonType.LINKTOWEB, null),               //Public-Record-Requests Link
                         new ButtonItem("Animal Control",R.drawable.animal_control,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/473/Animal-Control")), null ,ButtonType.LINKTOWEB, null),                       //Animal-Control Link
                         new ButtonItem("Security and Extra Patrol Request",R.drawable.security_requests,null, null ,ButtonType.POPUPCONTAINER, new ButtonItem[]{
-                                new ButtonItem("Security Request",0, new Intent(context, Email.class),null,ButtonType.NEWPAGE,null),
-                                new ButtonItem("Extra Patrol Request",0, new Intent(context,Email.class),null,ButtonType.NEWPAGE,null),
+                                new ButtonItem("Security Request",0, new Intent(context, Email.class),null,ButtonType.LINKTONEWPAGE,null),
+                                new ButtonItem("Extra Patrol Request",0, new Intent(context,Email.class),null,ButtonType.LINKTONEWPAGE,null),
                         }),
                         new ButtonItem("Tax Warrants",R.drawable.tax_warrants,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/480/Tax-Warrants")), null ,ButtonType.LINKTOWEB, null),                          //Tax-Warrants Link
-                        new ButtonItem("Traffic Complaints",R.drawable.traffic_complaints,new Intent(context,Email.class),null , ButtonType.NEWPAGE, null),
+                        new ButtonItem("Traffic Complaints",R.drawable.traffic_complaints,new Intent(context,Email.class),null , ButtonType.LINKTONEWPAGE, null),
                 }),
                 new ButtonItem("Social Media",R.drawable.new_social_media,null, null ,ButtonType.CONTAINER, new ButtonItem[]{
                         new ButtonItem("Facebook",R.drawable.icofacebook,new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/660280407355488")), new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/TCSOIndiana/")) ,ButtonType.LINKTOSNS, null),                             //Facebook Link
