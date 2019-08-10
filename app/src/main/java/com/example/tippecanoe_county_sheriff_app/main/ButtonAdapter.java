@@ -1,8 +1,5 @@
 package com.example.tippecanoe_county_sheriff_app.main;
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +16,11 @@ import java.util.ArrayList;
 
 public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder> {
 
+    OnClickEvents onClickEvents;
     //Data
     ArrayList<ButtonItem> buttonItems = new ArrayList<>();
 
+    //ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder{
         Button textbutton;
 
@@ -33,11 +32,8 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder
 
     //Constructor
     public ButtonAdapter(ButtonItem[] buttonItems){
-        for(ButtonItem tempButton : buttonItems){
-            if(tempButton != null){
-                this.buttonItems.add(tempButton);
-            }
-        }
+        this.buttonItems = arrayToList(buttonItems);
+        onClickEvents = new OnClickEvents();
     }
 
     @NonNull
@@ -52,72 +48,36 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ButtonAdapter.ViewHolder holder, final int position) {
         holder.textbutton.setText(String.valueOf(buttonItems.get(position).getButtonName()));
         holder.textbutton.setPaintFlags(holder.textbutton.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
         switch (buttonItems.get(position).getButtonType()){
             case AUTODIAL:
                 holder.textbutton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        Context context = v.getContext();
-                        Intent intent = buttonItems.get(position).getFunc();
-                        try { context.startActivity(intent); }
-                        catch (Exception e) { e.printStackTrace(); }
-                    }
+                    public void onClick(View v) { onClickEvents.dialOnClick(v,buttonItems.get(position)); }
                 });
                 break;
             case LINKTOAPP:
                 holder.textbutton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        Context context = v.getContext();
-                        Intent intent = buttonItems.get(position).getFunc();
-                        if(buttonItems.get(position).getButtonName().equals("Instagram")){ intent.setPackage("com.instagram.android"); }
-                        //desc
-
-                        Intent Extraintent = buttonItems.get(position).getExtraFunc();
-                        try { context.startActivity(intent); }
-                        catch (android.content.ActivityNotFoundException anfe) { context.startActivity(Extraintent); }
-                    }
+                    public void onClick(View v) { onClickEvents.appOnClick(v,buttonItems.get(position)); }
                 });
                 break;
             case LINKTOSNS:
                 holder.textbutton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        Context context = v.getContext();
-                        Intent intent = buttonItems.get(position).getFunc();
-                        if(buttonItems.get(position).getButtonName().equals("Video Visitation")){
-                            ComponentName componentName =  new ComponentName("air.com.renovo.vismobile","air.com.renovo.vismobile.AppEntry");
-                            intent.addCategory(Intent.CATEGORY_LAUNCHER);
-                            intent.setComponent(componentName);
-                        }
-                        //desc
-
-                        Intent Extraintent = buttonItems.get(position).getExtraFunc();
-                        try { context.startActivity(intent); }
-                        catch (android.content.ActivityNotFoundException anfe) { context.startActivity(Extraintent); }
-                    }
+                    public void onClick(View v) { onClickEvents.snsOnClick(v,buttonItems.get(position)); }
                 });
                 break;
             case LINKTOWEB:
                 holder.textbutton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        Context context = v.getContext();
-                        Intent intent = buttonItems.get(position).getFunc();
-                        try { context.startActivity(intent); }
-                        catch (Exception e) { e.printStackTrace(); }
-                    }
+                    public void onClick(View v) { onClickEvents.webOnClick(v,buttonItems.get(position)); }
                 });
                 break;
             case LINKTONEWPAGE:
                 holder.textbutton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        Context context = v.getContext();
-                        Intent intent = buttonItems.get(position).getFunc();
-                        intent.putExtra("ButtonName",buttonItems.get(position).getButtonName());
-                        context.startActivity(intent);
-                    }
+                    public void onClick(View v) { onClickEvents.newPageOnClick(v,buttonItems.get(position)); }
                 });
                 break;
             default:
@@ -127,4 +87,12 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder
 
     @Override
     public int getItemCount() { return buttonItems.size(); }
+
+    private ArrayList<ButtonItem> arrayToList(ButtonItem[] buttonItems){
+        ArrayList<ButtonItem> arrayList = new ArrayList<>();
+        for(ButtonItem tempButton : buttonItems){
+            if(tempButton != null){ arrayList.add(tempButton); }
+        }
+        return arrayList;
+    }
 }
