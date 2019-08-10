@@ -3,29 +3,5 @@
     <string name="Tippecanoe">Tippecanoe County Sheriff</string>
     <string name="Close">Close</string>
     <string name="desc">Image</string>
-    <string name="Phone_Directory_Link">https://www.tippecanoe.in.gov/Directory.aspx?did=43</string>
-    <string name="Administration_Number">tel:7654239388</string>
-    <string name="Job_Apply_Link">https://www.tippecanoe.in.gov/470/Employment</string>
-    <string name="Sec_Offender_Link">http://www.icrimewatch.net/index.php?AgencyID=54758</string>
-    <string name="Inmate_Lookup_Link">http://www3.tippecanoe.in.gov/InmateListing/InmateSearch.aspx</string>
-    <string name="Commissary_Link">https://deposits.jailatm.com/webdeposits/default.aspx</string>
-    <string name="Video_Visitaion_App_Link"></string>
-    <string name="Video_Visitaion_Download_Link">market://details?id=air.com.renovo.vismobile</string>
-    <string name="Visitaion_Policy_Link">https://www.tippecanoe.in.gov/468/Inmate-Visitation-Policy</string>
-    <string name="WeTip_Link">https://wetip.com/</string>
-    <string name="Dispatch_Number">tel:7654239321</string>
-    <string name="Jail_Number">tel:7654231655</string>
-    <string name="Sheriffs_Sale_Guideline_Link">https://www.tippecanoe.in.gov/DocumentCenter/View/740/Sheriff-Sale-Guidelines-PDF?bidId=</string>
-    <string name="Sheriffs_Sale_Listing_Link">https://legacy.sri-taxsale.com/Foreclosure/PropertyListing.aspx?county=Tippecanoe</string>
-    <string name="Gun_Permissions_Link">http://www.tippecanoe.in.gov/477/Firearm-Permits</string>
-    <string name="Crash_Reports_Link">http://www.tippecanoe.in.gov/486/Crash-Reports</string>
-    <string name="Records_Request_Link">http://www.tippecanoe.in.gov/524/Public-Record-Requests</string>
-    <string name="Animal_Control_Link">http://www.tippecanoe.in.gov/473/Animal-Control</string>
-    <string name="Tax_Warrants_Link">http://www.tippecanoe.in.gov/480/Tax-Warrants</string>
-    <string name="Facebook_App_Link">fb://page/660280407355488</string>
-    <string name="Facebook_Web_Link">https://www.facebook.com/TCSOIndiana/</string>
-    <string name="Twitter_App_Link">twitter://user?screen_name=tippecanoecoin</string>
-    <string name="Twitter_Web_Link">https://twitter.com/tippecanoecosh1</string>
-    <string name="Instagram_App_Link">http://instagram.com/_u/tcso79</string>
-    <string name="Instagram_Web_Link">https://instagram.com/tcso79/</string>
+    <string name="Traffic_Complaints_Email">alskdjfhg7455@naver.com</string>
 </resources>

@@ -33,6 +33,7 @@ public class Email extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 1;
     private AuthPreferences authPreferences;
     private AccountManager accountManager;
+    private EmailComponent emailComponent;
 
     private final String SCOPE = Constant.GMAIL_COMPOSE + " " + Constant.GMAIL_MODIFY + " " + Constant.MAIL_GOOGLE_COM;
 
@@ -49,6 +50,7 @@ public class Email extends AppCompatActivity {
 
         accountManager = AccountManager.get(this);
         authPreferences = new AuthPreferences(this);
+        emailComponent = new EmailComponent(findViewById(android.R.id.content));
 
         Button buttonSend = findViewById(R.id.button_send);
         buttonSend.setOnClickListener(new View.OnClickListener() {
@@ -59,26 +61,35 @@ public class Email extends AppCompatActivity {
 
                 boolean existingAccount = false;
 
-                int result = ContextCompat.checkSelfPermission(Email.this, Manifest.permission.GET_ACCOUNTS);
-                if (result == PackageManager.PERMISSION_GRANTED){
-                    Account[] accounts = accountManager.getAccountsByType("com.google");
-                    for(Account tempaccount: accounts) {
-                        if(tempaccount.name.equals(authPreferences.getUser())){
-                            existingAccount = true;
-                            d("jun", "Account Exist!");
+                d("jun",emailComponent.getSubject());
+                d("jun",emailComponent.getBody());
+
+                if(emailComponent.isNotNull()){
+                    int result = ContextCompat.checkSelfPermission(Email.this, Manifest.permission.GET_ACCOUNTS);
+                    if (result == PackageManager.PERMISSION_GRANTED){
+                        Account[] accounts = accountManager.getAccountsByType("com.google");
+                        for(Account tempaccount: accounts) {
+                            if(tempaccount.name.equals(authPreferences.getUser())){
+                                existingAccount = true;
+                                d("jun", "Account Exist!");
+                            }
                         }
+                        if(!existingAccount){d("jun","No Account!");}
                     }
-                    if(!existingAccount){d("jun","No Account!");}
+                    else{
+                        d("jun","Permission Failed");
+                        ActivityCompat.requestPermissions(Email.this, new String[]{Manifest.permission.GET_ACCOUNTS}, PERMISSION_REQUEST_CODE);
+                    }
+
+                    if (authPreferences.getUser() != null
+                            && authPreferences.getToken() != null && existingAccount) {
+                        doCoolAuthenticatedStuff();
+                    } else { chooseAccount(); }
                 }
                 else{
-                    d("jun","Permission Failed");
-                    ActivityCompat.requestPermissions(Email.this, new String[]{Manifest.permission.GET_ACCOUNTS}, PERMISSION_REQUEST_CODE);
+                    Toast.makeText(getApplicationContext() ,"Plz fill the blanks", Toast.LENGTH_SHORT).show();
                 }
 
-                if (authPreferences.getUser() != null
-                        && authPreferences.getToken() != null && existingAccount) {
-                    doCoolAuthenticatedStuff();
-                } else { chooseAccount(); }
             }
         });
 
@@ -176,13 +187,17 @@ public class Email extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            EditText mEditTextTo = findViewById(R.id.edit_text_to);
-            EditText mEditTextSubject = findViewById(R.id.edit_text_subject);
-            EditText mEditTextMessage = findViewById(R.id.edit_text_message);
-
-            subject = mEditTextSubject.getText().toString();
-            body = mEditTextMessage.getText().toString();
-            recipients = mEditTextTo.getText().toString();
+            //emailComponent = new EmailComponent(findViewById(android.R.id.content));
+//            EditText mEditTextTo = findViewById(R.id.edit_text_to);
+//            EditText mEditTextSubject = findViewById(R.id.edit_text_subject);
+//            EditText mEditTextMessage = findViewById(R.id.edit_text_message);
+//
+            subject = emailComponent.getSubject();
+            body = emailComponent.getBody();
+//            subject = "subject";
+//            body = "body";
+//            recipients = "alskdjfhg7455@naver.com";
+            recipients = getResources().getString(R.string.Traffic_Complaints_Email);
         }
 
         @Override
