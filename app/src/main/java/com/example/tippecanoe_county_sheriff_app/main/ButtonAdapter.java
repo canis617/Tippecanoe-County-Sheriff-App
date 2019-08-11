@@ -18,7 +18,7 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder
 
     OnClickEvents onClickEvents;
     //Data
-    ArrayList<ButtonItem> buttonItems = new ArrayList<>();
+    ArrayList<ButtonItem> buttonItems;
 
     //ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder{

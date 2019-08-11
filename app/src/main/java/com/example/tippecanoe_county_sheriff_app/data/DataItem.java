@@ -26,12 +26,12 @@ public class DataItem{
                         new ButtonItem("Job Apply",R.drawable.new_job_apply,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/470/Employment")),null ,ButtonType.LINKTOWEB,null),                                //Employment Link
                 }),
                 new ButtonItem("Sex Offender",R.drawable.new_sex_offenders,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.icrimewatch.net/index.php?AgencyID=54758")),null , ButtonType.LINKTOWEB, null),                       //Sex Offender Registry Link
-                new ButtonItem("Corrections",R.drawable.corrections, null,null , ButtonType.CONTAINER, new ButtonItem[]{
+                new ButtonItem("Corrections",R.drawable.new_corrections, null,null , ButtonType.CONTAINER, new ButtonItem[]{
                         new ButtonItem("Inmate Lookup",R.drawable.new_inmate_lookup,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www3.tippecanoe.in.gov/InmateListing/InmateSearch.aspx")), null ,ButtonType.LINKTOWEB, null),      //Inmate Lookup Link
                         //new ButtonItem(null,R.drawable.web_based_vendor,null,null , true, null),                                                                          //I don't get it
                         new ButtonItem("Commissary",R.drawable.new_commissary,new Intent(Intent.ACTION_VIEW, Uri.parse("https://deposits.jailatm.com/webdeposits/default.aspx")),null ,ButtonType.LINKTOWEB, null),               //Jun:
                         new ButtonItem("Video Visitation",R.drawable.new_video_visitation, new Intent(Intent.ACTION_MAIN), new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=air.com.renovo.vismobile")) ,ButtonType.LINKTOAPP, null),                             //Video Visitation Link
-                        new ButtonItem("Visitation Policy",R.drawable.corrections,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/468/Inmate-Visitation-Policy")),null ,ButtonType.LINKTOWEB, null),
+                        new ButtonItem("Visitation Policy",R.drawable.new_visitation_policy,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/468/Inmate-Visitation-Policy")),null ,ButtonType.LINKTOWEB, null),
                         //new ButtonItem(null,R.drawable.bond_statements,null,null ,true, null),
                 }),
                 new ButtonItem("We-Tip",R.drawable.new_we_tip,new Intent(Intent.ACTION_VIEW, Uri.parse("https://wetip.com/")), null ,ButtonType.LINKTOWEB, null),                                                                           //Another Page
@@ -57,9 +57,9 @@ public class DataItem{
                         new ButtonItem("Traffic Complaints",R.drawable.new_traffic_complaints,new Intent(context,Email.class),null , ButtonType.LINKTONEWPAGE, null),
                 }),
                 new ButtonItem("Social Media",R.drawable.new_social_media,null, null ,ButtonType.CONTAINER, new ButtonItem[]{
-                        new ButtonItem("Facebook",R.drawable.icofacebook,new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/660280407355488")), new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/TCSOIndiana/")) ,ButtonType.LINKTOSNS, null),                             //Facebook Link
-                        new ButtonItem("Twitter",R.drawable.icotwitter,new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name=tippecanoecoin")), new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/tippecanoecosh1")),ButtonType.LINKTOSNS, null),                               //Twitter Link
-                        new ButtonItem("Instagram",R.drawable.icoinstagram,new Intent(Intent.ACTION_VIEW,Uri.parse("http://instagram.com/_u/tcso79")), new Intent(Intent.ACTION_VIEW, Uri.parse("https://instagram.com/tcso79/")),ButtonType.LINKTOSNS, null),                                   //Instagram Link
+                        new ButtonItem("Facebook",R.drawable.new_facebook,new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/660280407355488")), new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/TCSOIndiana/")) ,ButtonType.LINKTOSNS, null),                             //Facebook Link
+                        new ButtonItem("Twitter",R.drawable.new_twitter,new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name=tippecanoecoin")), new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/tippecanoecosh1")),ButtonType.LINKTOSNS, null),                               //Twitter Link
+                        new ButtonItem("Instagram",R.drawable.new_instagram,new Intent(Intent.ACTION_VIEW,Uri.parse("http://instagram.com/_u/tcso79")), new Intent(Intent.ACTION_VIEW, Uri.parse("https://instagram.com/tcso79/")),ButtonType.LINKTOSNS, null),                                   //Instagram Link
                         // need app link or other ways 2 open app
                 }),
                 /*new ButtonItem("Enforcement",R.drawable.enforcement,null, null ,ButtonType.CONTAINER, new ButtonItem[]{
