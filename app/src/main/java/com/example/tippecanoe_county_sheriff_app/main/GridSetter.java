@@ -9,7 +9,8 @@ import android.view.WindowManager;
 
 public class GridSetter {
     private static final float MAX_GRID_PERC = 0.56f;
-    private static final float MIN_MARGIN_PERC = 0.02f;
+    private static final float MIN_VERTMARG_PERC = 0.02f;
+    private static final float DEFAULT_HORIMARG_PERC = 0.05f;
     private float gHoriMargin, gVertMargin;
     private int mWidthPixels, mHeightPixels;
     private float dpHeight, dpWidth;
@@ -54,10 +55,11 @@ public class GridSetter {
     private void GridMarginCalc() {
         float gridWidth = (float)mWidthPixels;
         float gridHeight = (float)mHeightPixels;
+        gHoriMargin = DEFAULT_HORIMARG_PERC;
 
         while(true){
             gVertMargin = (gridHeight* MAX_GRID_PERC - gridWidth)/2f/gridHeight;
-            if(gVertMargin< MIN_MARGIN_PERC){ gridWidth -= gridWidth*0.01; }
+            if(gVertMargin < MIN_VERTMARG_PERC){ gridWidth -= gridWidth*0.01; }
             else{
                 if(gridWidth != mWidthPixels){ gHoriMargin = (1 - gridWidth/mWidthPixels)/2.0f; }
                 gVertMargin = (gridHeight* MAX_GRID_PERC - gridWidth)/2f/gridHeight;
