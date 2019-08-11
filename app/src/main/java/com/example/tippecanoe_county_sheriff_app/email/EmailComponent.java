@@ -46,8 +46,8 @@ public class EmailComponent {
         return eSubject;
     }
     public String getBody(){
-        eBody = tMainContent.getText().toString() + "\n\t" + eContent.getText() + "\n" + "Area: "+ eArea.getText() + "\n" + "Time: "
-                + eTime.getText() + "\n" + "Other Information:\n\t"+ eOther.getText();
+        eBody = tMainContent.getText().toString() + "\n" + eContent.getText() + "\n\n" + "Area: "+ eArea.getText() + "\n\n" + "Time: "
+                + eTime.getText() + "\n\n" + "Other Information:\n"+ eOther.getText();
         return eBody;
     }
 
