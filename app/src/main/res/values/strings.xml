@@ -3,5 +3,9 @@
     <string name="Tippecanoe">Tippecanoe County Sheriff</string>
     <string name="Close">Close</string>
     <string name="desc">Image</string>
+
+    <!--Emails-->
     <string name="Traffic_Complaints_Email">alskdjfhg7455@naver.com</string>
+    <string name="Security_Request_Email">alskdjfhg7455@naver.com</string>
+    <string name="Extra_Patrol_Request_Email">alskdjfhg7455@naver.com</string>
 </resources>

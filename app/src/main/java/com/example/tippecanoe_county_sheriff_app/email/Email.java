@@ -34,6 +34,8 @@ public class Email extends AppCompatActivity {
     private AuthPreferences authPreferences;
     private AccountManager accountManager;
     private EmailComponent emailComponent;
+    private String ButtonName;
+    private String recipents;
 
     private final String SCOPE = Constant.GMAIL_COMPOSE + " " + Constant.GMAIL_MODIFY + " " + Constant.MAIL_GOOGLE_COM;
 
@@ -45,12 +47,13 @@ public class Email extends AppCompatActivity {
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        String UpCategory = getIntent().getStringExtra("ButtonName");
-        getSupportActionBar().setTitle(UpCategory);
+        ButtonName = getIntent().getStringExtra("ButtonName");
+        getSupportActionBar().setTitle(ButtonName);
+
 
         accountManager = AccountManager.get(this);
         authPreferences = new AuthPreferences(this);
-        emailComponent = new EmailComponent(findViewById(android.R.id.content));
+        emailComponent = new EmailComponent(findViewById(android.R.id.content),ButtonName);
 
         Button buttonSend = findViewById(R.id.button_send);
         buttonSend.setOnClickListener(new View.OnClickListener() {
@@ -60,9 +63,6 @@ public class Email extends AppCompatActivity {
                 //is the account is on the authPreferences?
 
                 boolean existingAccount = false;
-
-                d("jun",emailComponent.getSubject());
-                d("jun",emailComponent.getBody());
 
                 if(emailComponent.isNotNull()){
                     int result = ContextCompat.checkSelfPermission(Email.this, Manifest.permission.GET_ACCOUNTS);
@@ -87,7 +87,7 @@ public class Email extends AppCompatActivity {
                     } else { chooseAccount(); }
                 }
                 else{
-                    Toast.makeText(getApplicationContext() ,"Plz fill the blanks", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext() ,"Please fill the non-optional blanks", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -187,17 +187,22 @@ public class Email extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            //emailComponent = new EmailComponent(findViewById(android.R.id.content));
-//            EditText mEditTextTo = findViewById(R.id.edit_text_to);
-//            EditText mEditTextSubject = findViewById(R.id.edit_text_subject);
-//            EditText mEditTextMessage = findViewById(R.id.edit_text_message);
-//
-            subject = emailComponent.getSubject();
+            subject = "("+ ButtonName +") " + emailComponent.getSubject();
             body = emailComponent.getBody();
-//            subject = "subject";
-//            body = "body";
-//            recipients = "alskdjfhg7455@naver.com";
-            recipients = getResources().getString(R.string.Traffic_Complaints_Email);
+            switch (ButtonName){
+                case "Traffic Complaints":
+                    recipients = getResources().getString(R.string.Traffic_Complaints_Email);
+                    break;
+                case "Security Request":
+                    recipients = getResources().getString(R.string.Security_Request_Email);
+                    break;
+                case "Extra Patrol Request":
+                    recipients = getResources().getString(R.string.Extra_Patrol_Request_Email);
+                    break;
+                default:
+                    break;
+            }
+
         }
 
         @Override
@@ -215,10 +220,7 @@ public class Email extends AppCompatActivity {
             }
             else{ Toast.makeText(getApplicationContext() ,"Failed to Send Message", Toast.LENGTH_SHORT).show(); }
         }
-
-
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -230,69 +232,4 @@ public class Email extends AppCompatActivity {
         }
         return true;
     }
-
 }
-
-//To Alonzo
-/*
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
-import android.os.*;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
-
-import static android.util.Log.d;
-
-public class Email extends AppCompatActivity {
-    private EditText mEditTextTo;
-    private EditText mEditTextSubject;
-    private EditText mEditTextMessage;
-    private String UpCategory;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.email_layout);
-
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-
-        UpCategory = getIntent().getStringExtra("ButtonName");
-        d("jun",UpCategory);
-        getSupportActionBar().setTitle(UpCategory);
-
-        mEditTextTo = findViewById(R.id.edit_text_to);
-        mEditTextSubject = findViewById(R.id.edit_text_subject);
-        mEditTextMessage = findViewById(R.id.edit_text_message);
-
-
-        Button buttonSend = findViewById(R.id.button_send);
-        buttonSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendMail();
-            }
-        });
-    }
-    private void sendMail(){
-        String recipientList = mEditTextTo.getText().toString();
-        String[] recipients = recipientList.split(",");
-        // example1@gmail.com, exam2@gmail.com
-        String subject = mEditTextSubject.getText().toString();
-        String message = mEditTextMessage.getText().toString();
-
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.putExtra(Intent.EXTRA_EMAIL, recipients);
-        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        intent.putExtra(Intent.EXTRA_TEXT, message);
-
-        intent.setType("message/rfc822");
-        startActivity(Intent.createChooser(intent, "Choose an email client"));
-    }
-
-
-}
-*/

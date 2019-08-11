@@ -49,7 +49,7 @@ public class DataItem{
                         new ButtonItem("Crash Reports",R.drawable.new_crash_reports,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/486/Crash-Reports")), null ,ButtonType.LINKTOWEB, null),                        //Crash-Reports Link
                         new ButtonItem("Records Request",R.drawable.new_records_request,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/524/Public-Record-Requests")), null ,ButtonType.LINKTOWEB, null),               //Public-Record-Requests Link
                         new ButtonItem("Animal Control",R.drawable.new_animal_control,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/473/Animal-Control")), null ,ButtonType.LINKTOWEB, null),                       //Animal-Control Link
-                        new ButtonItem("Security and Extra Patrol Request",R.drawable.new_security_requests,null, null ,ButtonType.POPUPCONTAINER, new ButtonItem[]{
+                        new ButtonItem("Security and Extra Patrol Request",R.drawable.new_security_extra_patrol_request,null, null ,ButtonType.POPUPCONTAINER, new ButtonItem[]{
                                 new ButtonItem("Security Request",0, new Intent(context, Email.class),null,ButtonType.LINKTONEWPAGE,null),
                                 new ButtonItem("Extra Patrol Request",0, new Intent(context,Email.class),null,ButtonType.LINKTONEWPAGE,null),
                         }),
