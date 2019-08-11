@@ -41,19 +41,19 @@ public class DataItem{
                         new ButtonItem("Jail",0,new Intent(Intent.ACTION_DIAL, Uri.parse("tel:7654231655")),null ,ButtonType.AUTODIAL, null),
                 }),
                 new ButtonItem("Services",R.drawable.new_services,null, null ,ButtonType.CONTAINER, new ButtonItem[]{
-                        new ButtonItem("Sheriff's Sale",R.drawable.sheriffs_sale,null, null ,ButtonType.POPUPCONTAINER, new ButtonItem[]{
+                        new ButtonItem("Sheriff's Sale",R.drawable.new_sheriffs_sale,null, null ,ButtonType.POPUPCONTAINER, new ButtonItem[]{
                                 new ButtonItem("Sheriff's Sale GuideLine",0,new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tippecanoe.in.gov/DocumentCenter/View/740/Sheriff-Sale-Guidelines-PDF?bidId=")),null,ButtonType.LINKTOWEB,null),
                                 new ButtonItem("Sheriff's Sale Listing",0,new Intent(Intent.ACTION_VIEW, Uri.parse("https://legacy.sri-taxsale.com/Foreclosure/PropertyListing.aspx?county=Tippecanoe")),null,ButtonType.LINKTOWEB,null),
                         }),                       //Sheriff-Sales Link
-                        new ButtonItem("Gun Permissions",R.drawable.gun_permits,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/477/Firearm-Permits")), null ,ButtonType.LINKTOWEB, null),                      //Firearm-Permits Link
-                        new ButtonItem("Crash Reports",R.drawable.crash_reports,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/486/Crash-Reports")), null ,ButtonType.LINKTOWEB, null),                        //Crash-Reports Link
-                        new ButtonItem("Records Request",R.drawable.records_request,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/524/Public-Record-Requests")), null ,ButtonType.LINKTOWEB, null),               //Public-Record-Requests Link
-                        new ButtonItem("Animal Control",R.drawable.animal_control,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/473/Animal-Control")), null ,ButtonType.LINKTOWEB, null),                       //Animal-Control Link
-                        new ButtonItem("Security and Extra Patrol Request",R.drawable.security_requests,null, null ,ButtonType.POPUPCONTAINER, new ButtonItem[]{
+                        new ButtonItem("Gun Permissions",R.drawable.new_gun_permits,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/477/Firearm-Permits")), null ,ButtonType.LINKTOWEB, null),                      //Firearm-Permits Link
+                        new ButtonItem("Crash Reports",R.drawable.new_crash_reports,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/486/Crash-Reports")), null ,ButtonType.LINKTOWEB, null),                        //Crash-Reports Link
+                        new ButtonItem("Records Request",R.drawable.new_records_request,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/524/Public-Record-Requests")), null ,ButtonType.LINKTOWEB, null),               //Public-Record-Requests Link
+                        new ButtonItem("Animal Control",R.drawable.new_animal_control,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/473/Animal-Control")), null ,ButtonType.LINKTOWEB, null),                       //Animal-Control Link
+                        new ButtonItem("Security and Extra Patrol Request",R.drawable.new_security_requests,null, null ,ButtonType.POPUPCONTAINER, new ButtonItem[]{
                                 new ButtonItem("Security Request",0, new Intent(context, Email.class),null,ButtonType.LINKTONEWPAGE,null),
                                 new ButtonItem("Extra Patrol Request",0, new Intent(context,Email.class),null,ButtonType.LINKTONEWPAGE,null),
                         }),
-                        new ButtonItem("Tax Warrants",R.drawable.tax_warrants,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/480/Tax-Warrants")), null ,ButtonType.LINKTOWEB, null),                          //Tax-Warrants Link
+                        new ButtonItem("Tax Warrants",R.drawable.new_tax_warrants,new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tippecanoe.in.gov/480/Tax-Warrants")), null ,ButtonType.LINKTOWEB, null),                          //Tax-Warrants Link
                         new ButtonItem("Traffic Complaints",R.drawable.new_traffic_complaints,new Intent(context,Email.class),null , ButtonType.LINKTONEWPAGE, null),
                 }),
                 new ButtonItem("Social Media",R.drawable.new_social_media,null, null ,ButtonType.CONTAINER, new ButtonItem[]{
