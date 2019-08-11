@@ -22,39 +22,23 @@ public class ButtonItem {
         this.child = child;
     }
 
-    //Getter and Setter
+    //Getter
     public String getButtonName() { return ButtonName; }
-
-    public void setButtonName(String buttonName) { ButtonName = buttonName; }
 
     public int getButtonContent() {
         return ButtonContent;
-    }
-
-    public void setButtonContent(int buttonContent) {
-        this.ButtonContent = buttonContent;
     }
 
     public Intent getFunc() {
         return Func;
     }
 
-    public void setFunc(Intent func) {
-        this.Func = func;
-    }
-
     public Intent getExtraFunc() { return ExtraFunc; }
-
-    public void setExtraFunc(Intent extraFunc) { ExtraFunc = extraFunc; }
 
     public ButtonType getButtonType() { return ButtonType; }
 
     public ButtonItem[] getChild() {
         return child;
-    }
-
-    public void setChild(ButtonItem[] child) {
-        this.child = child;
     }
 
 }

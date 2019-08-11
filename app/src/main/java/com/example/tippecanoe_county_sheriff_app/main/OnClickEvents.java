@@ -19,6 +19,15 @@ public class OnClickEvents {
         Context context = view.getContext();
         Intent intent = button.getFunc();
         intent.putExtra("ButtonName",button.getButtonName());
+        switch(button.getButtonName()){
+            case "Traffic Complaints":
+                break;
+            case "Security Request":
+                break;
+            case "Extra Patrol Request":
+                break;
+        }
+
         context.startActivity(intent);
     }
     public void webOnClick(View view, ButtonItem button){

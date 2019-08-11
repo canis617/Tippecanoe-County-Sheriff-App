@@ -21,7 +21,6 @@ public class Popup extends PopupWindow {
 
     public Popup(View view, LayoutInflater inflater, ButtonItem button, float mWidthDp){
         Context context = view.getContext();
-        //LayoutInflater infla = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.activity_pop_up_window, (ViewGroup) view.findViewById(R.id.popup_element));
 
         setContentView(layout);
@@ -46,10 +45,4 @@ public class Popup extends PopupWindow {
         poprecview.setLayoutManager(layoutManager);
         poprecview.setAdapter(buttonAdapter);
     }
-//                pwindo = new PopupWindow(layout, (int)(mWidthPixels*0.9), ViewGroup.LayoutParams.WRAP_CONTENT, true);
-
-//            pwindo.
-//            pwindo.
-//
-
 }
