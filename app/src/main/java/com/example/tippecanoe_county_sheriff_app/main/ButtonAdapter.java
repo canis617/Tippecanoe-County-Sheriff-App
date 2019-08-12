@@ -15,9 +15,7 @@ import com.example.tippecanoe_county_sheriff_app.data.*;
 import java.util.ArrayList;
 
 public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder> {
-
     OnClickEvents onClickEvents;
-    //Data
     ArrayList<ButtonItem> buttonItems;
 
     //ViewHolder

@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -27,16 +28,17 @@ import com.example.tippecanoe_county_sheriff_app.R;
 import static android.util.Log.d;
 
 public class Email extends AppCompatActivity {
-
     private static final int AUTHORIZATION_CODE = 1993;
     private static final int ACCOUNT_CODE = 42;
     private static final int PERMISSION_REQUEST_CODE = 1;
     private AuthPreferences authPreferences;
     private AccountManager accountManager;
     private EmailComponent emailComponent;
+    private boolean existingAccount;
     private String ButtonName;
-    private String recipents;
-    boolean existingAccount;
+    private Button buttonSend;
+
+    private Toast toast;
 
     private final String SCOPE = Constant.GMAIL_COMPOSE + " " + Constant.GMAIL_MODIFY + " " + Constant.MAIL_GOOGLE_COM;
 
@@ -51,55 +53,50 @@ public class Email extends AppCompatActivity {
         ButtonName = getIntent().getStringExtra("ButtonName");
         getSupportActionBar().setTitle(ButtonName);
 
-
         accountManager = AccountManager.get(this);
         authPreferences = new AuthPreferences(this);
         emailComponent = new EmailComponent(findViewById(android.R.id.content),ButtonName);
 
-        Button buttonSend = findViewById(R.id.button_send);
+        buttonSend = findViewById(R.id.button_send);
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //checking
-                //is the account is on the authPreferences?
-
-                existingAccount = false;
+                buttonSend.setEnabled(false);
+                buttonSend.setTextColor(getResources().getColor(R.color.ButtonColor2));
+                toast = Toast.makeText(getApplicationContext() ,"Wait...", Toast.LENGTH_SHORT);
+                toast.show();
 
                 if(emailComponent.isNotNull()){
-                    int result = ContextCompat.checkSelfPermission(Email.this, Manifest.permission.GET_ACCOUNTS);
-                    if (ContextCompat.checkSelfPermission(Email.this, Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED){
-                        Account[] accounts = accountManager.getAccountsByType("com.google");
-                        for(Account tempaccount: accounts) {
-                            if(tempaccount.name.equals(authPreferences.getUser())){
-                                existingAccount = true;
-                                d("jun", "Account Exist!");
-                            }
-                        }
-                        if(!existingAccount){d("jun","No Account!");}
-                    }
-                    else{
-                        d("jun","Permission Failed");
-                        ActivityCompat.requestPermissions(Email.this, new String[]{Manifest.permission.GET_ACCOUNTS}, PERMISSION_REQUEST_CODE);
-                    }
-
+                    if (ContextCompat.checkSelfPermission(Email.this, Manifest.permission.GET_ACCOUNTS)
+                            == PackageManager.PERMISSION_GRANTED) { existingAccount = isExistingAccount(); }
+                    else{ ActivityCompat.requestPermissions(Email.this, new String[]{Manifest.permission.GET_ACCOUNTS}, PERMISSION_REQUEST_CODE); }
                     if (authPreferences.getUser() != null
-                            && authPreferences.getToken() != null && existingAccount) {
-                        doCoolAuthenticatedStuff();
-                    } else { chooseAccount(); }
+                            && authPreferences.getToken() != null && existingAccount) { doCoolAuthenticatedStuff(); }
+                    else { chooseAccount(); }
                 }
                 else{
-                    Toast.makeText(getApplicationContext() ,"Please fill the non-optional blanks", Toast.LENGTH_LONG).show();
+                    toast = Toast.makeText(getApplicationContext() ,"Please fill the non-optional blanks", Toast.LENGTH_SHORT);
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            toast.show();
+                            buttonSend.setEnabled(true);
+                            buttonSend.setTextColor(getResources().getColor(R.color.PlainTextColor));
+                        }
+                    }, 2000);
                 }
-
             }
         });
 
     }
-
-    private void doCoolAuthenticatedStuff() {
-        new senmailAsync().execute();   //uncomment to send mail
-
+    public boolean isExistingAccount(){
+        Account[] accounts = accountManager.getAccountsByType("com.google");
+        for(Account tempaccount: accounts) { if(tempaccount.name.equals(authPreferences.getUser())){ return true; } }
+        return false;
     }
+
+    private void doCoolAuthenticatedStuff() { new senmailAsync().execute(); }
 
     private void chooseAccount() {
         Intent intent = AccountManager.newChooseAccountIntent(null, null,
@@ -110,22 +107,9 @@ public class Email extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode ==  PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                Intent intent = AccountManager.newChooseAccountIntent(null, null,
-//                        new String[]{"com.google"}, false, null, null, null, null);
-//                startActivityForResult(intent, ACCOUNT_CODE);
-                Account[] accounts = accountManager.getAccountsByType("com.google");
-                for(Account tempaccount: accounts) {
-                    if(tempaccount.name.equals(authPreferences.getUser())){
-                        existingAccount = true;
-                        d("jun", "Account Exist!");
-                    }
-                }
-            } else {
-                Toast.makeText(this,"Permission Denied.",
-                        Toast.LENGTH_LONG).show();
-            }
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) { existingAccount = isExistingAccount(); }
         }
+        else { Toast.makeText(this,"Permission Denied.", Toast.LENGTH_SHORT).show(); }
     }
 
     private void requestToken() {
@@ -133,9 +117,9 @@ public class Email extends AppCompatActivity {
         String user = authPreferences.getUser();
 
         Account[] accounts = accountManager.getAccountsByType("com.google");
-        for(Account account: accounts) {
-            if (account.name.equals(user)) {
-                userAccount = account;
+        for(Account tempaccount: accounts) {
+            if (tempaccount.name.equals(user)) {
+                userAccount = tempaccount;
                 break;
             }
         }
@@ -171,7 +155,6 @@ public class Email extends AppCompatActivity {
         }
     }
     private class OnTokenAcquired implements AccountManagerCallback<Bundle> {
-
         @Override
         public void run(AccountManagerFuture<Bundle> result) {
             try {
@@ -194,7 +177,6 @@ public class Email extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
             subject = "("+ ButtonName +") " + emailComponent.getSubject();
             body = emailComponent.getBody();
             switch (ButtonName){
@@ -216,8 +198,7 @@ public class Email extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Void... params) {
             GMailSender gMailSender = new GMailSender();
-            Boolean msgSend = gMailSender.sendMail(subject, body, authPreferences.getUser(), authPreferences.getToken(), recipients);
-            return msgSend;
+            return gMailSender.sendMail(subject, body, authPreferences.getUser(), authPreferences.getToken(), recipients);
         }
 
         @Override
@@ -226,7 +207,18 @@ public class Email extends AppCompatActivity {
                 Toast.makeText(getApplicationContext() ,"Message Sent", Toast.LENGTH_SHORT).show();
                 onBackPressed();
             }
-            else{ Toast.makeText(getApplicationContext() ,"Failed to Send Message", Toast.LENGTH_SHORT).show(); }
+            else{
+                toast.makeText(getApplicationContext() ,"Failed to Send Message", Toast.LENGTH_SHORT);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        toast.show();
+                        buttonSend.setEnabled(true);
+                        buttonSend.setTextColor(getResources().getColor(R.color.PlainTextColor));
+                    }
+                }, 2000);
+            }
         }
     }
 

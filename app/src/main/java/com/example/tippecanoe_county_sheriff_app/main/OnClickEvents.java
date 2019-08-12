@@ -30,10 +30,14 @@ public class OnClickEvents {
     public void appOnClick(View view, ButtonItem button){
         Context context = view.getContext();
         Intent intent = button.getFunc();
-        if(button.getButtonName().equals("Video Visitation")){
-            ComponentName componentName =  new ComponentName("air.com.renovo.vismobile","air.com.renovo.vismobile.AppEntry");
-            intent.addCategory(Intent.CATEGORY_LAUNCHER);
-            intent.setComponent(componentName);
+        switch (button.getButtonName()){
+            case "Video Visitation":
+                ComponentName componentName =  new ComponentName("air.com.renovo.vismobile","air.com.renovo.vismobile.AppEntry");
+                intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                intent.setComponent(componentName);
+                break;
+                default:
+                    break;
         }
         //desc
 
@@ -44,7 +48,13 @@ public class OnClickEvents {
     public void snsOnClick(View view, ButtonItem button){
         Context context = view.getContext();
         Intent intent = button.getFunc();
-        if(button.getButtonName().equals("Instagram")){ intent.setPackage("com.instagram.android"); }
+        switch (button.getButtonName()){
+            case "Instagram":
+                intent.setPackage("com.instagram.android");
+                break;
+                default:
+                    break;
+        }
         //desc
 
         Intent Extraintent = button.getExtraFunc();

@@ -70,18 +70,12 @@ class ImageButtonAdapter extends BaseAdapter{
             convertView = inf.inflate(layout, null);
 
         ImageButton ib = convertView.findViewById(R.id.imagebutton);                                //item_imagebutton.xmln.xml
-
         ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) ib.getLayoutParams();
-        // Set the height of this ImageButton
         params.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (gridSetter.getDpWidth()*(1-(gridSetter.getgHoriMargin()*2)))/3, ib.getResources().getDisplayMetrics());
-        // Set the width of that ImageButton
         params.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (gridSetter.getDpWidth()*(1-(gridSetter.getgHoriMargin()*2)))/3, ib.getResources().getDisplayMetrics());
-        // Apply the updated layout parameters to last ImageButton
         ib.setLayoutParams(params);
-
         if(position%2==0){ ib.setBackgroundColor(context.getResources().getColor(R.color.ButtonColor1)); }
         else{ ib.setBackgroundColor(context.getResources().getColor(R.color.ButtonColor2)); }
-
         ib.setImageResource(buttonItems.get(position).getButtonContent());
 
         switch (buttonItems.get(position).getButtonType()){
@@ -99,7 +93,7 @@ class ImageButtonAdapter extends BaseAdapter{
                     @Override
                     public void onClick(View v) {
                         try{ Popup popup = new Popup(v,inf, buttonItems.get(position),gridSetter.getmWidthPixels()); }
-                        catch (Exception e){ }
+                        catch (Exception e){ e.printStackTrace(); }
                     }
                 });
                 break;

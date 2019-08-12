@@ -17,7 +17,6 @@ import com.example.tippecanoe_county_sheriff_app.R;
 import com.example.tippecanoe_county_sheriff_app.data.*;
 
 public class Popup extends PopupWindow {
-    private Button btnClosePopup;
 
     public Popup(View view, LayoutInflater inflater, ButtonItem button, float mWidthDp){
         Context context = view.getContext();
@@ -30,8 +29,7 @@ public class Popup extends PopupWindow {
         setOutsideTouchable(true);
         setBackgroundDrawable(new BitmapDrawable());
         showAtLocation(layout, Gravity.CENTER, 0, 0);
-
-        btnClosePopup = layout.findViewById(R.id.btn_close_popup);
+        Button btnClosePopup = layout.findViewById(R.id.btn_close_popup);
         btnClosePopup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { dismiss(); }
