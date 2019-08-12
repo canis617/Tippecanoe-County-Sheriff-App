@@ -5,6 +5,7 @@ package com.example.tippecanoe_county_sheriff_app.main;
  * */
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.Guideline;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -17,11 +18,12 @@ import com.example.tippecanoe_county_sheriff_app.weather.WeatherAPI;
 
 
 public class MainActivity extends AppCompatActivity {
+    private static final float MAX_GRID_SIZE = 0.6f;
     private ButtonItem[] ButtonData;
     private GridView gridView;
-    private GridViewGuideLines gridLines;
     private ImageButtonAdapter imageButtonAdapter;
     private GridSetter gridSetter;
+    private Guideline leftvertGL, rightvertGL, tophoriGL, bothoriGL;
 
     private WeatherAPI weatherView;
 
@@ -35,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
         weatherView = new WeatherAPI(this);
 
-        gridLines = new GridViewGuideLines(findViewById(android.R.id.content));
+        setGridViewGuideLines();
         gridSetter = new GridSetter(this);
-        gridLines.setGuidlinesPercent(gridSetter.getgVertMargin(),gridSetter.getgHoriMargin());
+        setGuidlinesPercent(gridSetter.getgVertMargin(),gridSetter.getgHoriMargin());
 
         DataItem dataItem = new DataItem(this);                                                       //Data
         ButtonData = dataItem.getData();
@@ -57,5 +59,19 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"App is Closing", Toast.LENGTH_SHORT).show();
             super.onBackPressed();
         }
+    }
+
+    private void setGridViewGuideLines() {
+        leftvertGL = findViewById(R.id.ddguideline12);
+        rightvertGL = findViewById(R.id.ddguideline14);
+        tophoriGL = findViewById(R.id.dguideline20);
+        bothoriGL = findViewById(R.id.dguideline4);
+    }
+
+    private void setGuidlinesPercent(float gridVMargin, float gridHMargin){
+        tophoriGL.setGuidelinePercent((1.0f - MAX_GRID_SIZE) + gridVMargin);
+        bothoriGL.setGuidelinePercent(1.0f - gridVMargin);
+        leftvertGL.setGuidelinePercent(0.0f + gridHMargin);
+        rightvertGL.setGuidelinePercent(1.0f - gridHMargin);
     }
 }
