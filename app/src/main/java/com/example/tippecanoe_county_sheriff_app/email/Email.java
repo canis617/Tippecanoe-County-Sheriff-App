@@ -36,6 +36,7 @@ public class Email extends AppCompatActivity {
     private EmailComponent emailComponent;
     private String ButtonName;
     private String recipents;
+    boolean existingAccount;
 
     private final String SCOPE = Constant.GMAIL_COMPOSE + " " + Constant.GMAIL_MODIFY + " " + Constant.MAIL_GOOGLE_COM;
 
@@ -62,11 +63,11 @@ public class Email extends AppCompatActivity {
                 //checking
                 //is the account is on the authPreferences?
 
-                boolean existingAccount = false;
+                existingAccount = false;
 
                 if(emailComponent.isNotNull()){
                     int result = ContextCompat.checkSelfPermission(Email.this, Manifest.permission.GET_ACCOUNTS);
-                    if (result == PackageManager.PERMISSION_GRANTED){
+                    if (ContextCompat.checkSelfPermission(Email.this, Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED){
                         Account[] accounts = accountManager.getAccountsByType("com.google");
                         for(Account tempaccount: accounts) {
                             if(tempaccount.name.equals(authPreferences.getUser())){
@@ -110,9 +111,16 @@ public class Email extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode ==  PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Intent intent = AccountManager.newChooseAccountIntent(null, null,
-                        new String[]{"com.google"}, false, null, null, null, null);
-                startActivityForResult(intent, ACCOUNT_CODE);
+//                Intent intent = AccountManager.newChooseAccountIntent(null, null,
+//                        new String[]{"com.google"}, false, null, null, null, null);
+//                startActivityForResult(intent, ACCOUNT_CODE);
+                Account[] accounts = accountManager.getAccountsByType("com.google");
+                for(Account tempaccount: accounts) {
+                    if(tempaccount.name.equals(authPreferences.getUser())){
+                        existingAccount = true;
+                        d("jun", "Account Exist!");
+                    }
+                }
             } else {
                 Toast.makeText(this,"Permission Denied.",
                         Toast.LENGTH_LONG).show();
