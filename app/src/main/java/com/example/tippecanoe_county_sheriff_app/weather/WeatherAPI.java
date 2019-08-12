@@ -80,14 +80,16 @@ public class WeatherAPI{
         protected void onPostExecute(String xml) {
             try {
                 JSONObject json = new JSONObject(xml);
-                if (json != null) {
+                if (json == null) {
+                    Toast.makeText(activity.getApplicationContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+                } else if (json != null) {
                     JSONObject details = json.getJSONArray("weather").getJSONObject(0);
                     JSONObject main = json.getJSONObject("main");
                     DateFormat df = DateFormat.getDateTimeInstance();
 
                     cityField.setText(json.getString("name").toUpperCase(Locale.US) + ", " + json.getJSONObject("sys").getString("country"));
                     //detailsField.setText(details.getString("description").toUpperCase(Locale.US));
-                    currentTemperatureField.setText(String.format("%.1f", main.getDouble("temp")*0.1*1.8+32) + "°F");
+                    currentTemperatureField.setText(String.format("%.1f", main.getDouble("temp") * 0.1 * 1.8 + 32) + "°F");
                     //humidity_field.setText("Humidity: " + main.getString("humidity") + "%");
                     //pressure_field.setText("Pressure: " + main.getString("pressure") + " hPa");
                     //updatedField.setText(df.format(new Date(json.getLong("dt") * 1000)));
